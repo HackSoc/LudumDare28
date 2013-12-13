@@ -1,7 +1,7 @@
 local HC = require 'HardonCollider'
 
-entities = []
-hitboxes = []
+entities = {}
+hitboxes = {}
 background = nil
 
 function initialize()

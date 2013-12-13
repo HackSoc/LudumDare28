@@ -1,14 +1,16 @@
+local scene = {}
+
 local HC = require 'HardonCollider'
 
-entities = {}
-hitboxes = {}
-background = nil
+scene.entities = {}
+scene.hitboxes = {}
+scene.background = love.graphics.newImage("background.png")
 
-function initialize()
+function scene.initialize()
    collider = HC(100, onCollide)
 end
 
-function onCollide(dt, hitbox1, hitbox2, dx, dy)
+function scene.onCollide(dt, hitbox1, hitbox2, dx, dy)
    local entity1 = hitboxes[hitbox1]
    local entity2 = hitboxes[hitbox2]
 
@@ -20,35 +22,37 @@ function onCollide(dt, hitbox1, hitbox2, dx, dy)
    entity2:hit(entity1, dx, dy)
 end
 
-function update(dt)
-   for entity in entities do
+function scene.update(dt)
+   for key, entity in pairs(scene.entities) do
       entity:update(dt)
    end
 
    collider:update(dt)
 
-   for entity in entities do
+   for key, entity in pairs(scene.entities) do
       if entity.dead then
-         removeDeadEntity(entity)
+         scene.removeDeadEntity(entity)
       end
    end
 end
 
-function removeDeadEntity(entity)
-   table.remove(entities, entity)
-   table.remove(hitboxes, entity.hitbox)
+function scene.removeDeadEntity(entity)
+   table.remove(scene.entities, entity)
+   table.remove(scene.hitboxes, entity.hitbox)
    HC.remove(entity.hitbox)
 end
 
-function draw()
-   love.graphics.draw(background, 0, 0)
+function scene.draw()
+   love.graphics.draw(scene.background, 0, 0)
 
-   for entity in entities do
+   for key,entity in pairs(scene.entities) do
       entity:draw()
    end
 end
 
-function addEntity(entity)
-   entities[entity] = entity
-   hitboxes[entity.hitbox] = entity
+function scene.addEntity(entity)
+   scene.entities[entity] = entity
+   scene.hitboxes[entity.hitbox] = entity
 end
+
+return scene

@@ -1,14 +1,14 @@
 local class = require 'middleclass.middleclass'
 
 Entity = class('Entity')
-Entity.static.x = 0
-Entity.static.y = 0
-Entity.static.width = 0
-Entity.static.height = 0
-Entity.static.sprite = nil
-Entity.static.visible = true
-Entity.static.hitbox = nil
-Entity.static.dead = false
+Entity.x = 0
+Entity.y = 0
+Entity.width = 0
+Entity.height = 0
+Entity.sprite = nil
+Entity.visible = true
+Entity.hitbox = nil
+Entity.dead = false
 
 function Entity:initialize(x, y, sprite, collider)
    self.x = x
@@ -30,7 +30,7 @@ function Entity:draw()
 end
 
 function Entity:update(dx)
-   error("Unimplemented")
+   --error("Unimplemented")
 end
 
 function Entity:move(x, y)

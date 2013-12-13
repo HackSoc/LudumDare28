@@ -7,7 +7,7 @@ scene.hitboxes = {}
 scene.background = love.graphics.newImage("background.png")
 
 function scene.initialize()
-   collider = HC(100, onCollide)
+   scene.collider = HC(100, onCollide)
 end
 
 function scene.onCollide(dt, hitbox1, hitbox2, dx, dy)
@@ -27,7 +27,7 @@ function scene.update(dt)
       entity:update(dt)
    end
 
-   collider:update(dt)
+   scene.collider:update(dt)
 
    for key, entity in pairs(scene.entities) do
       if entity.dead then

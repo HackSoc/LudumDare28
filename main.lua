@@ -1,8 +1,17 @@
 
 local scene = require 'scene'
+require 'entity'
 
 function love.load()
 	scene.initialize()
+	paddleimg = love.graphics.newImage("paddle.png")
+	
+	paddleA = Entity:new(100,100,paddleimg,scene.collider)
+	paddleB = Entity:new(500,100,paddleimg,scene.collider)
+	scene.addEntity(paddleA)
+	scene.addEntity(paddleB)
+	
+	print "Test"
 	
 end
 

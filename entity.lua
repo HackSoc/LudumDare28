@@ -1,6 +1,4 @@
-local class = require 'middleclass'
-
-require "physics"
+local class = require 'middleclass.middleclass'
 
 Entity = class('Entity')
 Entity.static.x = 0

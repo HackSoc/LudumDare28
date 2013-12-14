@@ -1,12 +1,7 @@
 local class = require 'middleclass.middleclass'
+require 'events.EntityEvent'
 
-LeftEvent = class('events.LeftEvent', Event)
-
-LeftentityId = nil
-
-function LeftEvent:initialize(entityId)
-    self.entityId = entityId
-end
+LeftEvent = class('events.LeftEvent', EntityEvent)
 
 function LeftEvent:apply(state)
     state[self.entityId]:startLeft()

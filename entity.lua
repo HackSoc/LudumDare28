@@ -37,7 +37,7 @@ function Entity:draw()
    end
 end
 
-function Entity:update(dx)
+function Entity:update(dt)
    -- error("Unimplemented")
 end
 

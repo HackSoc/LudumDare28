@@ -11,8 +11,8 @@ OneBullet.fired = false
 OneBullet.fireTime = 0
 
 function OneBullet:initialize(collider)
-    OneBullet.collider = collider
     Entity.initialize(self, -100, -100, self.class.sprite, collider)
+    OneBullet.collider = collider
     self:rotate(math.pi)
 end
 
@@ -112,10 +112,5 @@ end
 
 function OneBullet:stopRight()
     self.steerRight = false
-end
-
-
-function OneBullet:hit(other, dx, dy)
-    print "Bullet Hit!"
 end
 

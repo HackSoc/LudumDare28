@@ -2,7 +2,7 @@ local class = require 'middleclass.middleclass'
 
 require 'utils'
 
-require 'Event'
+require 'events.Event'
 
 EventLog = class('EventLog')
 

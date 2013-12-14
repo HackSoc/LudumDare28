@@ -23,7 +23,7 @@ function OneBullet:update(dt)
     
     self.fireTime = self.fireTime + dt
     
-    if (self.fireTime > 1 and self.fireTime < 2) then
+    if (self.fireTime > 0.1 and self.fireTime < 2) then
         self.collider:setSolid(self.hitbox)
         self.fireTime = 3
     end

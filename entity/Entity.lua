@@ -10,6 +10,7 @@ Entity.visible = true
 Entity.hitbox = nil
 Entity.dead = false
 Entity.angle = 0
+Entity.orientation = 1
 Entity.dx = 0
 Entity.dy = 0
 Entity.collider = nil
@@ -43,7 +44,7 @@ end
 
 function Entity:draw()
     if self.visible then
-        love.graphics.draw(self.sprite, self.x, self.y, self.angle, 1, 1, self.width/2, self.height/2)
+        love.graphics.draw(self.sprite, self.x, self.y, self.angle, self.orientation, 1, self.width/2, self.height/2)
     end
 end
 
@@ -63,9 +64,11 @@ function Entity:hit(other, dx, dy)
 end
 
 function Entity:startLeft()
+    self.orientation = -1
 end
 
 function Entity:startRight()
+    self.orientation = 1
 end
 
 function Entity:stop()

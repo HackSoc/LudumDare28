@@ -17,19 +17,21 @@ function Player:initialize(x, y, collider)
 end
 
 function Player:startLeft()
-   self.dx = -self.class.speed
+    Entity.startLeft()
+    self.dx = -self.class.speed
 end
 
 function Player:startRight()
-   self.dx = self.class.speed
+    Entity.startRight()
+    self.dx = self.class.speed
 end
 
 function Player:draw()
-	if highestiteration == self.iteration then
-		self.sprite = self.class.sprite
-	else
-		self.sprite = self.class.oldsprite
-	end
+    if highestiteration == self.iteration then
+        self.sprite = self.class.sprite
+    else
+        self.sprite = self.class.oldsprite
+    end
     local opacity = (5 - highestiteration + self.iteration) / 5
     love.graphics.setColor(255,255,255, 255 * opacity)
     Entity.draw(self)

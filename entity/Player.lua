@@ -30,11 +30,6 @@ function Player:isCurrentPlayer()
     return highestiteration == self.iteration
 end
 
-function Player:tick()
-    Entity.tick(self)
-    self.dy = self.dy + 0.2
-end
-
 function Player:draw()
     if self:isCurrentPlayer() then
         self.sprite = self.class.sprite

@@ -2,7 +2,7 @@ local class = require 'middleclass.middleclass'
 require 'entity'
 
 Paddle = class('Paddle', Entity)
-Paddle.static.sprite = love.graphics.newImage("paddle.png")
+Paddle.static.sprite = love.graphics.newImage("assets/paddle.png")
 
 function Paddle:initialize(x, y, collider)
    Entity.initialize(self, x, y, self.class.sprite, collider)

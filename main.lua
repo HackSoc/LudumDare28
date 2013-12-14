@@ -8,11 +8,9 @@ function love.load()
    love.graphics.setCaption("Ping Pong")
    scene.initialize()
 
-   local ballSprite = love.graphics.newImage("ball.png")
-
    paddleA = Paddle:new(90, 250, scene.collider)
    paddleB = Paddle:new(710, 250, scene.collider)
-   ball = Ball:new(410, 210, ballSprite, scene.collider)
+   ball = Ball:new(410, 210, scene.collider)
 
    wallTop = Wall:new(400, -25, 800, 50, scene.collider)
    wallBottom = Wall:new(400, 625, 800, 50, scene.collider)

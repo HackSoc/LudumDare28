@@ -3,8 +3,13 @@ require 'entity'
 require 'wall'
 
 Ball = class('Ball', Entity)
+Ball.static.sprite = love.graphics.newImage("assets/ball.png")
 Ball.vx = 2
 Ball.vy = -7
+
+function Ball:initialize(x, y, collider)
+   Entity.initialize(self, x, y, self.class.sprite, collider)
+end
 
 function Ball:update(dt)
    self:move(self.x + self.vx, self.y + self.vy)

@@ -4,7 +4,7 @@ local HC = require 'HardonCollider'
 
 scene.entities = {}
 scene.hitboxes = {}
-scene.background = love.graphics.newImage("background.png")
+scene.background = love.graphics.newImage("assets/background.png")
 
 function scene.initialize()
    scene.collider = HC(100, scene.onCollide)

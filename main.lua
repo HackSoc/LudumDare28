@@ -2,7 +2,7 @@ require 'entity.Entity'
 require 'entity.Block'
 local HC = require 'HardonCollider'
 
-require 'Scene'
+require 'Display'
 
 entities = {}
 
@@ -10,7 +10,7 @@ function love.load()
     love.graphics.setMode(800,600, false, true,0)
     love.graphics.setCaption("You Only Get Juan")
     
-    scene = Scene:new()
+    display = Display:new()
 
     collider = HC(100, onCollide)
 
@@ -48,7 +48,6 @@ function love.keyreleased(key, unicode)
         keyUp = false
     elseif key == 's' then
         keyDown = false
-        bullet:stopRight()
     elseif key == 'a' then
         keyLeft = false
     elseif key == 'd' then
@@ -58,5 +57,5 @@ end
 
 
 function love.draw()
-    scene:draw(entities)
+    display:draw(entities)
 end

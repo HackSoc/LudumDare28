@@ -1,9 +1,9 @@
 local class = require 'middleclass.middleclass'
 
-Scene = class('Scene')
-Scene.static.background = love.graphics.newImage("assets/background.png")
+Display = class('Display')
+Display.static.background = love.graphics.newImage("assets/background.png")
 
-function Scene:draw(entities)
+function Display:draw(entities)
     love.graphics.draw(self.class.background, 0, 0)
 
     for key,entity in pairs(entities) do
@@ -11,4 +11,4 @@ function Scene:draw(entities)
     end
 end
 
-return scene
+return Display

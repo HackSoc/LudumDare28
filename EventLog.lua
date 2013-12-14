@@ -16,8 +16,6 @@ function EventLog:initialize()
 end
 
 function EventLog:partialApply(state, first, last)
-    self.collider:clear()
-
     local seenTicks = 0
     local newState = copystate(state)
     for _, event in ipairs(self.events) do

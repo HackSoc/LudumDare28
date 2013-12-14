@@ -19,16 +19,21 @@ end
 
 function Asteroid:hit(other, dx, dy)
    if other.class == Asteroid then
-      local averagedx = (abs(self.dx) + abs(other.dx))/2
+      local averagedx = (math.abs(self.dx) + math.abs(other.dx))/2
       local midx = (self.x + other.x)/2
-      self.dx = (self.x - midx) / abs(self.x-midx) * averagedx
-      other.dx = (other.x - midx) / abs(other.x-midx) * averagedx
+      self.dx = self:sign(self.x - midx) * averagedx
+      other.dx = self:sign(other.x - midx) * averagedx
 
-      local averagedy = (abs(self.dy) + abs(other.dy))/2
+      local averagedy = (math.abs(self.dy) + math.abs(other.dy))/2
       local midy = (self.y + other.y)/2
-      self.dy = (self.y - midy) / abs(self.y-midy) * averagedy
-      other.dy = (other.y - midy) / abs(other.y-midy) * averagedy
+      self.dy = self:sign(self.y - midy) * averagedy
+      other.dy = self:sign(other.y - midy) * averagedy
    elseif other.class == OneBullet then
       self.dead = true
    end
+end
+
+function Asteroid:sign(a)
+   if a >= 0 then return 1 end
+   return -1
 end

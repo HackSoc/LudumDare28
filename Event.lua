@@ -36,3 +36,16 @@ end
 function RightEvent:apply(state)
     state[self.entityId]:startRight()
 end
+
+
+StopEvent = class('StopEvent', Event)
+
+StopEvent.entityId = nil
+
+function StopEvent:initialize(entityId)
+    self.entityId = entityId
+end
+
+function StopEvent:apply(state)
+    state[self.entityId]:stop()
+end

@@ -1,9 +1,11 @@
 require 'entity.Entity'
 require 'entity.Block'
+require 'entity.Player'
 local HC = require 'HardonCollider'
 
 require 'Display'
 require 'EventLog'
+
 
 require 'utils'
 
@@ -11,6 +13,9 @@ startState = {}
 
 interval = 0
 time = 0
+keyLeft = false
+keyRight = false
+
 
 function love.load()
     love.graphics.setMode(800,600, false, true,0)
@@ -25,10 +30,12 @@ function love.load()
 
     startState[uniqueId()] = blk1
     startState[uniqueId()] = blk2
-    
+
+    player = Player:new(100, 60, collider)
     playerId = uniqueId()
-    
-    eventLog = EventLog()
+    startState[playerId] = player
+
+    eventLog = EventLog:new()
 end
 
 function onCollide(dt, hitbox1, hitbox2, dx, dy)
@@ -37,9 +44,10 @@ end
 
 function love.update(dt)
     interval = interval + dt
-    if (interval > 0.05) then
+    if (interval > 0.02) then
         interval = 0
         time = time + 1
+        eventLog:append(TickEvent:new())
     end
 end
 
@@ -50,13 +58,12 @@ function love.keypressed(key, unicode)
     elseif key == 's' then
         keyDown = true
     elseif key == 'a' and keyLeft == false then
-        eventLog = eventLog:insert(LeftEvent(playerId))
+        eventLog:insert(LeftEvent:new(playerId), time)
         keyLeft = true
     elseif key == 'd' and keyRight == false then
-        eventLog = eventLog:insert(RightEvent(playerId))
+        eventLog:insert(RightEvent:new(playerId), time)
         keyRight = true
     end
-    
 end
 
 function love.keyreleased(key, unicode)
@@ -65,15 +72,20 @@ function love.keyreleased(key, unicode)
     elseif key == 's' then
         keyDown = false
     elseif key == 'a' and keyLeft == true then
-        eventLog = eventLog:insert(LeftEvent(playerId))
+        eventLog:insert(StopEvent:new(playerId), time)
         keyLeft = false
-    elseif key == 'd' and keyRight == false then
-        eventLog = eventLog:insert(RightEvent(playerId))
+    elseif key == 'd' and keyRight == true then
+        eventLog:insert(StopEvent:new(playerId), time)
         keyRight = false
     end
 end
 
 
 function love.draw()
-    display:draw(eventLog:apply(startState, time))
+    local state = eventLog:apply(startState, time)
+    -- print "----"
+    for _, v in ipairs(eventLog.events) do
+        -- print(v.class.name)
+    end
+    display:draw(state)
 end

@@ -9,43 +9,37 @@ EventLog = class('EventLog')
 EventLog.events = {}
 
 function EventLog:initialize()
-
+    self.events = {}
 end
 
 function EventLog:apply(state, t)
     local seenTicks = 0
-    local newState = shallowcopy(state)
+    local newState = copystate(state)
     for _, event in ipairs(self.events) do
-        if (event.class == Tick) then
+        event:apply(newState)
+        if event.class == TickEvent then
             seenTicks = seenTicks + 1
-        else
-            event:apply(newState)
         end
-        if (seenTicks > t) then break end
+        if seenTicks > t then break end
     end
     return newState
 end
 
 function EventLog:append(event)
-    local newLog = EventLog()
-    for k, v in pairs(self.events) do
-        newLog.events[k] = v
-    end
-    table.insert(newLog.events, event)
-    return newLog
+    table.insert(self.events, event)
 end
 
 function EventLog:insert(event, t)
     local seenTicks = 0
-    local newLog = EventLog()
+    local newEvents = {}
     for _, e in ipairs(self.events) do
-        table.insert(newLog, e)
-        if (e.class == Tick) then 
+        table.insert(newEvents, e)
+        if e.class == TickEvent then 
             seenTicks = seenTicks + 1
             if seenTicks == t then
-                table.insert(newLog, event)
+                table.insert(newEvents, event)
             end
         end
     end
-    return newLog
+    self.events = newEvents
 end

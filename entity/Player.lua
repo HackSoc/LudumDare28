@@ -3,7 +3,7 @@ require 'entity.Entity'
 
 Player = class('entity.Player', Entity)
 Player.static.sprite = love.graphics.newImage("assets/block.png")
-Player.static.speed = 1
+Player.static.speed = 10
 
 function Player:initialize(x, y, collider)
     Entity.initialize(self, x, y, self.class.sprite, collider)

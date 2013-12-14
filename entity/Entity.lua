@@ -1,6 +1,7 @@
 local class = require 'middleclass.middleclass'
 
 Entity = class('entity.Entity')
+Entity.id = nil
 Entity.x = 0
 Entity.y = 0
 Entity.width = 0
@@ -15,7 +16,8 @@ Entity.dx = 0
 Entity.dy = 0
 Entity.collider = nil
 
-function Entity:initialize(x, y, sprite, collider)
+function Entity:initialize(id, x, y, sprite, collider)
+    self.id = id
     self.x = x
     self.y = y
     self.width = sprite:getWidth()
@@ -23,7 +25,8 @@ function Entity:initialize(x, y, sprite, collider)
     self.sprite = sprite
 
     self.collider = collider
-    self.hitbox = collider:addRectangle(self:top(),
+    self.hitbox = collider:addRectangle(self.id,
+                                        self:top(),
                                         self:left(),
                                         self.width,
                                         self.height)

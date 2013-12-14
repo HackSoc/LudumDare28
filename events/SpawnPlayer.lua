@@ -5,12 +5,11 @@ require 'utils'
 
 SpawnPlayer = class('events.SpawnPlayer', Event)
 
-function SpawnPlayer:initialize(collider)
-    self.collider = collider
+function SpawnPlayer:initialize()
     self.playerId = uniqueId()
 end
 
-function SpawnPlayer:apply(state)
-    local player = Player:new(100, 460, self.collider)
+function SpawnPlayer:apply(state, collider)
+    local player = Player:new(self.playerId, 100, 460, collider)
     state[self.playerId] = player
 end

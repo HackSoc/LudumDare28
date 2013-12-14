@@ -1,18 +1,20 @@
 local class = require 'middleclass.middleclass'
 
+require 'events.EntityEvent'
 require 'entity.PlayerBullet'
 require 'utils'
 
-PlayerBulletEvent = class('events.PlayerBulletEvent', Event)
+PlayerBulletEvent = class('events.PlayerBulletEvent', EntityEvent)
 
 function PlayerBulletEvent:initialize(entityId)
-    self.entityId = entityId
+    EntityEvent.initialize(self, entityId)
     self.bulletId = uniqueId()
 end
 
-function PlayerBulletEvent:apply(state)
-    local bullet = PlayerBullet:new(state[self.entityId].x,
+function PlayerBulletEvent:safeApply(state, collider)
+    local bullet = PlayerBullet:new(self.bulletId,
+                                    state[self.entityId].x,
                                     state[self.entityId].y,
-                                    state[self.entityId].collider)
+                                    collider)
     state[self.bulletId] = bullet
 end

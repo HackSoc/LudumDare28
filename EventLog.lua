@@ -1,5 +1,7 @@
 local class = require 'middleclass.middleclass'
 
+require 'ColliderWrapper'
+
 require 'utils'
 
 require 'events.Event'
@@ -9,14 +11,17 @@ EventLog = class('EventLog')
 EventLog.events = {}
 
 function EventLog:initialize()
+    self.collider = ColliderWrapper:new()
     self.events = {}
 end
 
 function EventLog:apply(state, t)
+    self.collider:clear()
+
     local seenTicks = 0
     local newState = copystate(state)
     for _, event in ipairs(self.events) do
-        event:apply(newState)
+        event:apply(newState, self.collider)
         if event.class == TickEvent then
             seenTicks = seenTicks + 1
         end

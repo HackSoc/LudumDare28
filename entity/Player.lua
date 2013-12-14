@@ -10,8 +10,8 @@ Player.static.speed = 10
 Player.iteration = 0
 Player.health = 100
 
-function Player:initialize(x, y, collider)
-    Entity.initialize(self, x, y, self.class.sprite, collider)
+function Player:initialize(id, x, y, collider)
+    Entity.initialize(self, id, x, y, self.class.sprite, collider)
     highestiteration = highestiteration + 1
     self.iteration = highestiteration
 end

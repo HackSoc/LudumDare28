@@ -13,6 +13,7 @@ startState = {}
 
 interval = 0
 time = 0
+maxTime = 100
 keyLeft = false
 keyRight = false
 
@@ -50,11 +51,15 @@ function love.update(dt)
         eventLog:append(TickEvent:new())
     end
 
-    if time > 100 then
+    if time > maxTime then
+        eventLog:insert(DestroyEvent:new(playerId), time)
+
         playerId = uniqueId()
         player = Player:new(100, 60, collider)
         startState[playerId] = player
-        time = 0
+
+        maxTime = maxTime + 40
+        time = time - 100
     end
 end
 

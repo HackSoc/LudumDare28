@@ -8,6 +8,7 @@ require 'events.PlayerBulletEvent'
 require 'events.EnemyBulletEvent'
 require 'events.SpawnPlayer'
 require 'events.DestroyEvent'
+require 'events.SpawnEnemy'
 
 require 'Display'
 require 'EventLog'
@@ -42,6 +43,10 @@ function love.load()
     playerId = splayer.playerId
     eventLog:append(splayer)
     state = startState
+
+    eventLog:append(SpawnEnemy:new(600,400))
+    eventLog:append(SpawnEnemy:new(500,400))
+    eventLog:append(SpawnEnemy:new(400,400))
 end
 
 function love.update(dt)

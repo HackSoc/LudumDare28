@@ -1,6 +1,7 @@
 local class = require 'middleclass.middleclass'
 
 require 'events.TileEvent'
+require 'events.TileNoCollisionEvent'
 
 Background = class('Background')
 Background.tile = {}
@@ -48,23 +49,26 @@ function Background:getEvents()
             tileNo = self.map[y*self.mapWidth+x+1]
             
             if tileNo ~= 0 then
-                table.insert(events, TileEvent:new(x * 70 - self.drawX, y * 70, self.tile[tileNo]))
+                table.insert(events, TileEvent:new(x * 70, y * 70, self.tile[tileNo]))
             end
         end
     end
-    return events
-end
-
-function Background:draw()
+    
     for y = 0, 8 do
         for x = 0, self.mapWidth-1 do
             tileNo = self.objects[y*self.mapWidth+x+1]
             
             if tileNo ~= 0 then
-                love.graphics.draw(self.tile[tileNo], x * 70 - self.drawX, y * 70)
+                table.insert(events, TileNoCollisionEvent:new(x * 70, y * 70, self.tile[tileNo]))
             end
         end
     end
+    
+    return events
+end
+
+function Background:draw()
+    
 end
 
 function Background:moveX(newX)

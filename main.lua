@@ -1,6 +1,8 @@
 require 'entity.Entity'
 require 'entity.Ball'
 require 'entity.Paddle'
+require 'entity.OneBullet'
+
 local scene = require 'scene'
 
 function love.load()
@@ -20,6 +22,11 @@ function love.load()
     scene.addEntity(ball)
     scene.addEntity(wallTop)
     scene.addEntity(wallBottom)
+    
+    --Frank Add
+    bullet = OneBullet:new(scene.collider)
+    scene.addEntity(bullet)
+    
 end
 
 
@@ -43,7 +50,12 @@ function love.keypressed(key, unicode)
         padUp = true
     elseif key == 'down' then
         padDown = true
+    elseif key == 'k' then
+        bullet:goLeft()
+    elseif key == 'l' then
+        bullet:goRight()
     end
+    
 end
 
 function love.keyreleased(key, unicode)
@@ -51,6 +63,10 @@ function love.keyreleased(key, unicode)
         padUp = false
     elseif key == 'down' then
         padDown = false
+    elseif key == 'k' then
+        bullet:stopLeft()
+    elseif key == 'l' then
+        bullet:stopRight()
     end
 end
 

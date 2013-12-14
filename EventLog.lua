@@ -6,45 +6,18 @@ require 'utils'
 
 require 'events.Event'
 
+require 'StateCache'
+
 EventLog = class('EventLog')
 
 EventLog.events = {}
+EventLog.cache = nil
 
-function EventLog:initialize()
+function EventLog:initialize(startState)
     self.collider = ColliderWrapper:new()
     self.events = {}
-end
-
-function EventLog:partialApply(state, first, last)
-    local seenTicks = 0
-    local newState = copystate(state)
-    for _, event in ipairs(self.events) do
-        if seenTicks >= first then
-            event:apply(newState, self.collider)
-        end
-        if event.class == TickEvent then
-            seenTicks = seenTicks + 1
-        end
-        if seenTicks > last then
-            break
-        end
-    end
-    return newState
-end
-
-function EventLog:apply(state, t)
-    self.collider:clear()
-
-    local seenTicks = 0
-    local newState = copystate(state)
-    for _, event in ipairs(self.events) do
-        event:apply(newState, self.collider)
-        if event.class == TickEvent then
-            seenTicks = seenTicks + 1
-        end
-        if seenTicks > t then break end
-    end
-    return newState
+    self.startState = startState
+    self.cache = StateCache:new()
 end
 
 function EventLog:append(event)
@@ -63,5 +36,51 @@ function EventLog:insert(event, t)
             end
         end
     end
+    self.cache:invalidateAfter(t)
     self.events = newEvents
+end
+
+function EventLog:eventsInRange(first, last)
+    local events = {}
+    local time = 0
+    for _, e in ipairs(self.events) do
+        if e.class == TickEvent then
+            time = time + 1
+        end
+        if time >= first and time < last then
+            table.insert(events, e)
+        end
+        if time > last then
+            break
+        end
+    end
+    return events
+end
+
+function EventLog:play(t)
+    local cacheTime, cached = self.cache:before(t)
+    local state
+    if not cacheTime then 
+        self.collider:clear()
+        local events = self:eventsInRange(0, t)
+        state = self:applyEvents(startState, events)
+    else
+        local events = self:eventsInRange(cacheTime, t)
+        state = self:applyEvents(cached, events)
+    end
+    self.cache:insert(state, t)
+    return state
+end
+
+
+function EventLog:applyEvents(state, events)
+    local newState = statecopy(state)
+    for _, e in ipairs(events) do
+        e:apply(newState, self.collider)
+    end
+    return newState
+end
+
+function EventLog:reset()
+    self.cache:invalidateAfter(0)
 end

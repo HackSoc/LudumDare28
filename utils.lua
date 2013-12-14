@@ -13,9 +13,38 @@ function shallowcopy(orig)
     return copy
 end
 
+
+function copy1(tab)
+    local copy
+    if type(orig) == 'table' then
+        copy = {}
+        setmetatable(copy, shallowcopy(getmetatable(orig)) )
+        for k, v in pairs(orig) do
+            copy[shallowcopy(k)] = shallowcopy(v)
+        end
+    else
+        copy = orig
+    end
+    return copy
+end
+
+function copy2(tab)
+    local copy
+    if type(orig) == 'table' then
+        copy = {}
+        setmetatable(copy, copy1(getmetatable(orig)))
+        for k, v in pairs(orig) do
+            copy[copy1(k)] = copy1(v)
+        end
+    else
+        copy = orig
+    end
+    return copy
+end
+
 function copystate(state)
     local copy = {}
-    setmetatable(copy, getmetatable(state))
+    setmetatable(copy, shallowcopy(getmetatable(state)))
     for k, v in pairs(state) do
         copy[shallowcopy(k)] = shallowcopy(v)
     end

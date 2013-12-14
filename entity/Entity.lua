@@ -14,7 +14,6 @@ Entity.angle = 0
 Entity.orientation = 1
 Entity.dx = 0
 Entity.dy = 0
-Entity.collider = nil
 
 function Entity:initialize(id, x, y, sprite, collider)
     self.id = id
@@ -24,7 +23,6 @@ function Entity:initialize(id, x, y, sprite, collider)
     self.height = sprite:getHeight()
     self.sprite = sprite
 
-    self.collider = collider
     self.hitbox = collider:addRectangle(self.id,
                                         self:top(),
                                         self:left(),

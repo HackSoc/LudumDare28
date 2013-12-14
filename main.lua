@@ -22,6 +22,7 @@ time = 0
 maxTime = 100
 keyLeft = false
 keyRight = false
+state = {}
 
 
 function love.load()
@@ -30,7 +31,7 @@ function love.load()
     
     display = Display:new()
 
-    eventLog = EventLog:new()
+    eventLog = EventLog:new(startState)
 
     bgEvents = display.class.background:getEvents()
     for _, v in ipairs(bgEvents) do
@@ -40,17 +41,16 @@ function love.load()
     local splayer = SpawnPlayer()
     playerId = splayer.playerId
     eventLog:append(splayer)
-    state = startState
 end
 
 function love.update(dt)
+    local timeChanged = false
     interval = interval + dt
     if (interval > 0.02) then
         interval = 0
-        local oldTime = time
         time = time + 1
         eventLog:append(TickEvent:new())
-        state = eventLog:partialApply(state, oldTime, time)
+        timeChanged = true
     end
 
     if time > maxTime then
@@ -61,8 +61,11 @@ function love.update(dt)
         local splayer = SpawnPlayer()
         playerId = splayer.playerId
         eventLog:insert(splayer, time)
-        state = eventLog:apply(startState, time)
     end
+    
+    -- if timeChanged then
+    --     state = eventLog:play(time)
+    -- end
 end
 
 
@@ -100,5 +103,6 @@ end
 
 
 function love.draw()
+    state = eventLog:play(time)
     display:draw(state)
 end

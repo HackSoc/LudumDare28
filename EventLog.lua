@@ -44,11 +44,11 @@ function EventLog:eventsInRange(first, last)
     local events = {}
     local time = 0
     for _, e in ipairs(self.events) do
-        if e.class == TickEvent then
-            time = time + 1
-        end
         if time >= first and time < last then
             table.insert(events, e)
+        end
+        if e.class == TickEvent then
+            time = time + 1
         end
         if time > last then
             break
@@ -63,22 +63,25 @@ function EventLog:play(t)
     if not cacheTime then 
         self.collider:clear()
         local events = self:eventsInRange(0, t)
-        state = self:applyEvents(startState, events)
+        state = self:applyEvents(startState, events, 0)
     else
         local events = self:eventsInRange(cacheTime, t)
-        state = self:applyEvents(cached, events)
+        state = self:applyEvents(cached, events, cacheTime)
     end
     self.cache:insert(state, t)
+    self:sanitizeCollider(state)
     return state
 end
 
 
-function EventLog:applyEvents(state, events)
-    local newState = statecopy(state)
+function EventLog:applyEvents(state, events, startTime)
+    local newState = copystate(state)
+    local time = startTime
     for _, e in ipairs(events) do
         e:apply(newState, self.collider)
         if e.class == TickEvent then
-            self.collider:tick(seenTicks, newState)
+            time = time + 1
+            self.collider:tick(time, newState)
         end
     end
     return newState
@@ -86,4 +89,14 @@ end
 
 function EventLog:reset()
     self.cache:invalidateAfter(0)
+end
+
+function EventLog:sanitizeCollider(entities)
+    for _, e in pairs(entities) do
+        if e.ghosted then
+            self.collider:setGhost(e.hitbox)
+        else
+            self.collider:setSolid(e.hitbox)
+        end
+    end
 end

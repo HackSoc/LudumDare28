@@ -1,29 +1,17 @@
 local class = require 'middleclass.middleclass'
-require 'entity.Entity'
+require 'entity.Mob'
 
 local highestiteration = 0
 
-Player = class('entity.Player', Entity)
+Player = class('entity.Player', Mob)
 Player.static.oldsprite = love.graphics.newImage("assets/character-1.png")
 Player.static.sprite = love.graphics.newImage("assets/character-2.png")
-Player.static.speed = 10
 Player.iteration = 0
-Player.health = 100
 
 function Player:initialize(id, x, y, collider)
     Entity.initialize(self, id, x, y, self.class.sprite, collider)
     highestiteration = highestiteration + 1
     self.iteration = highestiteration
-end
-
-function Player:startLeft()
-    Entity.startLeft(self)
-    self.dx = -self.class.speed
-end
-
-function Player:startRight()
-    Entity.startRight(self)
-    self.dx = self.class.speed
 end
 
 function Player:isCurrentPlayer()
@@ -40,12 +28,4 @@ function Player:draw()
     love.graphics.setColor(255,255,255, 255 * opacity)
     Entity.draw(self)
     love.graphics.setColor(255,255,255,255)
-end
-
-function Player:damage(amount)
-    self.health = self.health - amount
-end
-
-function Player:hit()
-    return self.health <= 0
 end

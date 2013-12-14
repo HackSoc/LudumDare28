@@ -40,14 +40,17 @@ function love.load()
     local splayer = SpawnPlayer()
     playerId = splayer.playerId
     eventLog:append(splayer)
+    state = startState
 end
 
 function love.update(dt)
     interval = interval + dt
     if (interval > 0.02) then
         interval = 0
+        local oldTime = time
         time = time + 1
         eventLog:append(TickEvent:new())
+        state = eventLog:partialApply(state, oldTime, time)
     end
 
     if time > maxTime then
@@ -58,6 +61,7 @@ function love.update(dt)
         local splayer = SpawnPlayer()
         playerId = splayer.playerId
         eventLog:insert(splayer, time)
+        state = eventLog:apply(startState, time)
     end
 end
 
@@ -96,11 +100,5 @@ end
 
 
 function love.draw()
-    local state = eventLog:apply(startState, time)
-    
-    -- print "----"
-    for _, v in ipairs(eventLog.events) do
-        -- print(v.class.name)
-    end
     display:draw(state)
 end

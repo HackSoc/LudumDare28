@@ -15,6 +15,25 @@ function EventLog:initialize()
     self.events = {}
 end
 
+function EventLog:partialApply(state, first, last)
+    self.collider:clear()
+
+    local seenTicks = 0
+    local newState = copystate(state)
+    for _, event in ipairs(self.events) do
+        if seenTicks >= first then
+            event:apply(newState, self.collider)
+        end
+        if event.class == TickEvent then
+            seenTicks = seenTicks + 1
+        end
+        if seenTicks > last then
+            break
+        end
+    end
+    return newState
+end
+
 function EventLog:apply(state, t)
     self.collider:clear()
 

@@ -71,6 +71,8 @@ function love.keypressed(key, unicode)
         keyLeft = true
     elseif key == 'd' then
         keyRight = true
+    elseif key == ' ' then
+        bullet:fire(player)
     end
     
 end

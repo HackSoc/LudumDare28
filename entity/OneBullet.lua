@@ -7,14 +7,27 @@ OneBullet.static.sprite = love.graphics.newImage("assets/bullet.png")
 OneBullet.velocity = 200
 OneBullet.steerRate = 4
 OneBullet.accRate = 100
+OneBullet.fired = false
+OneBullet.fireTime = 0
 
 function OneBullet:initialize(collider)
-    print (OneBullet.static.sprite)
-    Entity.initialize(self, 200, 200, self.class.sprite, collider)
+    OneBullet.collider = collider
+    Entity.initialize(self, -100, -100, self.class.sprite, collider)
     self:rotate(math.pi)
 end
 
 function OneBullet:update(dt)
+    if not self.fired then
+        return
+    end
+    
+    self.fireTime = self.fireTime + dt
+    
+    if (self.fireTime > 1 and self.fireTime < 2) then
+        self.collider:setSolid(self.hitbox)
+        self.fireTime = 3
+    end
+    
     if self.steerLeft then
         self.angle = self.angle - (self.steerRate * dt)
     end
@@ -57,6 +70,16 @@ function OneBullet:update(dt)
     
     self:move(self.x + self.velocity * math.sin(self.angle) * dt, self.y - self.velocity * math.cos(self.angle) * dt)
     self:rotate(self.angle)
+end
+
+function OneBullet:fire(ship)
+    if not self.fired then
+        self.fired = true
+        self.x = ship.x + math.sin(ship.angle) * 55.0
+        self.y = ship.y - math.cos(ship.angle) * 55.0
+        self.angle = ship.angle
+        self.collider:setGhost(self.hitbox)
+    end
 end
 
 function OneBullet:accelerate()

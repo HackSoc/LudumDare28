@@ -100,6 +100,7 @@ end
 function love.draw()
     collider:clear()
     local state = eventLog:apply(startState, time)
+    
     -- print "----"
     for _, v in ipairs(eventLog.events) do
         -- print(v.class.name)

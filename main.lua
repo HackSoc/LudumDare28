@@ -26,13 +26,13 @@ function love.load()
 
     collider = HC(100, onCollide)
 
-    blk1 = Block:new(100, 100, collider)
-    blk2 = Block:new(140, 100, collider)
+    blk1 = Block:new(100, 500, collider)
+    blk2 = Block:new(140, 500, collider)
 
     startState[uniqueId()] = blk1
     startState[uniqueId()] = blk2
 
-    player = Player:new(100, 60, collider)
+    player = Player:new(100, 460, collider)
     playerId = uniqueId()
     startState[playerId] = player
 
@@ -55,7 +55,7 @@ function love.update(dt)
         eventLog:insert(DestroyEvent:new(playerId), time)
 
         playerId = uniqueId()
-        player = Player:new(100, 60, collider)
+        player = Player:new(100, 460, collider)
         startState[playerId] = player
 
         maxTime = maxTime + 40

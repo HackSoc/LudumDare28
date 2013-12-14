@@ -12,13 +12,13 @@ function Player:initialize(x, y, collider)
 end
 
 function Player:moveUp()
-	self.vx = self.vx + math.sin(self.angle) * self.class.power
-	self.vy = self.vy - math.cos(self.angle) * self.class.power
+    self.vx = self.vx + math.sin(self.angle) * self.class.power
+    self.vy = self.vy - math.cos(self.angle) * self.class.power
 end
 
 function Player:moveDown()
     self.vx = self.vx - math.sin(self.angle) * self.class.power
-	self.vy = self.vy + math.cos(self.angle) * self.class.power
+    self.vy = self.vy + math.cos(self.angle) * self.class.power
 end
 
 function Player:moveLeft()
@@ -30,13 +30,13 @@ function Player:moveRight()
 end
 
 function Player:update()
-	self.vx = self.vx / 1.01
-	self.vy = self.vy / 1.01
-	self:move(self.x + self.vx, self.y + self.vy)
+    self.vx = self.vx / 1.01
+    self.vy = self.vy / 1.01
+    self:move(self.x + self.vx, self.y + self.vy)
 end
 
 function Player:hit(other, dx, dy)
-	if other.class ~= Wall then
-    	error("You lose")
+    if other.class ~= Wall then
+        error("You lose")
     end
 end

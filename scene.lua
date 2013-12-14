@@ -39,7 +39,7 @@ end
 function scene.removeDeadEntity(entity)
     scene.entities[entity] = nil
     scene.hitboxes[entity.hitbox] = nil
-    HC.remove(entity.hitbox)
+    scene.collider:remove(entity.hitbox)
 end
 
 function scene.draw()

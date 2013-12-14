@@ -37,8 +37,8 @@ function scene.update(dt)
 end
 
 function scene.removeDeadEntity(entity)
-    table.remove(scene.entities, entity)
-    table.remove(scene.hitboxes, entity.hitbox)
+    scene.entities[entity] = nil
+    scene.hitboxes[entity.hitbox] = nil
     HC.remove(entity.hitbox)
 end
 

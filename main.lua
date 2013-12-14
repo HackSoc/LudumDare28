@@ -64,8 +64,7 @@ function love.keypressed(key, unicode)
         bullet:goLeft()
     elseif key == 'l' then
         bullet:goRight()
-    end
-    if key == 'a' then
+    elseif key == 'a' then
         keyLeft = true
     elseif key == 'd' then
         keyRight = true
@@ -77,7 +76,7 @@ function love.keyreleased(key, unicode)
     if key == 'w' then
         keyUp = false
     elseif key == 's' then
-        padDown = false
+        keyDown = false
     elseif key == 'k' then
         bullet:stopLeft()
     elseif key == 'l' then

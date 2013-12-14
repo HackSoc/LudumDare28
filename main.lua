@@ -24,7 +24,6 @@ function love.load()
     scene.addEntity(wallTop)
     scene.addEntity(wallBottom)
     
-    --Frank Add
     bullet = OneBullet:new(scene.collider)
     scene.addEntity(bullet)
     

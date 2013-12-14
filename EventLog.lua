@@ -23,6 +23,7 @@ function EventLog:partialApply(state, first, last)
             event:apply(newState, self.collider)
         end
         if event.class == TickEvent then
+            self.collider:tick(seenTicks, newState)
             seenTicks = seenTicks + 1
         end
         if seenTicks > last then

@@ -26,8 +26,12 @@ function Player:startRight()
     self.dx = self.class.speed
 end
 
+function Player:isCurrentPlayer()
+	return highestiteration == self.iteration
+end
+
 function Player:draw()
-    if highestiteration == self.iteration then
+    if self:isCurrentPlayer() then
         self.sprite = self.class.sprite
     else
         self.sprite = self.class.oldsprite

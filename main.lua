@@ -3,6 +3,7 @@ require 'entity.Ball'
 require 'entity.Paddle'
 require 'entity.OneBullet'
 require 'entity.Asteroid'
+AsteroidFactory = require 'AsteroidFactory'
 
 require 'entity.Player'
 local scene = require 'scene'
@@ -31,13 +32,7 @@ function love.load()
     
     scene.addEntity(player)
 
-    --add Asteroids
-    asteroid1 = Asteroid:new(300, 500, 100, 100, scene.collider)
-    asteroid2 = Asteroid:new(460, 180, 100, -100, scene.collider)
-    asteroid3 = Asteroid:new(220, 330, -100, -100, scene.collider)
-    scene.addEntity(asteroid1)
-    scene.addEntity(asteroid2)
-    scene.addEntity(asteroid3)
+    scene.addCallback(AsteroidFactory.callback)
 end
 
 

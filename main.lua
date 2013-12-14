@@ -12,7 +12,7 @@ function love.load()
     love.graphics.setCaption("You only get one")
     scene.initialize()
 
-    player = Player:new(90, 250, scene.collider)
+    player = Player:new(400, 300, scene.collider)
     
     wallLeft = Wall:new(-100, 300, 50, 600, scene.collider)
     wallRight = Wall:new(900, 300, 50, 600, scene.collider)

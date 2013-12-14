@@ -4,11 +4,14 @@ require 'entity.Entity'
 Player = class('entity.Player', Entity)
 Player.static.sprite = love.graphics.newImage("assets/ship.png")
 Player.static.power = 0.1
+Player.invulnerable = 2
 Player.vx = 0
 Player.vy = 0
 
 function Player:initialize(x, y, collider)
     Entity.initialize(self, x, y, self.class.sprite, collider)
+    Player.collider = collider
+    collider:setGhost(self.hitbox)
 end
 
 function Player:moveUp()
@@ -29,7 +32,14 @@ function Player:moveRight()
     self:rotate(self.angle + math.pi/16)
 end
 
-function Player:update()
+function Player:update(dt)
+    if self.invulnerable > 0 then
+        self.invulnerable = self.invulnerable - dt
+    end
+    if self.invulnerable < 0 then
+        self.invulnerable = 0
+        self.collider:setSolid(self.hitbox)
+    end
     self.vx = self.vx / 1.01
     self.vy = self.vy / 1.01
     self:move(self.x + self.vx, self.y + self.vy)

@@ -60,12 +60,15 @@ function love.keypressed(key, unicode)
         keyUp = true
     elseif key == 's' then
         keyDown = true
-    elseif key == 'k' then
+    elseif key == 'j' then
         bullet:goLeft()
     elseif key == 'l' then
         bullet:goRight()
-    end
-    if key == 'a' then
+    elseif key == 'i' then
+        bullet:accelerate()
+    elseif key == 'k' then
+        bullet:brake()
+    elseif key == 'a' then
         keyLeft = true
     elseif key == 'd' then
         keyRight = true
@@ -78,7 +81,7 @@ function love.keyreleased(key, unicode)
         keyUp = false
     elseif key == 's' then
         padDown = false
-    elseif key == 'k' then
+    elseif key == 'j' then
         bullet:stopLeft()
     elseif key == 'l' then
         bullet:stopRight()
@@ -86,6 +89,10 @@ function love.keyreleased(key, unicode)
         keyLeft = false
     elseif key == 'd' then
         keyRight = false
+    elseif key == 'i' then
+        bullet:stopAccelerate()
+    elseif key == 'k' then
+        bullet:stopBrake()
     end
 end
 

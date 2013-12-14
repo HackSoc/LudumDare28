@@ -4,7 +4,7 @@ local scene = require 'scene'
 
 function love.load()
     love.graphics.setMode(800,600, false, true,0)
-    love.graphics.setCaption("Ping Pong")
+    love.graphics.setCaption("You only get one")
     scene.initialize()
 
     player = Player:new(90, 250, scene.collider)

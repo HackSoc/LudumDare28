@@ -2,6 +2,8 @@ require 'entity.Entity'
 require 'entity.Block'
 require 'entity.Player'
 require 'events.PlayerBulletEvent'
+require 'events.EnemyBulletEvent'
+require 'events.SpawnPlayer'
 local HC = require 'HardonCollider'
 
 require 'Display'
@@ -33,15 +35,13 @@ function love.load()
     startState[uniqueId()] = blk1
     startState[uniqueId()] = blk2
 
-    player = Player:new(100, 460, collider)
-    playerId = uniqueId()
-    startState[playerId] = player
-
     eventLog = EventLog:new()
+    local splayer = SpawnPlayer(collider)
+    playerId = splayer.playerId
+    eventLog:append(splayer)
 end
 
 function onCollide(dt, hitbox1, hitbox2, dx, dy)
-
 end
 
 function love.update(dt)
@@ -49,18 +49,17 @@ function love.update(dt)
     if (interval > 0.02) then
         interval = 0
         time = time + 1
-        eventLog:append(TickEvent:new())
+        eventLog:append(TickEvent:new(collider))
     end
 
     if time > maxTime then
         eventLog:insert(DestroyEvent:new(playerId), time)
 
-        playerId = uniqueId()
-        player = Player:new(100, 460, collider)
-        startState[playerId] = player
-
         maxTime = maxTime + 40
         time = time - 100
+        local splayer = SpawnPlayer(collider)
+        playerId = splayer.playerId
+        eventLog:insert(splayer, time)
     end
 end
 
@@ -78,6 +77,8 @@ function love.keypressed(key, unicode)
         keyRight = true
     elseif key == ' ' then
         eventLog:insert(PlayerBulletEvent:new(playerId), time)
+    elseif key == '-' then
+        eventLog:insert(EnemyBulletEvent:new(playerId), time)
     end
 end
 
@@ -97,6 +98,7 @@ end
 
 
 function love.draw()
+    collider:clear()
     local state = eventLog:apply(startState, time)
     -- print "----"
     for _, v in ipairs(eventLog.events) do

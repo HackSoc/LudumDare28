@@ -2,7 +2,7 @@ local class = require 'middleclass.middleclass'
 require 'entity.Bullet'
 
 PlayerBullet = class('entity.PlayerBullet', Bullet)
-PlayerBullet.static.speed = 25
+PlayerBullet.static.speed = 5
 
 function PlayerBullet:hit(other, dx, dy)
     Bullet.hit(self, other, dx, dy)

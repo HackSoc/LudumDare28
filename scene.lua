@@ -7,12 +7,12 @@ scene.hitboxes = {}
 scene.background = love.graphics.newImage("background.png")
 
 function scene.initialize()
-   scene.collider = HC(100, onCollide)
+   scene.collider = HC(100, scene.onCollide)
 end
 
 function scene.onCollide(dt, hitbox1, hitbox2, dx, dy)
-   local entity1 = hitboxes[hitbox1]
-   local entity2 = hitboxes[hitbox2]
+   local entity1 = scene.hitboxes[hitbox1]
+   local entity2 = scene.hitboxes[hitbox2]
 
    if entity1.dead or entity2.dead then
       return

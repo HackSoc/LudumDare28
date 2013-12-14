@@ -1,25 +1,37 @@
-
-local scene = require 'scene'
 require 'entity'
+require 'ball'
+require 'paddle'
+local scene = require 'scene'
+
+local paddleA = nil;
+local paddleB = nil;
+local ball = nil;
 
 function love.load()
+	success = love.graphics.setMode(800,600, false, true,0)
 	scene.initialize()
-	paddleimg = love.graphics.newImage("paddle.png")
-	
-	paddleA = Entity:new(100,100,paddleimg,scene.collider)
-	paddleB = Entity:new(500,100,paddleimg,scene.collider)
+
+	local ball = love.graphics.newImage("ball.png")
+
+	paddleA = Paddle:new(90, 250, scene.collider)
+	paddleB = Paddle:new(710, 250, scene.collider)
+	ball = Ball:new(410, 210, ball, scene.collider)
+
+	wallBottom = Wall:new(400, 625, 800, 50, scene.collider)
+	wallTop = Wall:new(400, -25, 800, 50, scene.collider)
+
 	scene.addEntity(paddleA)
 	scene.addEntity(paddleB)
-	
-	print "Test"
-	
+	scene.addEntity(ball)
+	scene.addEntity(wallTop)
+	scene.addEntity(wallBottom)
 end
 
 
 function love.update(dt)
 	scene.update(dt)
 	
-end
+end	
 
 
 function love.keypressed(key, unicode)

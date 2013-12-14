@@ -17,20 +17,28 @@ function Entity:initialize(x, y, sprite, collider)
    self.height = sprite:getHeight()
    self.sprite = sprite
 
-   self.hitbox = collider:addRectangle(x,
-                                       y,
+   self.hitbox = collider:addRectangle(self:top(),
+                                       self:left(),
                                        self.width,
                                        self.height)
 end
 
+function Entity:left()
+   return self.x - self.width/2
+end
+
+function Entity:top()
+   return self.y - self.height/2
+end
+
 function Entity:draw()
    if self.visible then
-      love.graphics.draw(self.sprite, self.x, self.y)
+      love.graphics.draw(self.sprite, self:left(), self:top())
    end
 end
 
 function Entity:update(dx)
-   --error("Unimplemented")
+   -- error("Unimplemented")
 end
 
 function Entity:move(x, y)
@@ -40,4 +48,5 @@ function Entity:move(x, y)
 end
 
 function Entity:hit(other, dx, dy)
+
 end

@@ -1,7 +1,7 @@
 require 'entity.Entity'
 require 'entity.Ball'
 require 'entity.Paddle'
-local scene = require 'Scene'
+local scene = require 'scene'
 
 function love.load()
     love.graphics.setMode(800,600, false, true,0)

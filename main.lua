@@ -27,6 +27,7 @@ keyRight = false
 function love.load()
     love.graphics.setMode(800,600, false, true,0)
     love.graphics.setCaption("You Only Get Juan")
+    Display.static.background:moveX(100)
     
     display = Display:new()
 

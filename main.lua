@@ -1,6 +1,5 @@
 require 'entity.Entity'
-require 'entity.Ball'
-require 'entity.Paddle'
+require 'entity.Player'
 local scene = require 'scene'
 
 function love.load()
@@ -8,31 +7,22 @@ function love.load()
     love.graphics.setCaption("Ping Pong")
     scene.initialize()
 
-    paddleA = Paddle:new(90, 250, scene.collider)
-    paddleB = Paddle:new(710, 250, scene.collider)
-    ball = Ball:new(410, 210, scene.collider)
+    player = Player:new(90, 250, scene.collider)
 
-    wallTop = Wall:new(400, -25, 800, 50, scene.collider)
-    wallBottom = Wall:new(400, 625, 800, 50, scene.collider)
-
-    scene.addEntity(paddleA)
-    scene.addEntity(paddleB)
-    scene.addEntity(ball)
-    scene.addEntity(wallTop)
-    scene.addEntity(wallBottom)
+    scene.addEntity(player)
 end
 
 
 function love.update(dt)
-    if paddleB.y < ball.y then
-        paddleB:moveDown()
-    else
-        paddleB:moveUp()
+    if keyUp then
+        player:moveUp()
+    elseif keyDown then
+        player:moveDown()
     end
-    if padUp then
-        paddleA:moveUp()
-    elseif padDown then
-        paddleA:moveDown()
+    if keyLeft then
+        player:moveLeft()
+    elseif keyRight then
+        player:moveRight()
     end
     scene.update(dt)
 end
@@ -40,17 +30,27 @@ end
 
 function love.keypressed(key, unicode)
     if key == 'up' then
-        padUp = true
+        keyUp = true
     elseif key == 'down' then
-        padDown = true
+        keyDown = true
+    end
+    if key == 'left' then
+        keyLeft = true
+    elseif key == 'right' then
+        keyRight = true
     end
 end
 
 function love.keyreleased(key, unicode)
     if key == 'up' then
-        padUp = false
+        keyUp = false
     elseif key == 'down' then
-        padDown = false
+        keyDown = false
+    end
+    if key == 'left' then
+        keyLeft = false
+    elseif key == 'right' then
+        keyRight = false
     end
 end
 

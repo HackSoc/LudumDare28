@@ -7,6 +7,8 @@ require 'entity.Asteroid'
 require 'entity.Player'
 local scene = require 'scene'
 
+score = 0
+
 function love.load()
     love.graphics.setMode(800,600, false, true,0)
     love.graphics.setCaption("You only get one")
@@ -100,5 +102,5 @@ end
 
 function love.draw()
     scene.draw()
-    
+    love.graphics.print("Score: " .. score, 20, 20)
 end

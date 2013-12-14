@@ -30,6 +30,7 @@ function Asteroid:hit(other, dx, dy)
       other.dy = self:sign(other.y - midy) * averagedy
    elseif other.class == OneBullet then
       self.dead = true
+      score = score + 1
    end
 end
 

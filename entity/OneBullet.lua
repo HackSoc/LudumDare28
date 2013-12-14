@@ -22,6 +22,14 @@ function OneBullet:update(dt)
         self.angle = self.angle + (self.steerRate * dt)
     end
     
+    if (self.x > 800) then
+        self.x = self.x - 800
+    end
+    
+    if (self.y > 600) then
+        self.y = self.y - 600
+    end
+    
     self:move(self.x + self.velocity * math.sin(self.angle) * dt, self.y - self.velocity * math.cos(self.angle) * dt)
     self:rotate(self.angle)
 end

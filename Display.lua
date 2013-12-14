@@ -1,10 +1,11 @@
 local class = require 'middleclass.middleclass'
+require 'Background'
 
 Display = class('Display')
-Display.static.background = love.graphics.newImage("assets/background.png")
+Display.static.background = Background:new()
 
 function Display:draw(entities)
-    love.graphics.draw(self.class.background, 0, 0)
+    Display.static.background:draw()
 
     for key,entity in pairs(entities) do
         entity:draw()

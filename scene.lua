@@ -2,6 +2,7 @@ local scene = {}
 
 local HC = require 'HardonCollider'
 
+scene.callbacks = {}
 scene.entities = {}
 scene.hitboxes = {}
 scene.background = love.graphics.newImage("assets/background.png")
@@ -34,6 +35,14 @@ function scene.update(dt)
             scene.removeDeadEntity(entity)
         end
     end
+
+    for key, callback in pairs(scene.callbacks) do
+        callback(scene, dt)
+    end
+end
+
+function scene.addCallback(callback)
+    table.insert(scene.callbacks, callback)
 end
 
 function scene.removeDeadEntity(entity)

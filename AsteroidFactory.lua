@@ -18,7 +18,25 @@ function AsteroidFactory.callback(scene, dt)
 end
 
 function AsteroidFactory.spawn(scene)
-   local asteroid = Asteroid:new(math.random(800), math.random(600), math.random(-20,20), math.random(-20,20), scene.collider)
+   dx = math.random(-300,300)
+   dy = math.random(-300,300)
+
+   local edge = math.random(4) --North, East, South, West
+   if edge == 1 then
+      x = math.random(800)
+      y = math.random(100)
+   elseif edge == 2 then
+      x = 800 - math.random(100)
+      y = math.random(600)
+   elseif edge == 3 then
+      x = math.random(800)
+      y = 600 - math.random(100)
+   else
+      x = math.random(100)
+      y = math.random(600)
+   end
+   
+   local asteroid = Asteroid:new(x, y, dx, dy, scene.collider)
    scene.addEntity(asteroid)
 end   
 

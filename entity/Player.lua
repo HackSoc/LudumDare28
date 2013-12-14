@@ -2,7 +2,7 @@ local class = require 'middleclass.middleclass'
 require 'entity.Entity'
 
 Player = class('entity.Player', Entity)
-Player.static.sprite = love.graphics.newImage("assets/block.png")
+Player.static.sprite = love.graphics.newImage("assets/character-1.png")
 Player.static.speed = 10
 
 function Player:initialize(x, y, collider)

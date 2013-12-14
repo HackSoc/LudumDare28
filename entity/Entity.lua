@@ -10,6 +10,8 @@ Entity.visible = true
 Entity.hitbox = nil
 Entity.dead = false
 Entity.angle = 0
+Entity.dx = 0
+Entity.dy = 0
 
 function Entity:initialize(x, y, sprite, collider)
     self.x = x
@@ -43,8 +45,9 @@ function Entity:draw()
     end
 end
 
-function Entity:update(dt)
-    -- error("Unimplemented")
+function Entity:tick()
+    self.x = self.x + self.dx
+    self.y = self.y + self.dy
 end
 
 function Entity:move(x, y)
@@ -55,4 +58,10 @@ end
 
 function Entity:hit(other, dx, dy)
 
+end
+
+function Entity:startLeft()
+end
+
+function Entity:startRight()
 end

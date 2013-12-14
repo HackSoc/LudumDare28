@@ -14,7 +14,7 @@ EventLog.events = {}
 EventLog.cache = nil
 
 function EventLog:initialize(startState)
-    self.collider = ColliderWrapper:new()
+    self.collider = ColliderWrapper:new(self)
     self.events = {}
     self.startState = startState
     self.cache = StateCache:new()
@@ -77,6 +77,9 @@ function EventLog:applyEvents(state, events)
     local newState = statecopy(state)
     for _, e in ipairs(events) do
         e:apply(newState, self.collider)
+        if e.class == TickEvent then
+            self.collider:tick(seenTicks, newState)
+        end
     end
     return newState
 end

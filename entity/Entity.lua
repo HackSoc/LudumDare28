@@ -9,7 +9,6 @@ Entity.height = 0
 Entity.sprite = nil
 Entity.visible = true
 Entity.hitbox = nil
-Entity.dead = false
 Entity.angle = 0
 Entity.orientation = 1
 Entity.dx = 0
@@ -45,15 +44,8 @@ end
 
 function Entity:draw()
     if self.visible then
-        love.graphics.draw(self.sprite, self.x, self.y, self.angle, self.orientation, 1, self.width/2, self.height/2)
+        love.graphics.draw(self.sprite, self.x-Display.static.background.drawX, self.y, self.angle, self.orientation, 1, self.width/2, self.height/2)
     end
-
-    x1, y1, x2, y2 = self.hitbox:bbox()
-      
-    r, g, b, a = love.graphics.getColor()
-    love.graphics.setColor(50, 100, 150, 255)
-    love.graphics.rectangle("line", x1, y1, x2 - x1, y2 - y1)
-    love.graphics.setColor(r, g, b, a)
 end
 
 function Entity:tick()
@@ -68,7 +60,7 @@ function Entity:move(x, y)
 end
 
 function Entity:hit(other, dx, dy)
-
+    return false
 end
 
 function Entity:startLeft()

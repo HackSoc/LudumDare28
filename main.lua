@@ -1,5 +1,4 @@
 require 'entity.Entity'
-require 'entity.Block'
 require 'entity.Player'
 require 'events.TickEvent'
 require 'events.RightEvent'
@@ -32,6 +31,11 @@ function love.load()
     display = Display:new()
 
     eventLog = EventLog:new()
+
+    bgEvents = display.class.background:getEvents()
+    for _, v in ipairs(bgEvents) do
+        eventLog:append(v)
+    end
 
     local splayer = SpawnPlayer()
     playerId = splayer.playerId

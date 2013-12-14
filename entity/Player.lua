@@ -27,7 +27,12 @@ function Player:startRight()
 end
 
 function Player:isCurrentPlayer()
-	return highestiteration == self.iteration
+    return highestiteration == self.iteration
+end
+
+function Player:tick()
+    Entity.tick(self)
+    self.dy = self.dy + 0.2
 end
 
 function Player:draw()

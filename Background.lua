@@ -1,5 +1,6 @@
-
 local class = require 'middleclass.middleclass'
+
+require 'events.TileEvent'
 
 Background = class('Background')
 Background.tile = {}
@@ -39,15 +40,23 @@ function Background:initialize()
     end
 end
 
-function Background:draw()
+function Background:getEvents()
+    events = {}
     for y = 0, 8 do
         for x = 0, self.mapWidth-1 do
             tileNo = self.map[y*self.mapWidth+x+1]
             
             if tileNo ~= 0 then
-                love.graphics.draw(self.tile[tileNo], x * 70 - self.drawX, y * 70)
+                table.insert(events, TileEvent:new(x * 70 - self.drawX, y * 70, self.tile[tileNo]))
             end
-            
+        end
+    end
+    return events
+end
+
+function Background:draw()
+    for y = 0, 8 do
+        for x = 0, self.mapWidth-1 do
             tileNo = self.objects[y*self.mapWidth+x+1]
             
             if tileNo ~= 0 then

@@ -14,14 +14,16 @@ end
 
 function EventLog:apply(state, t)
     local seenTicks = 0
+    local newState = shallowcopy(state)
     for _, event in ipairs(self.events) do
         if (event.class == Tick) then
             seenTicks = seenTicks + 1
         else
-            event:apply(state)
+            event:apply(newState)
         end
         if (seenTicks > t) then break end
     end
+    return newState
 end
 
 function EventLog:append(event)

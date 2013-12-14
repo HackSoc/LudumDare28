@@ -13,6 +13,13 @@ function ColliderWrapper:onCollide(dt, hitbox1, hitbox2, dx, dy)
     local entity1 = self.state[self.hitboxes[hitbox1]]
     local entity2 = self.state[self.hitboxes[hitbox2]]
 
+    if entity1 == nil or entity2 == nil then
+        if entity1 == nil then self:remove(hitbox1) end
+        if entity2 == nil then self:remove(hitbox2) end
+
+        return
+    end
+
     entity1:hit(entity2, dx, dy)
     entity2:hit(entity1, -dx, -dy)
 end

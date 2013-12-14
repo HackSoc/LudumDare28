@@ -11,9 +11,6 @@ function Bullet:initialize(id, x, y, collider)
     self.dx = self.class.speed
 end
 
-function Bullet:stop()
-end
-
 function Bullet:hit(other, dx, dy)
-    self.dead = true
+    return true
 end

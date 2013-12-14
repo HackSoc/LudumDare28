@@ -1,53 +1,32 @@
 require 'entity.Entity'
-require 'entity.Ball'
-require 'entity.Paddle'
-require 'entity.OneBullet'
-require 'entity.Asteroid'
-AsteroidFactory = require 'AsteroidFactory'
+require 'entity.Block'
+local HC = require 'HardonCollider'
 
-require 'entity.Player'
-local scene = require 'scene'
+require 'Scene'
 
-score = 0
+entities = {}
 
 function love.load()
     love.graphics.setMode(800,600, false, true,0)
-    love.graphics.setCaption("You only get one")
-    scene.initialize()
-
-    player = Player:new(400, 300, scene.collider)
+    love.graphics.setCaption("You Only Get Juan")
     
-    wallLeft = Wall:new(-100, 300, 50, 600, scene.collider)
-    wallRight = Wall:new(900, 300, 50, 600, scene.collider)
-    wallTop = Wall:new(400, -100, 800, 50, scene.collider)
-    wallBottom = Wall:new(400, 700, 800, 50, scene.collider)
+    scene = Scene:new()
 
-    scene.addEntity(wallLeft)
-    scene.addEntity(wallRight)
-    scene.addEntity(wallTop)
-    scene.addEntity(wallBottom)
-    
-    bullet = OneBullet:new(scene.collider)
-    scene.addEntity(bullet)
-    
-    scene.addEntity(player)
+    collider = HC(100, onCollide)
 
-    scene.addCallback(AsteroidFactory.callback)
+    blk1 = Block:new(100, 100, collider)
+    blk2 = Block:new(140, 100, collider)
+
+    entities[blk1] = blk1
+    entities[blk2] = blk2
 end
 
+function onCollide(dt, hitbox1, hitbox2, dx, dy)
+
+end
 
 function love.update(dt)
-    if keyUp then
-        player:moveUp()
-    elseif keyDown then
-        player:moveDown()
-    end
-    if keyLeft then
-        player:moveLeft()
-    elseif keyRight then
-        player:moveRight()
-    end
-    scene.update(dt)
+
 end
 
 
@@ -56,20 +35,10 @@ function love.keypressed(key, unicode)
         keyUp = true
     elseif key == 's' then
         keyDown = true
-    elseif key == 'j' then
-        bullet:goLeft()
-    elseif key == 'l' then
-        bullet:goRight()
-    elseif key == 'i' then
-        bullet:accelerate()
-    elseif key == 'k' then
-        bullet:brake()
     elseif key == 'a' then
         keyLeft = true
     elseif key == 'd' then
         keyRight = true
-    elseif key == ' ' then
-        bullet:fire(player)
     end
     
 end
@@ -79,23 +48,15 @@ function love.keyreleased(key, unicode)
         keyUp = false
     elseif key == 's' then
         keyDown = false
-    elseif key == 'j' then
-        bullet:stopLeft()
-    elseif key == 'l' then
         bullet:stopRight()
     elseif key == 'a' then
         keyLeft = false
     elseif key == 'd' then
         keyRight = false
-    elseif key == 'i' then
-        bullet:stopAccelerate()
-    elseif key == 'k' then
-        bullet:stopBrake()
     end
 end
 
 
 function love.draw()
-    scene.draw()
-    love.graphics.print("Score: " .. score, 20, 20)
+    scene:draw(entities)
 end

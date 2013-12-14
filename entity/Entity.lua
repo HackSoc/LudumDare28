@@ -9,7 +9,6 @@ Entity.height = 0
 Entity.sprite = nil
 Entity.visible = true
 Entity.hitbox = nil
-Entity.dead = false
 Entity.angle = 0
 Entity.orientation = 1
 Entity.dx = 0

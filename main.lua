@@ -49,6 +49,13 @@ function love.update(dt)
         time = time + 1
         eventLog:append(TickEvent:new())
     end
+
+    if time > 100 then
+        playerId = uniqueId()
+        player = Player:new(100, 60, collider)
+        startState[playerId] = player
+        time = 0
+    end
 end
 
 

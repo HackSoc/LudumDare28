@@ -4,7 +4,7 @@ require 'entity.Entity'
 local highestiteration = 0
 
 Player = class('entity.Player', Entity)
-Player.static.sprite = love.graphics.newImage("assets/block.png")
+Player.static.sprite = love.graphics.newImage("assets/character-1.png")
 Player.static.speed = 10
 Player.iteration = 0
 

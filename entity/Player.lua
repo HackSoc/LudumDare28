@@ -8,6 +8,7 @@ Player.static.oldsprite = love.graphics.newImage("assets/character-1.png")
 Player.static.sprite = love.graphics.newImage("assets/character-2.png")
 Player.static.speed = 10
 Player.iteration = 0
+Player.health = 100
 
 function Player:initialize(x, y, collider)
     Entity.initialize(self, x, y, self.class.sprite, collider)
@@ -33,4 +34,13 @@ function Player:draw()
     love.graphics.setColor(255,255,255, 255 * opacity)
     Entity.draw(self)
     love.graphics.setColor(255,255,255,255)
+end
+
+function Player:damage(amount)
+    self.health = self.health - amount
+    self.dead = self.health < 0
+
+    if self.dead then
+        print("I'm dead!")
+    end
 end

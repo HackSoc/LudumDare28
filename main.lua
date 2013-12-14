@@ -1,6 +1,7 @@
 require 'entity.Entity'
 require 'entity.Block'
 require 'entity.Player'
+require 'events.PlayerBulletEvent'
 local HC = require 'HardonCollider'
 
 require 'Display'
@@ -75,6 +76,8 @@ function love.keypressed(key, unicode)
     elseif key == 'd' and keyRight == false then
         eventLog:insert(RightEvent:new(playerId), time)
         keyRight = true
+    elseif key == ' ' then
+        eventLog:insert(PlayerBulletEvent:new(playerId), time)
     end
 end
 

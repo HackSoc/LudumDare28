@@ -12,6 +12,7 @@ Entity.dead = false
 Entity.angle = 0
 Entity.dx = 0
 Entity.dy = 0
+Entity.collider = nil
 
 function Entity:initialize(x, y, sprite, collider)
     self.x = x
@@ -20,6 +21,7 @@ function Entity:initialize(x, y, sprite, collider)
     self.height = sprite:getHeight()
     self.sprite = sprite
 
+    self.collider = collider
     self.hitbox = collider:addRectangle(self:top(),
                                         self:left(),
                                         self.width,
@@ -46,8 +48,8 @@ function Entity:draw()
 end
 
 function Entity:tick()
-    self.x = self.x + self.dx
-    self.y = self.y + self.dy
+    self:move(self.x + self.dx,
+              self.y + self.dy)
 end
 
 function Entity:move(x, y)

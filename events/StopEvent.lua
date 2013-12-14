@@ -3,6 +3,6 @@ require 'events.EntityEvent'
 
 StopEvent = class('events.StopEvent', EntityEvent)
 
-function StopEvent:apply(state)
+function StopEvent:safeApply(state)
     state[self.entityId]:stop()
 end

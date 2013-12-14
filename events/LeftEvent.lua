@@ -3,6 +3,6 @@ require 'events.EntityEvent'
 
 LeftEvent = class('events.LeftEvent', EntityEvent)
 
-function LeftEvent:apply(state)
+function LeftEvent:safeApply(state)
     state[self.entityId]:startLeft()
 end

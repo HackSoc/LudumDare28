@@ -3,10 +3,9 @@ local HC = require 'HardonCollider'
 
 ColliderWrapper = class('ColliderWrapper')
 
-function ColliderWrapper:initialize(eventlog)
+function ColliderWrapper:initialize()
     self.collider = HC(100, function(...) self:onCollide(...) end)
     self.hitboxes = {}
-    self.eventlog = eventlog
 end
 
 function ColliderWrapper:onCollide(dt, hitbox1, hitbox2, dx, dy)

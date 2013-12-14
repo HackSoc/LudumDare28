@@ -11,7 +11,7 @@ EventLog = class('EventLog')
 EventLog.events = {}
 
 function EventLog:initialize()
-    self.collider = ColliderWrapper:new(self)
+    self.collider = ColliderWrapper:new()
     self.events = {}
 end
 

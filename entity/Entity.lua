@@ -9,6 +9,7 @@ Entity.sprite = nil
 Entity.visible = true
 Entity.hitbox = nil
 Entity.dead = false
+Entity.angle = 0
 
 function Entity:initialize(x, y, sprite, collider)
     self.x = x
@@ -31,9 +32,14 @@ function Entity:top()
     return self.y - self.height/2
 end
 
+function Entity:rotate(angle)
+    self.angle = angle
+    self.hitbox:setRotation(angle)
+end
+
 function Entity:draw()
     if self.visible then
-        love.graphics.draw(self.sprite, self:left(), self:top())
+        love.graphics.draw(self.sprite, self.x, self.y, self.angle, 1, 1, self.width/2, self.height/2)
     end
 end
 

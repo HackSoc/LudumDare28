@@ -21,6 +21,7 @@ startState = {}
 interval = 0
 time = 0
 maxTime = 100
+fireCooldown = 0
 keyLeft = false
 keyRight = false
 state = {}
@@ -55,7 +56,9 @@ function love.update(dt)
         interval = 0
         time = time + 1
         eventLog:append(TickEvent:new())
-        timeChanged = true
+        if fireCooldown > 0 then
+            fireCooldown = fireCooldown - 1
+        end
     end
 
     if time > maxTime then
@@ -85,8 +88,9 @@ function love.keypressed(key, unicode)
     elseif key == 'd' and keyRight == false then
         eventLog:insert(RightEvent:new(playerId), time)
         keyRight = true
-    elseif key == ' ' then
+    elseif key == ' ' and fireCooldown <= 0 then
         eventLog:insert(PlayerBulletEvent:new(playerId), time)
+        fireCooldown = 20
     elseif key == '-' then
         eventLog:insert(EnemyBulletEvent:new(playerId), time)
     end

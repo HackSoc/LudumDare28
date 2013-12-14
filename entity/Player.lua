@@ -30,9 +30,13 @@ function Player:moveRight()
 end
 
 function Player:update()
+	self.vx = self.vx / 1.01
+	self.vy = self.vy / 1.01
 	self:move(self.x + self.vx, self.y + self.vy)
 end
 
 function Player:hit(other, dx, dy)
-    error("You lose")
+	if other.class ~= Wall then
+    	error("You lose")
+    end
 end

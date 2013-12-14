@@ -13,6 +13,16 @@ function love.load()
 
     player = Player:new(90, 250, scene.collider)
     
+    wallLeft = Wall:new(-100, 300, 50, 600, scene.collider)
+    wallRight = Wall:new(900, 300, 50, 600, scene.collider)
+    wallTop = Wall:new(400, -100, 800, 50, scene.collider)
+    wallBottom = Wall:new(400, 700, 800, 50, scene.collider)
+
+    scene.addEntity(wallLeft)
+    scene.addEntity(wallRight)
+    scene.addEntity(wallTop)
+    scene.addEntity(wallBottom)
+    
     --Frank Add
     bullet = OneBullet:new(scene.collider)
     scene.addEntity(bullet)

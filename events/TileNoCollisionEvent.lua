@@ -18,7 +18,8 @@ function TileNoCollisionEvent:apply(state, collider)
                           self.x,
                           self.y,
                           self.sprite,
-                          collider, true)
+                          collider)
+    tile.ghosted = true
                           
     state[self.tileId] = tile
 end

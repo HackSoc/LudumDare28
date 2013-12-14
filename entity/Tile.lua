@@ -7,9 +7,6 @@ Tile.collider = nil
 function Tile:initialize(id, x, y, sprite, collider, nocollision)
     Tile.collider = collider
     Entity.initialize(self, id, x, y, sprite, collider)
-    if (nocollision) then
-       eventLog.collider.collider:setGhost(self.hitbox) 
-    end
 end
 
 function Tile:hit(other, dx, dy)

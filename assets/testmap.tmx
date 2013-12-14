@@ -5,7 +5,7 @@
  </tileset>
  <layer name="Map" width="70" height="9">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2DwAqmBdgCRoHWgHYAHKALxTCjmpLPdgzVcQGEiyoAIlxkM9A0bUsOFF4qJAVlArALFCWhyznj0oYfJQIRNKwPhsFEG4nYcGN3tMIxLPTEYl5nkhA0obhpw4AQ8+lrRMLI4CIDCZDYejM8PtMLEhg2+MIHhBBx6VQhgfGEyUOECC5t0JFyMhrOg/iMULiBcggUDADRBYo8=
+   eJxLYBgFo2DwAqmBdgCRoHWgHYAHKALxTCjmpLPdgzVcQGEiyoAIlxkM9A0bUsOFF4qJAVlArALFCWhyznj0oYfJQIRNKwPhsFEG4nYcGN3tMIxLPTEYl5nkhA0obhpw4AQ8+lrRMLI4CIDCZDYejM8PtMLEhg2+MIHhBBx6VQhgfGEyUOECC5t0JFyMhrOg/iMULiBcggUDAOVuYu8=
   </data>
  </layer>
  <layer name="Objects" width="70" height="9">

@@ -1,11 +1,11 @@
 local class = require 'middleclass.middleclass'
 
-Event = class('event.Event')
+Event = class('Event')
 
 function Event:apply(state)
 end
 
-TickEvent = class('event.TickEvent', Event)
+TickEvent = class('TickEvent', Event)
 
 function TickEvent:apply(state)
     for key, entity in pairs(state) do
@@ -13,26 +13,26 @@ function TickEvent:apply(state)
     end
 end
 
-LeftEvent = class('event.LeftEvent', Event)
+LeftEvent = class('LeftEvent', Event)
 
-LeftEvent.entity = nil
+LeftentityId = nil
 
-function LeftEvent:initialize(entity)
-    self.entity = entity
+function LeftEvent:initialize(entityId)
+    self.entityId = entityId
 end
 
 function LeftEvent:apply(state)
-    self.entity:startLeft()
+    state[self.entityId]:startLeft()
 end
 
-RightEvent = class('event.RightEvent', Event)
+RightEvent = class('RightEvent', Event)
 
-RightEvent.entity = nil
+RightentityId = nil
 
-function RightEvent:initialize(entity)
-    self.entity = entity
+function RightEvent:initialize(entityId)
+    self.entityId = entityId
 end
 
 function RightEvent:apply(state)
-    self.entity:startRight()
+    state[self.entityId]:startRight()
 end

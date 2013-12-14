@@ -12,12 +12,6 @@ function love.load()
     scene.initialize()
 
     player = Player:new(90, 250, scene.collider)
-
-    wallTop = Wall:new(400, -25, 800, 50, scene.collider)
-    wallBottom = Wall:new(400, 625, 800, 50, scene.collider)
-
-    scene.addEntity(wallTop)
-    scene.addEntity(wallBottom)
     
     --Frank Add
     bullet = OneBullet:new(scene.collider)

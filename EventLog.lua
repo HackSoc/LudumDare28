@@ -11,7 +11,7 @@ EventLog = class('EventLog')
 EventLog.events = {}
 
 function EventLog:initialize()
-    self.collider = ColliderWrapper:new()
+    self.collider = ColliderWrapper:new(self)
     self.events = {}
 end
 
@@ -40,6 +40,7 @@ function EventLog:apply(state, t)
     for _, event in ipairs(self.events) do
         event:apply(newState, self.collider)
         if event.class == TickEvent then
+            self.collider:tick(seenTicks, newState)
             seenTicks = seenTicks + 1
         end
         if seenTicks > t then break end

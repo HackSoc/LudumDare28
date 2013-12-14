@@ -44,9 +44,8 @@ end
 
 function Player:damage(amount)
     self.health = self.health - amount
-    self.dead = self.health < 0
+end
 
-    if self.dead then
-        print("I'm dead!")
-    end
+function Player:hit()
+    return self.health <= 0
 end

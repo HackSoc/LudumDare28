@@ -3,7 +3,6 @@ local class = require 'middleclass.middleclass'
 TickEvent = class('events.TickEvent', Event)
 
 function TickEvent:apply(state, collider)
-    collider:update(state, 0)
     for key, entity in pairs(state) do
         entity:tick()
     end

@@ -3,14 +3,18 @@ local HC = require 'HardonCollider'
 
 ColliderWrapper = class('ColliderWrapper')
 
-function ColliderWrapper:initialize()
+function ColliderWrapper:initialize(eventLog)
     self.collider = HC(100, function(...) self:onCollide(...) end)
     self.hitboxes = {}
+    self.eventLog = eventLog
 end
 
 function ColliderWrapper:onCollide(dt, hitbox1, hitbox2, dx, dy)
-    local entity1 = self.state[self.hitboxes[hitbox1]]
-    local entity2 = self.state[self.hitboxes[hitbox2]]
+    local id1 = self.hitboxes[hitbox1]
+    local id2 = self.hitboxes[hitbox2]
+
+    local entity1 = self.state[id1]
+    local entity2 = self.state[id2]
 
     if entity1 == nil or entity2 == nil then
         if entity1 == nil then self:remove(hitbox1) end
@@ -19,17 +23,23 @@ function ColliderWrapper:onCollide(dt, hitbox1, hitbox2, dx, dy)
         return
     end
 
-    entity1:hit(entity2, dx, dy)
-    entity2:hit(entity1, -dx, -dy)
+    if entity1:hit(entity2, dx, dy) then
+        self.eventLog:insert(DestroyEvent(id1), self.time)
+    end
+
+    if entity2:hit(entity1, -dx, -dy) then
+        self.eventLog:insert(DestroyEvent(id2), self.time)
+    end
 end
 
 function ColliderWrapper:clear(...)
     return self.collider:clear(...)
 end
 
-function ColliderWrapper:update(state, ...)
+function ColliderWrapper:tick(time, state)
     self.state = state
-    return self.collider:update(...)
+    self.time = time
+    return self.collider:update(0)
 end
 
 function ColliderWrapper:remove(hitbox)

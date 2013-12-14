@@ -70,7 +70,7 @@ function Entity:move(x, y)
 end
 
 function Entity:hit(other, dx, dy)
-
+    return false
 end
 
 function Entity:startLeft()

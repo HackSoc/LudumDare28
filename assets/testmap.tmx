@@ -3,9 +3,14 @@
  <tileset firstgid="1" name="tiles_spritesheet" tilewidth="70" tileheight="70" spacing="2">
   <image source="../../../../Downloads/platformerGraphicsDeluxe_Updated/Tiles/tiles_spritesheet.png" width="914" height="936"/>
  </tileset>
- <layer name="Tile Layer 1" width="70" height="9">
+ <layer name="Map" width="70" height="9">
   <data encoding="base64" compression="zlib">
-   eJxjYBgF+IAUEexRQDzAFm74wnKoh3MrFc3So6JZ9AbEhkMrDrVuePRYke6cQQcIhQ+ucAnCob4diocjUGZA+I9emGEA7ES3HwZasbBBYTIbCx7uQIUAxhYmIyFcANKkLoQ=
+   eJxjYBgFo2DwAqmBdgCRoHWgHYAHKALxTCjmpLPdgzVcQGEiyoAIlxkM9A0bUsOFF4qJAVlArALFCWhyznj0oYfJQIRNKwPhsFEG4nYcGN3tMIxLPTEYl5nkhA0obhpw4AQ8+lrRMLI4CIDCZDYejM8PtMLEhg2+MIHhBBx6VQhgfGEyUOECC5t0JFyMhrOg/iMULiBcggUDADRBYo8=
+  </data>
+ </layer>
+ <layer name="Objects" width="70" height="9">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgxmIDLQDBilQwCFeSU9HUACkCPCxiekRYa4CDnFdKB5uwBGIrYhQp0Bjd5ALpHCw6QUUaGy+Jg42rYAlDjyYQBkOjA240ctRQwSYQumgAXUFdQAnHrliIG6gwGwAPgwIyA==
   </data>
  </layer>
 </map>

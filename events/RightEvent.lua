@@ -3,6 +3,6 @@ require 'events.EntityEvent'
 
 RightEvent = class('events.RightEvent', EntityEvent)
 
-function RightEvent:safeApply(state)
+function RightEvent:safeApply(state, collider)
     state[self.entityId]:startRight()
 end

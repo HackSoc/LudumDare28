@@ -1,18 +1,20 @@
 local class = require 'middleclass.middleclass'
 
+require 'events.EntityEvent'
 require 'entity.EnemyBullet'
 require 'utils'
 
-EnemyBulletEvent = class('events.EnemyBulletEvent', Event)
+EnemyBulletEvent = class('events.EnemyBulletEvent', EntityEvent)
 
 function EnemyBulletEvent:initialize(entityId)
-    self.entityId = entityId
+    EntityEvent.initialize(self, entityId)
     self.bulletId = uniqueId()
 end
 
-function EnemyBulletEvent:apply(state)
-    local bullet = EnemyBullet:new(state[self.entityId].x,
+function EnemyBulletEvent:safeApply(state, collider)
+    local bullet = EnemyBullet:new(self.bulletId,
+                                   state[self.entityId].x,
                                    state[self.entityId].y,
-                                   state[self.entityId].collider)
+                                   collider)
     state[self.bulletId] = bullet
 end

@@ -6,8 +6,8 @@ Bullet.static.sprite = love.graphics.newImage("assets/blue-bullet.png")
 Bullet.static.speed = 0
 Bullet.static.damage = 10
 
-function Bullet:initialize(x, y, collider)
-    Entity.initialize(self, x, y, self.class.sprite, collider)
+function Bullet:initialize(id, x, y, collider)
+    Entity.initialize(self, id, x, y, self.class.sprite, collider)
     self.dx = self.class.speed
 end
 

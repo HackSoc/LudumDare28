@@ -80,7 +80,7 @@ function love.keyreleased(key, unicode)
     if key == 'w' then
         keyUp = false
     elseif key == 's' then
-        padDown = false
+        keyDown = false
     elseif key == 'j' then
         bullet:stopLeft()
     elseif key == 'l' then

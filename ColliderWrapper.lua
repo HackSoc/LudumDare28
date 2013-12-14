@@ -14,7 +14,7 @@ function ColliderWrapper:onCollide(dt, hitbox1, hitbox2, dx, dy)
     local entity2 = self.state[self.hitboxes[hitbox2]]
 
     entity1:hit(entity2, dx, dy)
-    entity2:hit(entity1, dx, dy)
+    entity2:hit(entity1, -dx, -dy)
 end
 
 function ColliderWrapper:clear(...)

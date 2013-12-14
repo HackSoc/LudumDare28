@@ -65,3 +65,8 @@ end
 
 function Entity:startRight()
 end
+
+function Entity:stop()
+    self.dx = 0
+    self.dy = 0
+end

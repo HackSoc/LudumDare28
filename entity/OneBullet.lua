@@ -3,26 +3,27 @@ require 'entity.Entity'
 require 'entity.Wall'
 
 OneBullet = class('OneBullet', Entity)
-OneBullet.static.sprite = love.graphics.newImage("assets/ball.png")
-OneBullet.angle = 0
+OneBullet.static.sprite = love.graphics.newImage("assets/bullet.png")
 OneBullet.velocity = 200
 OneBullet.steerRate = 4
 
 function OneBullet:initialize(collider)
     print (OneBullet.static.sprite)
     Entity.initialize(self, 200, 200, self.class.sprite, collider)
+    self:rotate(math.pi)
 end
 
 function OneBullet:update(dt)
-    if OneBullet.steerLeft then
-        OneBullet.angle = OneBullet.angle + (OneBullet.steerRate * dt)
+    if self.steerLeft then
+        self.angle = self.angle - (self.steerRate * dt)
     end
     
-    if OneBullet.steerRight then
-        OneBullet.angle = OneBullet.angle - (OneBullet.steerRate * dt)
+    if self.steerRight then
+        self.angle = self.angle + (self.steerRate * dt)
     end
     
-    self:move(self.x + OneBullet.velocity * math.sin(OneBullet.angle) * dt, self.y + OneBullet.velocity * math.cos(OneBullet.angle) * dt)
+    self:move(self.x + self.velocity * math.sin(self.angle) * dt, self.y - self.velocity * math.cos(self.angle) * dt)
+    self:rotate(self.angle)
 end
 
 function OneBullet:goLeft()

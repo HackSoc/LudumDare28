@@ -52,17 +52,10 @@ function Game:load()
     local splayer = SpawnPlayer(100, 260)
     self.playerId = splayer.playerId
     self.eventLog:append(splayer)
-    enemy1 = SpawnEnemy:new(600,400)
-    enemy2 = SpawnEnemy:new(500,400)
-    enemy3 = SpawnEnemy:new(400,400)
-    
-    enemy1:createBehaviour()
-    enemy2:createBehaviour()
-    enemy3:createBehaviour()
-    
-    self.eventLog:append(enemy1)
-    self.eventLog:append(enemy2)
-    self.eventLog:append(enemy3)
+
+    self.eventLog:append(SpawnEnemy:new(600,400))
+    self.eventLog:append(SpawnEnemy:new(500,400))
+    self.eventLog:append(SpawnEnemy:new(400,400))
 end
 
 function Game:update(dt)

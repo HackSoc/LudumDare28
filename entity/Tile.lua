@@ -14,6 +14,8 @@ end
 function Tile:hit(other, dx, dy)
     if other:isInstanceOf(Mob) then
         other:move(other.x - dx, other.y - dy)
-        other.dy = 0
+        if dy ~= 0 and other.dy > 0 then
+            other.dy = 0
+        end
     end
 end

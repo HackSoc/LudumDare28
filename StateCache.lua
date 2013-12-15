@@ -1,9 +1,12 @@
 local class = require 'middleclass.middleclass'
 
+require 'constants'
 
 StateCache = class('StateCache')
 
 StateCache.states = {}
+-- the amount of time after a state will probably never be necessary that we keep it around
+StateCache.static.slack = 10
 
 function StateCache:initialize()
     self.states = {}
@@ -30,6 +33,9 @@ function StateCache:before(t)
             else
                 return nil, nil
             end
+        elseif k - t > constants.jumpTime + self.class.slack then
+            -- prune entries that we will never need again
+            self.states[k] = nil
         end
         lastK = k
     end

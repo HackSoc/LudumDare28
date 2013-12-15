@@ -7,7 +7,7 @@ Mob = class('entity.Mob', Entity)
 Mob.static.speed = 10
 Mob.health = 0
 Mob.maxHealth = 100
-Mob.canJump = true
+Mob.canJump = false
 
 function Mob:initialize(...)
     Entity.initialize(self, ...)

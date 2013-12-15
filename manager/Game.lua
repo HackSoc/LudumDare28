@@ -124,15 +124,15 @@ end
 
 function Game:keypressed(key, unicode)
     if self.state[self.playerId] then
-        if key == 'w' then
+        if key == 'w' or key == 'up' then
             self.keyUp = true
             self.eventLog:insert(JumpEvent:new(self.playerId), self.time)
-        elseif key == 's' then
+        elseif key == 's' or key == 'down' then
             self.keyDown = true
-        elseif key == 'a' and self.keyLeft == false then
+        elseif (key == 'a' or key == 'left') and self.keyLeft == false then
             self.eventLog:insert(LeftEvent:new(self.playerId), self.time)
             self.keyLeft = true
-        elseif key == 'd' and self.keyRight == false then
+        elseif (key == 'd' or key == 'right') and self.keyRight == false then
             self.eventLog:insert(RightEvent:new(self.playerId), self.time)
             self.keyRight = true
         elseif key == ' ' and self.fireCooldown <= 0 then
@@ -146,14 +146,14 @@ end
 
 function Game:keyreleased(key, unicode)
     if self.state[self.playerId] then
-        if key == 'w' then
+        if key == 'w' or key == 'up' then
             self.keyUp = false
-        elseif key == 's' then
+        elseif key == 's' or key == 'down' then
             self.keyDown = false
-        elseif key == 'a' and self.keyLeft == true then
+        elseif (key == 'a' or key == 'left') and self.keyLeft == true then
             self.eventLog:insert(StopEvent:new(self.playerId), self.time)
             self.keyLeft = false
-        elseif key == 'd' and self.keyRight == true then
+        elseif (key == 'd' or key == 'right') and self.keyRight == true then
             self.eventLog:insert(StopEvent:new(self.playerId), self.time)
             self.keyRight = false
         end

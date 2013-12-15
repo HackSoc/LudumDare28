@@ -9,7 +9,7 @@ function Drawable:initialize(image)
 end
 
 function Drawable:draw(x, y, orientation)
-    love.graphics.draw(self.image, x, y, self.angle, self.orientation, 1, self:getWidth()/2, self:getHeight()/2)
+    love.graphics.draw(self.image, x, y, self.angle, orientation, 1, self:getWidth()/2, self:getHeight()/2)
 end
 
 function Drawable:tick(state, collider)

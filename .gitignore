@@ -1,3 +1,4 @@
 main.love
 *~
 *.sublime-*
+.DS_Store

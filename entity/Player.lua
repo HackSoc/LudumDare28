@@ -18,7 +18,6 @@ function Player:initialize(id, x, y, collider, orientation)
     self.iteration = highestiteration
 
     self.orientation = orientation
-    self.sprite.orientation = orientation
 end
 
 function Player:isCurrentPlayer()

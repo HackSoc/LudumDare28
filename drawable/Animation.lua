@@ -19,7 +19,7 @@ function Animation:initialize(image, framewidth, frameheight)
     self.frameHeight = frameheight
 end
 
-function Animation:draw(x, y)
+function Animation:draw(x, y, orientation)
     self.image:draw(x, y)
 end
 
@@ -33,10 +33,6 @@ end
 
 function Animation:getHeight()
     return self.frameHeight
-end
-
-function Animation:flip()
-    -- Here be invisible dragons
 end
 
 function Animation:rotate(r)

@@ -83,41 +83,41 @@ function Game:update(dt)
     self.frameMiniCount = self.frameMiniCount + 1
     
     if (self.frameMiniCount + math.random() > (1.0 / self.frameDrawPercentage)) then
-    self.frameMiniCount = 0
-    
-    
-    self.time = self.time + 1
-    
-    self.eventLog:append(TickEvent:new())
-    if self.fireCooldown > 0 then
-        self.fireCooldown = self.fireCooldown - 1
-    end
-    if self.maxTime - self.time == constants.jumpTime then
-        self.nextX = self.state[self.playerId].x
-        self.nextY = self.state[self.playerId].y
-        self.nextOrient = self.state[self.playerId].orientation
-    end
+        self.frameMiniCount = 0
+        
+        
+        self.time = self.time + 1
+        
+        self.eventLog:append(TickEvent:new())
+        if self.fireCooldown > 0 then
+            self.fireCooldown = self.fireCooldown - 1
+        end
+        if self.maxTime - self.time == constants.jumpTime then
+            self.nextX = self.state[self.playerId].x
+            self.nextY = self.state[self.playerId].y
+            self.nextOrient = self.state[self.playerId].orientation
+        end
 
-    if self.state[self.playerId] ~= nil and self.state[self.playerId].health <= 0 then
-        self.setManager(GameOver)
-        return
-    end
+        if self.state[self.playerId] ~= nil and self.state[self.playerId].health <= 0 then
+            self.setManager(GameOver)
+            return
+        end
 
-    if self.time > self.maxTime then
-        self.eventLog:insert(DestroyEvent:new(self.playerId), self.time)
+        if self.time > self.maxTime then
+            self.eventLog:insert(DestroyEvent:new(self.playerId), self.time)
 
-        self.maxTime = self.maxTime + constants.playTime - constants.jumpTime
-        self.time = self.time - constants.jumpTime
+            self.maxTime = self.maxTime + constants.playTime - constants.jumpTime
+            self.time = self.time - constants.jumpTime
 
-        local splayer = SpawnPlayer(self.nextX, self.nextY, self.nextOrient)
-        self.playerId = splayer.playerId
-        self.eventLog:insert(splayer, self.time)
-    end
+            local splayer = SpawnPlayer(self.nextX, self.nextY, self.nextOrient)
+            self.playerId = splayer.playerId
+            self.eventLog:insert(splayer, self.time)
+        end
 
-    if self.time % 30 == 0 then
-        self.eventLog:append(SpawnEnemy:new(self.state[self.playerId].x+500,200))
-    end
-    
+        if self.time % 30 == 0 then
+            self.eventLog:append(SpawnEnemy:new(self.state[self.playerId].x+500,200))
+        end
+        
     end
 end
 

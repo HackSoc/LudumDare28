@@ -3,6 +3,8 @@ require 'manager.Manager'
 
 Game = class('manager.Game', Manager)
 
+constants = require 'constants'
+
 require 'manager.GameOver'
 
 require 'entity.Entity'
@@ -23,15 +25,11 @@ require 'EventLog'
 
 require 'utils'
 
-Game.static.playTime = 140
-Game.static.jumpTime = 100
-Game.static.frameDuration = 1 / 25
-
 Game.startState = {}
 
 Game.interval = 0
 Game.time = 0
-Game.maxTime = Game.static.playTime
+Game.maxTime = constants.playTime
 Game.fireCooldown = 0
 Game.keyUp = false
 Game.keyDown = false
@@ -64,14 +62,14 @@ end
 function Game:update(dt)
     local timeChanged = false
     self.interval = self.interval + dt
-    while (self.interval > self.class.frameDuration) do
-        self.interval = self.interval - self.class.frameDuration
+    while (self.interval > constants.frameDuration) do
+        self.interval = self.interval - constants.frameDuration
         self.time = self.time + 1
         self.eventLog:append(TickEvent:new())
         if self.fireCooldown > 0 then
             self.fireCooldown = self.fireCooldown - 1
         end
-        if self.maxTime - self.time == self.class.jumpTime then
+        if self.maxTime - self.time == constants.jumpTime then
             self.nextX = self.state[self.playerId].x
             self.nextY = self.state[self.playerId].y
         end
@@ -85,8 +83,8 @@ function Game:update(dt)
     if self.time > self.maxTime then
         self.eventLog:insert(DestroyEvent:new(self.playerId), self.time)
 
-        self.maxTime = self.maxTime + self.class.playTime - self.class.jumpTime
-        self.time = self.time - self.class.jumpTime
+        self.maxTime = self.maxTime + constants.playTime - constants.jumpTime
+        self.time = self.time - constants.jumpTime
 
         local splayer = SpawnPlayer(self.nextX, self.nextY)
         self.playerId = splayer.playerId
@@ -138,14 +136,14 @@ function Game:draw()
     self.display:draw(self.state)
 
     drawFilledBar(580, 20, 200, 20,
-                  (self.maxTime - self.time) / self.class.playTime,
+                  (self.maxTime - self.time) / constants.playTime,
                   {107,141,255}, nil, {255,255,255})
 
     resetDraw(
         function ()
             love.graphics.setColor(255, 255, 255)
 
-            local str = math.ceil((self.maxTime - self.time) * self.class.frameDuration)
+            local str = math.ceil((self.maxTime - self.time) * constants.frameDuration)
             local strWidth = love.graphics.getFont():getWidth(str)
             love.graphics.print(str, 680 - strWidth/2, 23)
         end)

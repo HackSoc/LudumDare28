@@ -1,6 +1,8 @@
 class = require 'middleclass.middleclass'
+
 require 'manager.Manager'
 require 'manager.Game'
+require 'Level'
 
 Menu = class('manager.Menu', Manager)
 
@@ -13,7 +15,7 @@ end
 function Menu:keypressed(key, unicode)
     if self.main then
         if key == "return" then
-            self.setManager(Game:new("testmap.tmx",
+            self.setManager(Game:new(Level:new("testmap", "level1.png"),
                                      setManager, love.load))
         elseif key == "f1" then
             self.main = false

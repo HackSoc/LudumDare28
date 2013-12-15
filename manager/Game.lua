@@ -87,8 +87,8 @@ function Game:update(dt)
         
         
         self.time = self.time + 1
+
         
-        self.eventLog:append(TickEvent:new())
         if self.fireCooldown > 0 then
             self.fireCooldown = self.fireCooldown - 1
         end

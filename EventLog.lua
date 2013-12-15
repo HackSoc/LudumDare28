@@ -27,6 +27,11 @@ end
 function EventLog:insert(event, t)
     local seenTicks = 0
     local newEvents = {}
+
+    -- if the event happens at 0, insert the event
+    table.insert(newEvents, e)
+
+    -- wind time forwards, inserting the event when get to the right point
     for _, e in ipairs(self.events) do
         table.insert(newEvents, e)
         if e.class == TickEvent then 
@@ -36,6 +41,16 @@ function EventLog:insert(event, t)
             end
         end
     end
+
+    -- if we didn't get to insert the event, push out the log to contain enough TickEvents
+    -- and insert
+    if seenTicks < t then
+        for i = seenTicks, t-1, 1 do
+            table.insert(newEvents, TickEvent:new())
+        end
+        table.insert(newEvents, event)
+    end
+
     self.cache:invalidateAfter(t)
     self.events = newEvents
 end
@@ -54,6 +69,12 @@ function EventLog:eventsInRange(first, last)
             break
         end
     end
+    if time < last then 
+        for i = time, last-1, 1 do
+            table.insert(events, TickEvent:new())
+        end
+    end
+
     return events
 end
 

@@ -67,7 +67,11 @@ function Entity:draw()
         x2 = x2 - Display.static.background.viewportX
 
         r, g, b, a = love.graphics.getColor()
-        love.graphics.setColor(50, 100, 150, 255)
+        if self.ghosted then
+            love.graphics.setColor(255, 100, 150, 255)
+        else
+            love.graphics.setColor(50, 100, 150, 255)
+        end
         love.graphics.rectangle("line", x1, y1, x2 - x1, y2 - y1)
         love.graphics.setColor(r, g, b, a)
     end

@@ -9,7 +9,7 @@ Player.static.sprite = love.graphics.newImage("assets/character-2.png")
 Player.iteration = 0
 
 function Player:initialize(id, x, y, collider)
-    Entity.initialize(self, id, x, y, self.class.sprite, collider)
+    Mob.initialize(self, id, x, y, self.class.sprite, collider)
     highestiteration = highestiteration + 1
     self.iteration = highestiteration
 end
@@ -27,6 +27,6 @@ function Player:draw()
     end
     local opacity = (5 - highestiteration + self.iteration) / 5
     love.graphics.setColor(255,255,255, 255 * opacity)
-    Entity.draw(self)
+    Mob.draw(self)
     love.graphics.setColor(255,255,255,255)
 end

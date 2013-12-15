@@ -72,3 +72,27 @@ function uniqueId()
     lastUnique = lastUnique + 1
     return lastUnique
 end
+
+function drawFilledBar(x, y, width, height, proportion, fgcolor, bgcolor, linecolor)
+    bgcolor = bgcolor or {0,0,0,255}
+    fgcolor = fgcolor or {255,255,255,255}
+    linecolor = linecolor or bgcolor
+
+    resetDraw(
+        function ()
+            love.graphics.setColor(bgcolor)
+            love.graphics.rectangle("fill", x, y, width, height)
+
+            love.graphics.setColor(fgcolor)
+            love.graphics.rectangle("fill", x, y, proportion * width, height)
+
+            love.graphics.setColor(linecolor)
+            love.graphics.rectangle("line", x-1, y-1, width+1, height+1)
+        end)
+end
+
+function resetDraw(func)
+    r, g, b, a = love.graphics.getColor()
+    func()
+    love.graphics.setColor(r, g, b, a)
+end

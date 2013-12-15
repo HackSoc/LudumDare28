@@ -1,6 +1,8 @@
 local class = require 'middleclass.middleclass'
 require 'entity.Mob'
 
+require 'utils'
+
 local highestiteration = 0
 
 Player = class('entity.Player', Mob)
@@ -25,8 +27,10 @@ function Player:draw()
     else
         self.sprite = self.class.oldsprite
     end
-    local opacity = (5 - highestiteration + self.iteration) / 5
-    love.graphics.setColor(255,255,255, 255 * opacity)
-    Mob.draw(self)
-    love.graphics.setColor(255,255,255,255)
+    resetDraw(
+        function ()
+            local opacity = (5 - highestiteration + self.iteration) / 5
+            love.graphics.setColor(255,255,255, 255 * opacity)
+            Mob.draw(self)
+        end)
 end

@@ -1,5 +1,6 @@
 local class = require 'middleclass.middleclass'
 require 'entity.Entity'
+require 'utils'
 
 Mob = class('entity.Mob', Entity)
 Mob.static.speed = 10
@@ -46,16 +47,11 @@ end
 function Mob:draw()
     Entity.draw(self)
 
-    local left = self:left() - Display.static.background.viewportX
-    local top = self:top()
-    local width = self.width
-    local height = 10
-        
-    r, g, b, a = love.graphics.getColor()
-    love.graphics.setColor(128, 128, 128, 255)
-    love.graphics.rectangle("fill", left, top - height, width, height)
-
-    love.graphics.setColor(255, 0, 0, 255)
-    love.graphics.rectangle("fill", left, top - height, width * self.health / self.maxHealth, height)
-    love.graphics.setColor(r, g, b, a)
+    drawFilledBar(self:left() - Display.static.background.viewportX,
+                  self:top(),
+                  self.width,
+                  10,
+                  self.health / self.maxHealth,
+                  {255, 0, 0, 255},
+                  {128, 128, 128, 255})
 end

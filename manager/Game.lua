@@ -137,18 +137,18 @@ function Game:draw()
     self.state = self.eventLog:play(self.time)
     self.display:draw(self.state)
 
-    r, g, b, a = love.graphics.getColor()
-    love.graphics.setColor(255, 255, 255)
-    love.graphics.rectangle("line", 580, 20, 200, 20 )
-    love.graphics.setColor(107, 141, 255)
-    love.graphics.rectangle("fill", 580, 20, ((self.maxTime - self.time) / self.class.playTime) * 200, 20 )
-    love.graphics.setColor(255, 255, 255)
+    drawFilledBar(580, 20, 200, 20,
+                  (self.maxTime - self.time) / self.class.playTime,
+                  {107,141,255}, nil, {255,255,255})
 
-    local str = math.ceil((self.maxTime - self.time) * self.class.frameDuration)
-    local strWidth = love.graphics.getFont():getWidth(str)
-    love.graphics.print(str, 680 - strWidth/2, 23)
+    resetDraw(
+        function ()
+            love.graphics.setColor(255, 255, 255)
 
-    love.graphics.setColor(r, g, b, a)
+            local str = math.ceil((self.maxTime - self.time) * self.class.frameDuration)
+            local strWidth = love.graphics.getFont():getWidth(str)
+            love.graphics.print(str, 680 - strWidth/2, 23)
+        end)
 end
 
 return Game

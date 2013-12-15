@@ -37,8 +37,9 @@ function Enemy:tick(state, collider)
     end
     
     if (self.internalTick % 8) == 0 then --Shoot
-        local aBullet = EnemyBullet:new(uniqueId(),self.x,self.y,collider,self.orientation)
-        table.insert(state ,aBullet)
+        local id = uniqueId()
+        local bullet = EnemyBullet:new(id,self.x,self.y,collider,self.orientation)
+        state[id] = bullet
     end
     
     Mob.tick(self)

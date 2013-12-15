@@ -45,12 +45,17 @@ Game.frame = 0
 Game.frameDrawPercentage = 1.0
 Game.frameMiniCount = 0
 
+function Game:initialize(mapfile, ...)
+    Manager.initialize(self, ...)
+    self.mapfile = mapfile
+end
+
 function Game:load()
-    self.display = Display:new()
+    self.display = Display:new(self.mapfile)
 
     self.eventLog = EventLog:new(self.startState)
 
-    local bgEvents = self.display.class.background:getEvents()
+    local bgEvents = self.display.background:getEvents()
     for _, v in ipairs(bgEvents) do
         self.eventLog:append(v)
     end
@@ -162,6 +167,12 @@ end
 
 function Game:draw()
     self.state = self.eventLog:play(self.time)
+
+    if self.state[self.playerId] then
+        self.display:viewport(self.state[self.playerId].x,
+                              self.state[self.playerId].y)
+    end
+
     self.display:draw(self.state)
 
     drawFilledBar(580, 20, 200, 20,

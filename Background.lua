@@ -10,10 +10,9 @@ require 'events.TileNoCollisionEvent'
 Background = class('Background')
 Background.tile = {}
 Background.mapWidth = 70
-Background.viewportX = 0
 
-function Background:initialize()
-    self.map = loader.load("testmap.tmx")
+function Background:initialize(mapfile)
+    self.map = loader.load(mapfile)
 end
 
 function Background:getEvents()
@@ -31,11 +30,4 @@ function Background:getEvents()
 end
 
 function Background:draw()
-end
-
-function Background:panX(newX)
-    self.viewportX = newX - 400
-    if self.viewportX < 0 then
-       self.viewportX = 0 
-    end
 end

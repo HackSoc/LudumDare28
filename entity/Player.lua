@@ -24,17 +24,17 @@ function Player:isCurrentPlayer()
     return highestiteration == self.iteration
 end
 
-function Player:draw()
+function Player:draw(vx, vy)
     if self:isCurrentPlayer() then
         self.sprite = self.class.sprite
-        Display.static.background:panX(self.x)
     else
         self.sprite = self.class.oldsprite
     end
+
     resetDraw(
         function ()
             local opacity = (5 - highestiteration + self.iteration) / 5
             love.graphics.setColor(255,255,255, 255 * opacity)
-            Mob.draw(self)
+            Mob.draw(self, vx, vy)
         end)
 end

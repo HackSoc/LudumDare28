@@ -58,14 +58,14 @@ function Entity:rotate(angle)
     self.hitbox:setRotation(angle)
 end
 
-function Entity:draw()
-    self.sprite:draw(self.x - Display.static.background.viewportX, self.y, self.orientation)
+function Entity:draw(vx, vy)
+    self.sprite:draw(self.x - vx, self.y - vy, self.orientation)
 
     if self.class.debugHitboxes then
         x1, y1, x2, y2 = self.hitbox:bbox()
 
-        x1 = x1 - Display.static.background.viewportX
-        x2 = x2 - Display.static.background.viewportX
+        x1 = x1 - vx
+        x2 = x2 - vx
 
         resetDraw(
             function ()
@@ -74,7 +74,7 @@ function Entity:draw()
                 else
                     love.graphics.setColor(50, 100, 150, 255)
                 end
-                love.graphics.rectangle("line", x1, y1, x2 - x1, y2 - y1)
+                love.graphics.rectangle("line", x1, y1 - vy, x2 - x1, y2 - y1 - vy)
             end)
     end
 end

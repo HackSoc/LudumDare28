@@ -51,15 +51,16 @@ function Mob:jump()
     end
 end
 
-function Mob:draw()
-    Entity.draw(self)
+function Mob:draw(vx, vy)
+    Entity.draw(self, vx, vy)
+
     local healthBarHeight = 7
     local healthBarOffset = 5
     local healthBarWidth = self.width * 2
 
     if self.health ~= 0 then
-        drawFilledBar(self:left() - (healthBarWidth-self.width)/2 - Display.static.background.viewportX,
-                      self:top() - healthBarHeight - healthBarOffset,
+        drawFilledBar(self:left() - (healthBarWidth-self.width)/2 - vx,
+                      self:top() - healthBarHeight - healthBarOffset - vy,
                       healthBarWidth,
                       healthBarHeight,
                       self.health / self.maxHealth,

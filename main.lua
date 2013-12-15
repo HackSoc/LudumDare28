@@ -88,10 +88,10 @@ function love.keypressed(key, unicode)
         eventLog:insert(RightEvent:new(playerId), time)
         keyRight = true
     elseif key == ' ' and fireCooldown <= 0 then
-        eventLog:insert(PlayerBulletEvent:new(playerId), time)
+        eventLog:insert(PlayerBulletEvent:new(playerId, state[playerId].orientation), time)
         fireCooldown = 20
     elseif key == '-' then
-        eventLog:insert(EnemyBulletEvent:new(playerId), time)
+        eventLog:insert(EnemyBulletEvent:new(playerId, state[playerId].orientation), time)
     end
 end
 

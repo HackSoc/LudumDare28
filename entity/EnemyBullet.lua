@@ -4,7 +4,6 @@ require 'entity.Player'
 
 EnemyBullet = class('entity.EnemyBullet', Bullet)
 EnemyBullet.static.sprite = love.graphics.newImage("assets/orange-bullet.png")
-EnemyBullet.static.speed = -5
 
 function EnemyBullet:hit(other, dx, dy)
     if other.class == Player then

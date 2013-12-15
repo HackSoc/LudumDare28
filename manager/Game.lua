@@ -1,7 +1,7 @@
 class = require 'middleclass.middleclass'
-require 'manager.GameManager'
+require 'manager.Manager'
 
-Game = class('manager.Game', GameManager)
+Game = class('manager.Game', Manager)
 
 require 'entity.Entity'
 require 'entity.Player'
@@ -118,8 +118,9 @@ function Game:keyreleased(key, unicode)
     end
 end
 
-
 function Game:draw()
     state = eventLog:play(time)
     display:draw(state)
 end
+
+return Game

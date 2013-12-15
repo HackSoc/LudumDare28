@@ -1,5 +1,6 @@
 require 'manager.Menu'
 
+love.graphics.drawq = love.graphics.drawq or love.graphics.draw
 io.stdout:setvbuf("no")
 manager = nil
 

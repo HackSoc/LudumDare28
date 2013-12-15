@@ -3,8 +3,9 @@ local class = require 'middleclass.middleclass'
 Manager = class('manager.Manager')
 Manager.setManager = nil
 
-function Manager:initialize(setManager)
+function Manager:initialize(setManager, restart)
     self.setManager = setManager
+    self.restart = restart
 end
 
 function Manager:load()

@@ -15,7 +15,7 @@ Entity.dx = 0
 Entity.dy = 0
 Entity.ghosted = false
 
-Entity.static.debugHitboxes = false
+Entity.static.debugHitboxes = true
 
 function Entity:initialize(id, x, y, sprite, collider)
     self.id = id

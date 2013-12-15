@@ -6,6 +6,7 @@ StateCache = class('StateCache')
 StateCache.states = {}
 
 function StateCache:initialize()
+    self.states = {}
 end
 
 function StateCache:invalidateAfter(t)

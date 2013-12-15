@@ -63,7 +63,7 @@ function EventLog:play(t)
     if not cacheTime then 
         self.collider:clear()
         local events = self:eventsInRange(0, t)
-        state = self:applyEvents(startState, events, 0)
+        state = self:applyEvents(self.startState, events, 0)
     else
         local events = self:eventsInRange(cacheTime, t)
         state = self:applyEvents(cached, events, cacheTime)

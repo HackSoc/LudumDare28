@@ -99,7 +99,7 @@ function Game:update(dt)
         end
 
         if self.state[self.playerId] ~= nil and self.state[self.playerId].health <= 0 then
-            self.setManager(GameOver)
+            self.setManager(GameOver:new(setManager, love.load))
             return
         end
 

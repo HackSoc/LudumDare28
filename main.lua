@@ -5,7 +5,7 @@ io.stdout:setvbuf("no")
 manager = nil
 
 function love.load()
-    setManager(Menu)
+    setManager(Menu:new(setManager, love.load))
 end
 
 function love.update(dt)
@@ -25,6 +25,6 @@ function love.draw()
 end
 
 function setManager(newManager)
-    manager = newManager(setManager, love.load)
+    manager = newManager
     manager:load()
 end

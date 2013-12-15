@@ -13,7 +13,7 @@ end
 function Menu:keypressed(key, unicode)
     if self.main then
         if key == "return" then
-            self.setManager(Game)
+            self.setManager(Game:new(setManager, love.load))
         elseif key == "f1" then
             self.main = false
         end

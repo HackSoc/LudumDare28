@@ -1,11 +1,13 @@
 local class = require 'middleclass.middleclass'
 require 'entity.Entity'
+require 'entity.Tile'
 require 'utils'
 
 Mob = class('entity.Mob', Entity)
 Mob.static.speed = 10
 Mob.health = 0
 Mob.maxHealth = 100
+Mob.canJump = true
 
 function Mob:initialize(...)
     Entity.initialize(self, ...)
@@ -26,7 +28,11 @@ function Mob:damage(amount)
     self.health = self.health - amount
 end
 
-function Mob:hit()
+function Mob:hit(other, dx, dy)
+    if (other.class == Tile and self.y < other.y and self.x > other.x - other.width / 2 and self.x < other.x + other.width / 2) then
+        self.canJump = true
+    end
+    
     return self.health <= 0
 end
 
@@ -39,8 +45,9 @@ function Mob:tick(state, collider)
 end
 
 function Mob:jump()
-    if self.dy >= 0 and self.dy <= 2 then
+    if self.canJump then
         self.dy = -30
+        self.canJump = false
     end
 end
 

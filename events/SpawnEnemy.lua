@@ -13,7 +13,14 @@ function SpawnEnemy:initialize(x,y)
     self.y = y
 end
 
+function SpawnEnemy:createBehaviour()
+    self.behaviour = {}
+    for i = 1, 100 do
+        self.behaviour[i] = math.random(0,10)
+    end
+end
+
 function SpawnEnemy:apply(state, collider)
-    local enemy = Enemy:new(self.enemyId, self.x, self.y, collider)
+    local enemy = Enemy:new(self.enemyId, self.x, self.y, self.behaviour, collider)
     state[self.enemyId] = enemy
 end

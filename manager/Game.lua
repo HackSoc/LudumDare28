@@ -25,6 +25,7 @@ require 'utils'
 
 Game.static.playTime = 140
 Game.static.jumpTime = 100
+Game.static.frameDuration = 1 / 25
 
 Game.startState = {}
 
@@ -63,8 +64,8 @@ end
 function Game:update(dt)
     local timeChanged = false
     self.interval = self.interval + dt
-    if (self.interval > 0.02) then
-        self.interval = 0
+    while (self.interval > self.class.frameDuration) do
+        self.interval = self.interval - self.class.frameDuration
         self.time = self.time + 1
         self.eventLog:append(TickEvent:new())
         if self.fireCooldown > 0 then
@@ -143,7 +144,7 @@ function Game:draw()
     love.graphics.rectangle("fill", 580, 20, ((self.maxTime - self.time) / self.class.playTime) * 200, 20 )
     love.graphics.setColor(255, 255, 255)
 
-    local str = math.ceil((self.maxTime - self.time) / 25)
+    local str = math.ceil((self.maxTime - self.time) * self.class.frameDuration)
     local strWidth = love.graphics.getFont():getWidth(str)
     love.graphics.print(str, 680 - strWidth/2, 23)
 

@@ -1,10 +1,11 @@
 require 'manager.Menu'
 
+io.stdout:setvbuf("no")
 manager = nil
 
 function love.load()
-    love.graphics.setMode(800,600, false, true,0)
-    love.graphics.setCaption("You Only Get Juan")
+    love.window.setMode(800,600)
+    love.window.setTitle("You Only Get Juan")
 
     restart()
 end
@@ -12,7 +13,6 @@ end
 function love.update(dt)
     manager:update(dt)
 end
-
 
 function love.keypressed(key, unicode)
     manager:keypressed(key, unicode)

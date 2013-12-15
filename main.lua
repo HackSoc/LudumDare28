@@ -42,7 +42,7 @@ function love.load()
         eventLog:append(v)
     end
 
-    local splayer = SpawnPlayer(100, 460)
+    local splayer = SpawnPlayer(100, 260)
     playerId = splayer.playerId
     eventLog:append(splayer)
     eventLog:append(SpawnEnemy:new(600,400))

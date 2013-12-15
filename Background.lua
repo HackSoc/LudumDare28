@@ -33,13 +33,7 @@ Background.objects = {
 }
 
 function Background:initialize()
-    for i = 0, 156 do
-        k = 0
-        if i > 11 then
-            k = -1
-        end
-        self.tile[i+1+k] = love.graphics.newImage("assets/tiles"..i..".png") 
-    end
+    
 end
 
 function Background:getEvents()
@@ -49,7 +43,7 @@ function Background:getEvents()
             tileNo = self.map[y*self.mapWidth+x+1]
             
             if tileNo ~= 0 then
-                table.insert(events, TileEvent:new(x * 70, y * 70, self.tile[tileNo]))
+                table.insert(events, TileEvent:new(x * 70, y * 70, tileNo))
             end
         end
     end
@@ -59,7 +53,7 @@ function Background:getEvents()
             tileNo = self.objects[y*self.mapWidth+x+1]
             
             if tileNo ~= 0 then
-                table.insert(events, TileNoCollisionEvent:new(x * 70, y * 70, self.tile[tileNo]))
+                table.insert(events, TileNoCollisionEvent:new(x * 70, y * 70, tileNo))
             end
         end
     end

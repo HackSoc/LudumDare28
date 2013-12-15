@@ -53,6 +53,12 @@ function ColliderWrapper:addRectangle(entityid, ...)
     return hitbox
 end
 
+function ColliderWrapper:addPolygon(entityid, ...)
+    local hitbox = self.collider:addPolygon(...)
+    self.hitboxes[hitbox] = entityid
+    return hitbox
+end
+
 function ColliderWrapper:setGhost(x)
     pcall(function() self.collider:setGhost(x) end)
 end

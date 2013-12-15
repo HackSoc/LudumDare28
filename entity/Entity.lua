@@ -25,11 +25,15 @@ function Entity:initialize(id, x, y, sprite, collider)
     self.height = sprite:getHeight()
     self.sprite = sprite
 
-    self.hitbox = collider:addRectangle(self.id,
-                                        self:top(),
-                                        self:left(),
-                                        self.width,
-                                        self.height)
+    self.hitbox = self:createHitbox(collider)
+end
+
+function Entity:createHitbox(collider)
+    return collider:addRectangle(self.id,
+                                 self:left(),
+                                 self:top(),
+                                 self.width,
+                                 self.height)
 end
 
 function Entity:left()
@@ -38,6 +42,14 @@ end
 
 function Entity:top()
     return self.y - self.height/2
+end
+
+function Entity:right()
+    return self.x + self.width/2
+end
+
+function Entity:bottom()
+    return self.y + self.height/2
 end
 
 function Entity:rotate(angle)

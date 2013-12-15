@@ -39,7 +39,7 @@ function Mob:tick(state, collider)
 end
 
 function Mob:jump()
-    if self.dy >= 0 and self.dy <= 5 then
+    if self.dy >= 0 and self.dy <= 2 then
         self.dy = -30
     end
 end

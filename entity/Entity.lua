@@ -59,7 +59,7 @@ function Entity:rotate(angle)
 end
 
 function Entity:draw()
-    self.sprite:draw(self.x - Display.static.background.viewportX, self.y)
+    self.sprite:draw(self.x - Display.static.background.viewportX, self.y, self.orientation)
 
     if self.class.debugHitboxes then
         x1, y1, x2, y2 = self.hitbox:bbox()

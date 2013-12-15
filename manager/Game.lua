@@ -59,9 +59,10 @@ function Game:load()
     self.playerId = splayer.playerId
     self.eventLog:append(splayer)
 
+    self.eventLog:append(SpawnEnemy:new(1100,200))
+    self.eventLog:append(SpawnEnemy:new(1000,200))
+    self.eventLog:append(SpawnEnemy:new(800,200))
     self.eventLog:append(SpawnEnemy:new(600,400))
-    self.eventLog:append(SpawnEnemy:new(500,400))
-    self.eventLog:append(SpawnEnemy:new(400,400))
 end
 
 function Game:update(dt)
@@ -112,8 +113,8 @@ function Game:update(dt)
         self.eventLog:insert(splayer, self.time)
     end
 
-    if self.time % 50 == 0 then
-        self.eventLog:append(SpawnEnemy:new(self.nextX + 600,200))
+    if self.time % 30 == 0 then
+        self.eventLog:append(SpawnEnemy:new(self.state[self.playerId].x+800,200))
     end
     
     end

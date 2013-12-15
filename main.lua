@@ -4,10 +4,7 @@ io.stdout:setvbuf("no")
 manager = nil
 
 function love.load()
-    love.window.setMode(800,600)
-    love.window.setTitle("You Only Get Juan")
-
-    restart()
+    setManager(Menu)
 end
 
 function love.update(dt)
@@ -27,10 +24,6 @@ function love.draw()
 end
 
 function setManager(newManager)
-    manager = newManager(setManager, restart)
+    manager = newManager(setManager, love.load)
     manager:load()
-end
-
-function restart()
-    setManager(Menu)
 end

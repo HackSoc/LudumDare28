@@ -23,18 +23,20 @@ require 'EventLog'
 
 require 'utils'
 
+Game.static.playTime = 140
+Game.static.jumpTime = 100
+
 Game.startState = {}
 
 Game.interval = 0
 Game.time = 0
-Game.maxTime = 140
+Game.maxTime = Game.static.playTime
 Game.fireCooldown = 0
 Game.keyUp = false
 Game.keyDown = false
 Game.keyLeft = false
 Game.keyRight = false
 Game.state = {}
-Game.age = 0
 Game.nextX = 0
 Game.nextY = 0
 Game.playerId = nil
@@ -68,8 +70,7 @@ function Game:update(dt)
         if self.fireCooldown > 0 then
             self.fireCooldown = self.fireCooldown - 1
         end
-        self.age = self.age + 1
-        if self.age == 40 then
+        if self.maxTime - self.time == self.class.jumpTime then
             self.nextX = self.state[self.playerId].x
             self.nextY = self.state[self.playerId].y
         end
@@ -83,10 +84,8 @@ function Game:update(dt)
     if self.time > self.maxTime then
         self.eventLog:insert(DestroyEvent:new(self.playerId), self.time)
 
-        self.maxTime = self.maxTime + 40
-        self.time = self.time - 100
-
-        self.age = 0
+        self.maxTime = self.maxTime + self.class.playTime - self.class.jumpTime
+        self.time = self.time - self.class.jumpTime
 
         local splayer = SpawnPlayer(self.nextX, self.nextY)
         self.playerId = splayer.playerId
@@ -136,6 +135,19 @@ end
 function Game:draw()
     self.state = self.eventLog:play(self.time)
     self.display:draw(self.state)
+
+    r, g, b, a = love.graphics.getColor()
+    love.graphics.setColor(255, 255, 255)
+    love.graphics.rectangle("line", 580, 20, 200, 20 )
+    love.graphics.setColor(107, 141, 255)
+    love.graphics.rectangle("fill", 580, 20, ((self.maxTime - self.time) / self.class.playTime) * 200, 20 )
+    love.graphics.setColor(255, 255, 255)
+
+    local str = math.ceil((self.maxTime - self.time) / 25)
+    local strWidth = love.graphics.getFont():getWidth(str)
+    love.graphics.print(str, 680 - strWidth/2, 23)
+
+    love.graphics.setColor(r, g, b, a)
 end
 
 return Game

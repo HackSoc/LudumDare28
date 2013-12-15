@@ -45,13 +45,13 @@ Game.frame = 0
 Game.frameDrawPercentage = 1.0
 Game.frameMiniCount = 0
 
-function Game:initialize(mapfile, ...)
+function Game:initialize(level, ...)
     Manager.initialize(self, ...)
-    self.mapfile = mapfile
+    self.level = level
 end
 
 function Game:load()
-    self.display = Display:new(self.mapfile)
+    self.display = Display:new(self.level)
 
     self.eventLog = EventLog:new(self.startState)
 
@@ -169,8 +169,7 @@ function Game:draw()
     self.state = self.eventLog:play(self.time)
 
     if self.state[self.playerId] then
-        self.display:viewport(self.state[self.playerId].x,
-                              self.state[self.playerId].y)
+        self.display:viewport(self.state[self.playerId].x, 300)
     end
 
     self.display:draw(self.state)

@@ -2,9 +2,10 @@ local class = require 'middleclass.middleclass'
 require 'entity.Bullet'
 require 'entity.Player'
 require 'entity.Tile'
+require 'drawable.Drawable'
 
 EnemyBullet = class('entity.EnemyBullet', Bullet)
-EnemyBullet.static.sprite = love.graphics.newImage("assets/orange-bullet.png")
+EnemyBullet.static.sprite = newSprite("assets/orange-bullet.png")
 
 function EnemyBullet:initialize(id, x, y, collider, dir)
     Bullet.initialize(self, id, x, y, self.class.sprite, collider, dir)

@@ -5,6 +5,7 @@ require 'entity.Tile'
 require 'entity.LeftTriangleTile'
 require 'entity.RightTriangleTile'
 require 'utils'
+require 'drawable.Drawable'
 
 TileEvent = class('events.TileEvent', Event)
 TileEvent.static.tile = {}
@@ -13,7 +14,7 @@ for i = 0, 156 do
     if i > 11 then
         k = -1
     end
-    TileEvent.static.tile[i+1+k] = love.graphics.newImage("assets/tiles"..i..".png") 
+    TileEvent.static.tile[i+1+k] = newSprite("assets/tiles"..i..".png") 
 end
 
 function TileEvent:initialize(x, y, tileNo)

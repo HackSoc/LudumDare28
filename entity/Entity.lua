@@ -11,11 +11,10 @@ Entity.height = 0
 Entity.sprite = nil
 Entity.visible = true
 Entity.hitbox = nil
-Entity.angle = 0
-Entity.orientation = 1
 Entity.dx = 0
 Entity.dy = 0
 Entity.ghosted = false
+Entity.orientation = 1
 
 Entity.static.debugHitboxes = true
 
@@ -55,12 +54,12 @@ function Entity:bottom()
 end
 
 function Entity:rotate(angle)
-    self.angle = angle
+    self.sprite.rotate(angle)
     self.hitbox:setRotation(angle)
 end
 
 function Entity:draw()
-    love.graphics.draw(self.sprite, self.x - Display.static.background.viewportX, self.y, self.angle, self.orientation, 1, self.width/2, self.height/2)
+    self.sprite:draw(self.x - Display.static.background.viewportX, self.y)
 
     if self.class.debugHitboxes then
         x1, y1, x2, y2 = self.hitbox:bbox()
@@ -98,10 +97,12 @@ end
 
 function Entity:startLeft()
     self.orientation = -1
+    self.sprite.orientation = -1
 end
 
 function Entity:startRight()
     self.orientation = 1
+    self.sprite.orientation = 1
 end
 
 function Entity:stop()

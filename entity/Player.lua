@@ -1,13 +1,15 @@
 local class = require 'middleclass.middleclass'
 require 'entity.Mob'
 
+require 'drawable.Drawable'
+
 require 'utils'
 
 local highestiteration = 0
 
 Player = class('entity.Player', Mob)
-Player.static.oldsprite = love.graphics.newImage("assets/character-1.png")
-Player.static.sprite = love.graphics.newImage("assets/character-2.png")
+Player.static.oldsprite = newSprite("assets/character-1.png")
+Player.static.sprite = newSprite("assets/character-2.png")
 Player.iteration = 0
 
 function Player:initialize(id, x, y, collider)

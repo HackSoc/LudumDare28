@@ -3,9 +3,10 @@ require 'entity.Mob'
 require 'entity.EnemyBullet'
 require 'entity.Explosion'
 require 'utils'
+require 'drawable.Drawable'
 
 Enemy = class('entity.Enemy', Mob)
-Enemy.static.sprite = love.graphics.newImage("assets/character-3.png")
+Enemy.static.sprite = newSprite("assets/character-3.png")
 Enemy.static.speed = 5
 Enemy.maxHealth = 5
 Enemy.internalTick = 0

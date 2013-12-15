@@ -3,6 +3,8 @@ require 'manager.Manager'
 
 Game = class('manager.Game', Manager)
 
+require 'manager.GameOver'
+
 require 'entity.Entity'
 require 'entity.Player'
 require 'events.TickEvent'
@@ -21,107 +23,115 @@ require 'EventLog'
 
 require 'utils'
 
-startState = {}
+Game.startState = {}
 
-interval = 0
-time = 0
-maxTime = 140
-fireCooldown = 0
-keyLeft = false
-keyRight = false
-state = {}
-age = 0
-nextX = 0
-nextY = 0
+Game.interval = 0
+Game.time = 0
+Game.maxTime = 140
+Game.fireCooldown = 0
+Game.keyUp = false
+Game.keyDown = false
+Game.keyLeft = false
+Game.keyRight = false
+Game.state = {}
+Game.age = 0
+Game.nextX = 0
+Game.nextY = 0
+Game.playerId = nil
 
 function Game:load()
-    display = Display:new()
+    self.display = Display:new()
 
-    eventLog = EventLog:new(startState)
+    self.eventLog = EventLog:new(self.startState)
 
-    bgEvents = display.class.background:getEvents()
+    local bgEvents = self.display.class.background:getEvents()
     for _, v in ipairs(bgEvents) do
-        eventLog:append(v)
+        self.eventLog:append(v)
     end
 
     local splayer = SpawnPlayer(100, 260)
-    playerId = splayer.playerId
-    eventLog:append(splayer)
-    
-    eventLog:append(SpawnEnemy:new(600,400))
-    eventLog:append(SpawnEnemy:new(500,400))
-    eventLog:append(SpawnEnemy:new(400,400))
+    self.playerId = splayer.playerId
+    self.eventLog:append(splayer)
+
+    self.eventLog:append(SpawnEnemy:new(600,400))
+    self.eventLog:append(SpawnEnemy:new(500,400))
+    self.eventLog:append(SpawnEnemy:new(400,400))
 end
 
 function Game:update(dt)
     local timeChanged = false
-    interval = interval + dt
-    if (interval > 0.02) then
-        interval = 0
-        time = time + 1
-        eventLog:append(TickEvent:new())
-        if fireCooldown > 0 then
-            fireCooldown = fireCooldown - 1
+    self.interval = self.interval + dt
+    if (self.interval > 0.02) then
+        self.interval = 0
+        self.time = self.time + 1
+        self.eventLog:append(TickEvent:new())
+        if self.fireCooldown > 0 then
+            self.fireCooldown = self.fireCooldown - 1
         end
-        age = age + 1
-        if age == 40 then
-            nextX = state[playerId].x
-            nextY = state[playerId].y
+        self.age = self.age + 1
+        if self.age == 40 then
+            self.nextX = self.state[self.playerId].x
+            self.nextY = self.state[self.playerId].y
         end
     end
 
-    if time > maxTime then
-        eventLog:insert(DestroyEvent:new(playerId), time)
+    if self.state[self.playerId] ~= nil and self.state[self.playerId].health <= 0 then
+        self.setManager(GameOver)
+        return
+    end
 
-        maxTime = maxTime + 40
-        time = time - 100
+    if self.time > self.maxTime then
+        self.eventLog:insert(DestroyEvent:new(self.playerId), self.time)
 
-        age = 0
+        self.maxTime = self.maxTime + 40
+        self.time = self.time - 100
 
-        local splayer = SpawnPlayer(nextX, nextY)
-        playerId = splayer.playerId
-        eventLog:insert(splayer, time)
+        self.age = 0
+
+        local splayer = SpawnPlayer(self.nextX, self.nextY)
+        self.playerId = splayer.playerId
+        self.eventLog:insert(splayer, self.time)
     end
 end
 
 
 function Game:keypressed(key, unicode)
     if key == 'w' then
-        keyUp = true
-        eventLog:insert(JumpEvent:new(playerId), time)
+        self.keyUp = true
+        self.eventLog:insert(JumpEvent:new(self.playerId), self.time)
     elseif key == 's' then
-        keyDown = true
-    elseif key == 'a' and keyLeft == false then
-        eventLog:insert(LeftEvent:new(playerId), time)
-        keyLeft = true
-    elseif key == 'd' and keyRight == false then
-        eventLog:insert(RightEvent:new(playerId), time)
-        keyRight = true
-    elseif key == ' ' and fireCooldown <= 0 then
-        eventLog:insert(PlayerBulletEvent:new(playerId, state[playerId].orientation), time)
-        fireCooldown = 5
+        self.keyDown = true
+    elseif key == 'a' and self.keyLeft == false then
+        self.eventLog:insert(LeftEvent:new(self.playerId), self.time)
+        self.keyLeft = true
+    elseif key == 'd' and self.keyRight == false then
+        self.eventLog:insert(RightEvent:new(self.playerId), self.time)
+        self.keyRight = true
+    elseif key == ' ' and self.fireCooldown <= 0 then
+        self.eventLog:insert(PlayerBulletEvent:new(self.playerId, self.state[self.playerId].orientation), self.time)
+        self.fireCooldown = 5
     elseif key == '-' then
-        eventLog:insert(EnemyBulletEvent:new(playerId, state[playerId].orientation), time)
+        self.eventLog:insert(EnemyBulletEvent:new(self.playerId, self.state[self.playerId].orientation), self.time)
     end
 end
 
 function Game:keyreleased(key, unicode)
     if key == 'w' then
-        keyUp = false
+        self.keyUp = false
     elseif key == 's' then
-        keyDown = false
-    elseif key == 'a' and keyLeft == true then
-        eventLog:insert(StopEvent:new(playerId), time)
-        keyLeft = false
-    elseif key == 'd' and keyRight == true then
-        eventLog:insert(StopEvent:new(playerId), time)
-        keyRight = false
+        self.keyDown = false
+    elseif key == 'a' and self.keyLeft == true then
+        self.eventLog:insert(StopEvent:new(self.playerId), self.time)
+        self.keyLeft = false
+    elseif key == 'd' and self.keyRight == true then
+        self.eventLog:insert(StopEvent:new(self.playerId), self.time)
+        self.keyRight = false
     end
 end
 
 function Game:draw()
-    state = eventLog:play(time)
-    display:draw(state)
+    self.state = self.eventLog:play(self.time)
+    self.display:draw(self.state)
 end
 
 return Game

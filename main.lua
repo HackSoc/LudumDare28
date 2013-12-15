@@ -6,7 +6,7 @@ function love.load()
     love.graphics.setMode(800,600, false, true,0)
     love.graphics.setCaption("You Only Get Juan")
 
-    setManager(Menu)
+    restart()
 end
 
 function love.update(dt)
@@ -27,6 +27,10 @@ function love.draw()
 end
 
 function setManager(newManager)
-    manager = newManager(setManager)
+    manager = newManager(setManager, restart)
     manager:load()
+end
+
+function restart()
+    setManager(Menu)
 end

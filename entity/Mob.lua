@@ -57,11 +57,13 @@ function Mob:draw()
     local healthBarOffset = 5
     local healthBarWidth = self.width * 2
 
-    drawFilledBar(self:left() - (healthBarWidth-self.width)/2 - Display.static.background.viewportX,
-                  self:top() - healthBarHeight - healthBarOffset,
-                  healthBarWidth,
-                  healthBarHeight,
-                  self.health / self.maxHealth,
-                  {255, 0, 0, 255},
-                  {128, 128, 128, 255})
+    if self.health ~= 0 then
+        drawFilledBar(self:left() - (healthBarWidth-self.width)/2 - Display.static.background.viewportX,
+                      self:top() - healthBarHeight - healthBarOffset,
+                      healthBarWidth,
+                      healthBarHeight,
+                      self.health / self.maxHealth,
+                      {255, 0, 0, 255},
+                      {128, 128, 128, 255})
+    end
 end

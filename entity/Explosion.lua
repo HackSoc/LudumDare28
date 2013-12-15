@@ -10,12 +10,13 @@ Display = require 'Display'
 Explosion = class('entity.Explosion', Entity)
 Explosion.static.frameWidth = 96
 Explosion.static.frameHeight = 96
-Explosion.sprite = Animation:new("assets/explosion.png",
-                                 Explosion.static.frameWidth,
-                                 Explosion.static.frameHeight)
+Explosion.sprite = nil
 Explosion.lastFrame = -1
 
 function Explosion:initialize(id, x, y, collider)
+    self.sprite = Animation:new("assets/explosion.png",
+                                Explosion.static.frameWidth,
+                                Explosion.static.frameHeight)
     Entity.initialize(self, id, x, y, self.sprite, collider)
     self.sprite:setMode("once")
 end

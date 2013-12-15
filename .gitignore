@@ -1,4 +1,4 @@
-main.love
+*.love
 *~
 *.sublime-*
 .DS_Store

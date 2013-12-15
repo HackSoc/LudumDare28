@@ -97,12 +97,10 @@ end
 
 function Entity:startLeft()
     self.orientation = -1
-    self.sprite.orientation = -1
 end
 
 function Entity:startRight()
     self.orientation = 1
-    self.sprite.orientation = 1
 end
 
 function Entity:stop()

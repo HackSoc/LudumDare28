@@ -136,6 +136,19 @@ end
 function Game:draw()
     self.state = self.eventLog:play(self.time)
     self.display:draw(self.state)
+
+    r, g, b, a = love.graphics.getColor()
+    love.graphics.setColor(255, 255, 255)
+    love.graphics.rectangle("line", 580, 20, 200, 20 )
+    love.graphics.setColor(107, 141, 255)
+    love.graphics.rectangle("fill", 580, 20, (1 - self.age / 140) * 200, 20 )
+    love.graphics.setColor(255, 255, 255)
+
+    local str = math.ceil((140 - self.age) / 25)
+    local strWidth = love.graphics.getFont():getWidth(str)
+    love.graphics.print(str, 680 - strWidth/2, 23)
+
+    love.graphics.setColor(r, g, b, a)
 end
 
 return Game

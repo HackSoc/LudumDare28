@@ -39,6 +39,10 @@ Game.state = {}
 Game.nextX = 0
 Game.nextY = 0
 Game.playerId = nil
+Game.realTime = 0
+Game.frame = 0
+Game.frameDrawPercentage = 1.0
+Game.frameMiniCount = 0
 
 function Game:load()
     self.display = Display:new()
@@ -61,18 +65,34 @@ end
 
 function Game:update(dt)
     local timeChanged = false
-    self.interval = self.interval + dt
-    while (self.interval > constants.frameDuration) do
-        self.interval = self.interval - constants.frameDuration
-        self.time = self.time + 1
-        self.eventLog:append(TickEvent:new())
-        if self.fireCooldown > 0 then
-            self.fireCooldown = self.fireCooldown - 1
-        end
-        if self.maxTime - self.time == constants.jumpTime then
-            self.nextX = self.state[self.playerId].x
-            self.nextY = self.state[self.playerId].y
-        end
+    
+    --Frame Rate Limit - 20 fps
+    self.realTime = self.realTime + dt
+    if self.realTime > 0.5 then
+       self.realTime = 0.0
+       
+       if self.frame > 10 then
+          self.frameDrawPercentage = 10.0 / self.frame
+       end
+       self.frame = 0.0
+    end
+    
+    self.frame = self.frame + 1
+    self.frameMiniCount = self.frameMiniCount + 1
+    
+    if (self.frameMiniCount + math.random() > (1.0 / self.frameDrawPercentage)) then
+    self.frameMiniCount = 0
+    
+    
+    self.time = self.time + 1
+    
+    self.eventLog:append(TickEvent:new())
+    if self.fireCooldown > 0 then
+        self.fireCooldown = self.fireCooldown - 1
+    end
+    if self.maxTime - self.time == constants.jumpTime then
+        self.nextX = self.state[self.playerId].x
+        self.nextY = self.state[self.playerId].y
     end
 
     if self.state[self.playerId] ~= nil and self.state[self.playerId].health <= 0 then
@@ -93,6 +113,8 @@ function Game:update(dt)
 
     if self.time % 50 == 0 then
         self.eventLog:append(SpawnEnemy:new(self.nextX + 600,200))
+    end
+    
     end
 end
 

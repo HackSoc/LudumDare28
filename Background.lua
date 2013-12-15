@@ -6,7 +6,7 @@ require 'events.TileNoCollisionEvent'
 Background = class('Background')
 Background.tile = {}
 Background.mapWidth = 70
-Background.drawX = 0
+Background.viewportX = 0
 
 Background.map = {
     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -71,6 +71,9 @@ function Background:draw()
     
 end
 
-function Background:moveX(newX)
-    self.drawX = newX
+function Background:panX(newX)
+    self.viewportX = newX - 400
+    if self.viewportX < 0 then
+       self.viewportX = 0 
+    end
 end

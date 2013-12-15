@@ -22,6 +22,7 @@ end
 function Player:draw()
     if self:isCurrentPlayer() then
         self.sprite = self.class.sprite
+        Display.static.background:panX(self.x)
     else
         self.sprite = self.class.oldsprite
     end

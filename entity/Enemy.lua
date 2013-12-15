@@ -6,15 +6,20 @@ require 'utils'
 require 'drawable.Drawable'
 
 Enemy = class('entity.Enemy', Mob)
-Enemy.static.sprite = newSprite("assets/character-3.png")
 Enemy.static.speed = 5
 Enemy.maxHealth = 5
 Enemy.internalTick = 0
 Enemy.behaviour = {}
 Enemy.exploded = false
+Enemy.static.sprite = {}
+Enemy.static.sprite[0] = newSprite("assets/monster-0.png")
+Enemy.static.sprite[1] = newSprite("assets/monster-1.png")
+Enemy.static.sprite[2] = newSprite("assets/monster-2.png")
+Enemy.static.sprite[3] = newSprite("assets/monster-3.png")
+Enemy.static.sprite[4] = newSprite("assets/monster-4.png")
 
 function Enemy:initialize(id, x, y, behaviour, collider)
-   Mob.initialize(self, id, x, y, self.class.sprite, collider)
+   Mob.initialize(self, id, x, y, self.class.sprite[behaviour[1]%5], collider)
    self.internalTick = 0
    self.behaviour = behaviour
    self.bullets = {}

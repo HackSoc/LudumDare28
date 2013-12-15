@@ -8,8 +8,8 @@ require 'utils'
 local highestiteration = 0
 
 Player = class('entity.Player', Mob)
-Player.static.oldsprite = newSprite("assets/character-1.png")
-Player.static.sprite = newSprite("assets/character-2.png")
+Player.static.oldsprite = newSprite("assets/character.png")
+Player.static.sprite = newSprite("assets/character.png")
 Player.iteration = 0
 
 function Player:initialize(id, x, y, collider, orientation)

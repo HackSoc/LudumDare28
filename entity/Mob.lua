@@ -53,11 +53,12 @@ end
 
 function Mob:draw()
     Entity.draw(self)
+    local healthBarHeight = 10
 
     drawFilledBar(self:left() - Display.static.background.viewportX,
-                  self:top(),
+                  self:top() - healthBarHeight,
                   self.width,
-                  10,
+                  healthBarHeight,
                   self.health / self.maxHealth,
                   {255, 0, 0, 255},
                   {128, 128, 128, 255})

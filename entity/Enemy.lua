@@ -1,6 +1,7 @@
 local class = require 'middleclass.middleclass'
 require 'entity.Mob'
 require 'entity.EnemyBullet'
+require 'entity.Explosion'
 require 'utils'
 
 Enemy = class('entity.Enemy', Mob)
@@ -9,6 +10,7 @@ Enemy.static.speed = 5
 Enemy.maxHealth = 5
 Enemy.internalTick = 0
 Enemy.behaviour = {}
+Enemy.exploded = false
 
 function Enemy:initialize(id, x, y, behaviour, collider)
    Mob.initialize(self, id, x, y, self.class.sprite, collider)
@@ -22,7 +24,14 @@ end
 
 function Enemy:tick(state, collider)
     if self.visible == false then
-        return
+        if self.exploded then
+            return
+        end
+
+        local id = uniqueId()
+        local explosion = Explosion:new(id, self.x, self.y, collider)
+        state[id] = explosion
+        self.exploded = true
     end
     
     self.internalTick = self.internalTick + 1

@@ -4,3 +4,6 @@
 [submodule "middleclass"]
 	path = middleclass
 	url = https://github.com/kikito/middleclass.git
+[submodule "misclibs"]
+	path = misclibs
+	url = https://github.com/bartbes/love-misc-libs.git

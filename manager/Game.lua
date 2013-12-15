@@ -55,7 +55,7 @@ function Game:load()
         self.eventLog:append(v)
     end
 
-    local splayer = SpawnPlayer(100, 260)
+    local splayer = SpawnPlayer(100, 260, 1)
     self.playerId = splayer.playerId
     self.eventLog:append(splayer)
 
@@ -95,6 +95,7 @@ function Game:update(dt)
     if self.maxTime - self.time == constants.jumpTime then
         self.nextX = self.state[self.playerId].x
         self.nextY = self.state[self.playerId].y
+        self.nextOrient = self.state[self.playerId].orientation
     end
 
     if self.state[self.playerId] ~= nil and self.state[self.playerId].health <= 0 then
@@ -108,7 +109,7 @@ function Game:update(dt)
         self.maxTime = self.maxTime + constants.playTime - constants.jumpTime
         self.time = self.time - constants.jumpTime
 
-        local splayer = SpawnPlayer(self.nextX, self.nextY)
+        local splayer = SpawnPlayer(self.nextX, self.nextY, self.nextOrient)
         self.playerId = splayer.playerId
         self.eventLog:insert(splayer, self.time)
     end
@@ -122,36 +123,40 @@ end
 
 
 function Game:keypressed(key, unicode)
-    if key == 'w' then
-        self.keyUp = true
-        self.eventLog:insert(JumpEvent:new(self.playerId), self.time)
-    elseif key == 's' then
-        self.keyDown = true
-    elseif key == 'a' and self.keyLeft == false then
-        self.eventLog:insert(LeftEvent:new(self.playerId), self.time)
-        self.keyLeft = true
-    elseif key == 'd' and self.keyRight == false then
-        self.eventLog:insert(RightEvent:new(self.playerId), self.time)
-        self.keyRight = true
-    elseif key == ' ' and self.fireCooldown <= 0 then
-        self.eventLog:insert(PlayerBulletEvent:new(self.playerId, self.state[self.playerId].orientation), self.time)
-        self.fireCooldown = 5
-    elseif key == '-' then
-        self.eventLog:insert(EnemyBulletEvent:new(self.playerId, self.state[self.playerId].orientation), self.time)
+    if self.state[self.playerId] then
+        if key == 'w' then
+            self.keyUp = true
+            self.eventLog:insert(JumpEvent:new(self.playerId), self.time)
+        elseif key == 's' then
+            self.keyDown = true
+        elseif key == 'a' and self.keyLeft == false then
+            self.eventLog:insert(LeftEvent:new(self.playerId), self.time)
+            self.keyLeft = true
+        elseif key == 'd' and self.keyRight == false then
+            self.eventLog:insert(RightEvent:new(self.playerId), self.time)
+            self.keyRight = true
+        elseif key == ' ' and self.fireCooldown <= 0 then
+            self.eventLog:insert(PlayerBulletEvent:new(self.playerId, self.state[self.playerId].orientation), self.time)
+            self.fireCooldown = 5
+        elseif key == '-' then
+            self.eventLog:insert(EnemyBulletEvent:new(self.playerId, self.state[self.playerId].orientation), self.time)
+        end
     end
 end
 
 function Game:keyreleased(key, unicode)
-    if key == 'w' then
-        self.keyUp = false
-    elseif key == 's' then
-        self.keyDown = false
-    elseif key == 'a' and self.keyLeft == true then
-        self.eventLog:insert(StopEvent:new(self.playerId), self.time)
-        self.keyLeft = false
-    elseif key == 'd' and self.keyRight == true then
-        self.eventLog:insert(StopEvent:new(self.playerId), self.time)
-        self.keyRight = false
+    if self.state[self.playerId] then
+        if key == 'w' then
+            self.keyUp = false
+        elseif key == 's' then
+            self.keyDown = false
+        elseif key == 'a' and self.keyLeft == true then
+            self.eventLog:insert(StopEvent:new(self.playerId), self.time)
+            self.keyLeft = false
+        elseif key == 'd' and self.keyRight == true then
+            self.eventLog:insert(StopEvent:new(self.playerId), self.time)
+            self.keyRight = false
+        end
     end
 end
 

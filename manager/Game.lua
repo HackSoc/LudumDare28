@@ -92,6 +92,10 @@ function Game:update(dt)
         self.playerId = splayer.playerId
         self.eventLog:insert(splayer, self.time)
     end
+
+    if self.time % 50 == 0 then
+        self.eventLog:append(SpawnEnemy:new(self.nextX + 600,200))
+    end
 end
 
 

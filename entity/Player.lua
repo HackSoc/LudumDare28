@@ -10,6 +10,7 @@ local highestiteration = 0
 Player = class('entity.Player', Mob)
 Player.static.oldsprite = newSprite("assets/character-past.png")
 Player.static.sprite = newSprite("assets/character.png")
+Player.static.currentHealth = 100
 Player.iteration = 0
 
 function Player:initialize(id, x, y, collider, orientation)
@@ -18,10 +19,18 @@ function Player:initialize(id, x, y, collider, orientation)
     self.iteration = highestiteration
 
     self.orientation = orientation
+    self.health = Player.static.currentHealth
 end
 
 function Player:isCurrentPlayer()
     return highestiteration == self.iteration
+end
+
+function Player:damage(amount)
+    Mob.damage(self,amount)
+    if self:isCurrentPlayer() then
+       Player.static.currentHealth = self.health 
+    end
 end
 
 function Player:draw(vx, vy)

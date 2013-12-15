@@ -6,6 +6,6 @@ TickEvent = class('events.TickEvent', Event)
 
 function TickEvent:apply(state, collider)
     for key, entity in pairs(shallowcopy(state)) do
-        entity:tick(state)
+        entity:tick(state, collider)
     end
 end

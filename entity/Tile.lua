@@ -8,7 +8,7 @@ function Tile:initialize(id, x, y, sprite, collider, nocollision)
     Entity.initialize(self, id, x, y, sprite, collider)
 end
 
-function Tile:tick(state)
+function Tile:tick(state, collider)
 end
 
 function Tile:hit(other, dx, dy)

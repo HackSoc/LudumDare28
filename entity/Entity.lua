@@ -64,6 +64,7 @@ function Entity:draw()
         if self.class.debugHitboxes then
 
             x1, y1, x2, y2 = self.hitbox:bbox()
+            
             x1 = x1 - Display.static.background.viewportX
             x2 = x2 - Display.static.background.viewportX
 
@@ -76,7 +77,7 @@ function Entity:draw()
 end
 
 
-function Entity:tick(state)
+function Entity:tick(state, collider)
     self:move(self.x + self.dx,
               self.y + self.dy)
 end

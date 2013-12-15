@@ -7,3 +7,6 @@
 [submodule "misclibs"]
 	path = misclibs
 	url = https://github.com/bartbes/love-misc-libs.git
+[submodule "Advanced-Tiled-Loader"]
+	path = Advanced-Tiled-Loader
+	url = https://github.com/Kadoba/Advanced-Tiled-Loader.git

@@ -8,7 +8,9 @@ function Display:draw(entities)
     Display.static.background:draw()
 
     for key,entity in pairs(entities) do
-        entity:draw()
+        if entity.visible then
+            entity:draw()
+        end
     end
 end
 

@@ -44,20 +44,18 @@ function Mob:jump()
 end
 
 function Mob:draw()
-    if self.visible then
-        Entity.draw(self)
+    Entity.draw(self)
 
-        local left = self:left() - Display.static.background.viewportX
-        local top = self:top()
-        local width = self.width
-        local height = 10
+    local left = self:left() - Display.static.background.viewportX
+    local top = self:top()
+    local width = self.width
+    local height = 10
         
-        r, g, b, a = love.graphics.getColor()
-        love.graphics.setColor(128, 128, 128, 255)
-        love.graphics.rectangle("fill", left, top - height, width, height)
+    r, g, b, a = love.graphics.getColor()
+    love.graphics.setColor(128, 128, 128, 255)
+    love.graphics.rectangle("fill", left, top - height, width, height)
 
-        love.graphics.setColor(255, 0, 0, 255)
-        love.graphics.rectangle("fill", left, top - height, width * self.health / self.maxHealth, height)
-        love.graphics.setColor(r, g, b, a)
-    end
+    love.graphics.setColor(255, 0, 0, 255)
+    love.graphics.rectangle("fill", left, top - height, width * self.health / self.maxHealth, height)
+    love.graphics.setColor(r, g, b, a)
 end

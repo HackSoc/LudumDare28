@@ -58,21 +58,18 @@ function Entity:rotate(angle)
 end
 
 function Entity:draw()
-    if self.visible then
-        love.graphics.draw(self.sprite, self.x - Display.static.background.viewportX, self.y, self.angle, self.orientation, 1, self.width/2, self.height/2)
+    love.graphics.draw(self.sprite, self.x - Display.static.background.viewportX, self.y, self.angle, self.orientation, 1, self.width/2, self.height/2)
 
-        if self.class.debugHitboxes then
+    if self.class.debugHitboxes then
+        x1, y1, x2, y2 = self.hitbox:bbox()
 
-            x1, y1, x2, y2 = self.hitbox:bbox()
-            
-            x1 = x1 - Display.static.background.viewportX
-            x2 = x2 - Display.static.background.viewportX
+        x1 = x1 - Display.static.background.viewportX
+        x2 = x2 - Display.static.background.viewportX
 
-            r, g, b, a = love.graphics.getColor()
-            love.graphics.setColor(50, 100, 150, 255)
-            love.graphics.rectangle("line", x1, y1, x2 - x1, y2 - y1)
-            love.graphics.setColor(r, g, b, a)
-        end
+        r, g, b, a = love.graphics.getColor()
+        love.graphics.setColor(50, 100, 150, 255)
+        love.graphics.rectangle("line", x1, y1, x2 - x1, y2 - y1)
+        love.graphics.setColor(r, g, b, a)
     end
 end
 

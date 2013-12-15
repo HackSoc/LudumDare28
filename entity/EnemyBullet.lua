@@ -4,7 +4,6 @@ require 'entity.Player'
 
 EnemyBullet = class('entity.EnemyBullet', Bullet)
 EnemyBullet.static.sprite = love.graphics.newImage("assets/orange-bullet.png")
-EnemyBullet.debugHitboxes = true
 
 function EnemyBullet:initialize(id, x, y, collider, dir)
     Bullet.initialize(self, id, x, y, self.class.sprite, collider, dir)

@@ -114,8 +114,8 @@ function Game:update(dt)
             self.eventLog:insert(splayer, self.time)
         end
 
-        if self.time % 30 == 0 then
-            self.eventLog:append(SpawnEnemy:new(self.state[self.playerId].x+500,200))
+        if self.time % 100 == 0 then
+            self.eventLog:insert(SpawnEnemy:new(self.state[self.playerId].x+500,200), self.maxTime + 1)
         end
         
     end

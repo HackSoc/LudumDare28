@@ -28,7 +28,7 @@ function TileEvent:apply(state, collider)
     local klass
     if self.tileNo == 35 or self.tileNo == 33 or self.tileNo == 106 then
         klass = LeftTriangleTile
-    elseif self.tileNo == 9 then
+    elseif self.tileNo == 9 or self.tileNo == 96 then
         klass = RightTriangleTile
     else
         klass = Tile

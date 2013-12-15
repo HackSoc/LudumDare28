@@ -12,7 +12,6 @@ function Player:initialize(id, x, y, collider)
     Entity.initialize(self, id, x, y, self.class.sprite, collider)
     highestiteration = highestiteration + 1
     self.iteration = highestiteration
-    self.dy = 5
 end
 
 function Player:isCurrentPlayer()
@@ -30,9 +29,4 @@ function Player:draw()
     love.graphics.setColor(255,255,255, 255 * opacity)
     Entity.draw(self)
     love.graphics.setColor(255,255,255,255)
-end
-
-function Player:stop()
-    Entity.stop(self)
-    self.dy = 5
 end

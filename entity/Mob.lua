@@ -22,3 +22,11 @@ end
 function Mob:hit()
     return self.health <= 0
 end
+
+function Mob:tick()
+    Entity.tick(self)
+    self.dy = self.dy + 1
+    if self.dy > 5 then
+        self.dy = 5
+    end
+end

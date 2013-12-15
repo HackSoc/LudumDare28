@@ -3,6 +3,7 @@ local class = require 'middleclass.middleclass'
 require 'events.Event'
 require 'entity.Tile'
 require 'entity.LeftTriangleTile'
+require 'entity.RightTriangleTile'
 require 'utils'
 
 TileEvent = class('events.TileEvent', Event)
@@ -24,8 +25,10 @@ end
 
 function TileEvent:apply(state, collider)
     local klass
-    if self.tileNo == 35 then
+    if self.tileNo == 35 or self.tileNo == 33 or self.tileNo == 106 then
         klass = LeftTriangleTile
+    elseif self.tileNo == 9 or self.tileNo == 95 then
+        klass = RightTriangleTile
     else
         klass = Tile
     end

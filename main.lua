@@ -1,4 +1,4 @@
-require 'manager.Game'
+require 'manager.Menu'
 
 manager = nil
 
@@ -6,7 +6,7 @@ function love.load()
     love.graphics.setMode(800,600, false, true,0)
     love.graphics.setCaption("You Only Get Juan")
 
-    setManager(Game:new())
+    setManager(Menu)
 end
 
 function love.update(dt)
@@ -27,6 +27,6 @@ function love.draw()
 end
 
 function setManager(newManager)
-    manager = newManager
-    newManager:load()
+    manager = newManager(setManager)
+    manager:load()
 end

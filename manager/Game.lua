@@ -3,7 +3,7 @@ require 'manager.Manager'
 
 Game = class('manager.Game', Manager)
 
-constants = require 'constants'
+local constants = require 'constants'
 
 require 'manager.GameOver'
 

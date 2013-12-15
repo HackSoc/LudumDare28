@@ -13,6 +13,4 @@ function EntityEvent:apply(state, collider)
 end
 
 function EntityEvent:safeApply(state, collider)
-    
 end
-

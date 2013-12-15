@@ -4,9 +4,8 @@ require 'entity.Player'
 require 'utils'
 
 SpawnPlayer = class('events.SpawnPlayer', Event)
-
-SpawnPlayer.x = nil
-SpawnPlayer.y = nil
+SpawnPlayer.x = 0
+SpawnPlayer.y = 0
 
 function SpawnPlayer:initialize(x, y, orientation)
     self.playerId = uniqueId()
@@ -16,6 +15,11 @@ function SpawnPlayer:initialize(x, y, orientation)
 end
 
 function SpawnPlayer:apply(state, collider)
-    local player = Player:new(self.playerId, self.x, self.y, collider, self.orientation)
+    local player = Player:new(self.playerId,
+                              self.x,
+                              self.y,
+                              collider,
+                              self.orientation)
+
     state[self.playerId] = player
 end

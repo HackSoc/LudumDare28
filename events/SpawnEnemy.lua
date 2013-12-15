@@ -7,7 +7,7 @@ require 'utils'
 SpawnEnemy = class('events.SpawnEnemy', Event)
 SpawnEnemy.x = 0
 SpawnEnemy.y = 0
-SpawnEnemy.behaviour = {}
+SpawnEnemy.behaviour = nil
 
 function SpawnEnemy:initialize(x,y)
     self.enemyId = uniqueId()
@@ -24,6 +24,11 @@ function SpawnEnemy:createBehaviour()
 end
 
 function SpawnEnemy:apply(state, collider)
-    local enemy = Enemy:new(self.enemyId, self.x, self.y, self.behaviour, collider)
+    local enemy = Enemy:new(self.enemyId,
+                            self.x,
+                            self.y,
+                            self.behaviour,
+                            collider)
+
     state[self.enemyId] = enemy
 end

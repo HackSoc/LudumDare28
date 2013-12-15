@@ -1,4 +1,5 @@
 local class = require 'middleclass.middleclass'
+
 require 'events.EntityEvent'
 
 StopEvent = class('events.StopEvent', EntityEvent)

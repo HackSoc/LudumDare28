@@ -40,6 +40,7 @@ Game.nextX = 0
 Game.nextY = 0
 Game.playerId = nil
 Game.realTime = 0
+Game.frameRate = 30
 Game.frame = 0
 Game.frameDrawPercentage = 1.0
 Game.frameMiniCount = 0
@@ -66,13 +67,13 @@ end
 function Game:update(dt)
     local timeChanged = false
     
-    --Frame Rate Limit - 20 fps
+    --Frame Rate Limit - 30 fps
     self.realTime = self.realTime + dt
     if self.realTime > 0.5 then
        self.realTime = 0.0
        
-       if self.frame > 10 then
-          self.frameDrawPercentage = 10.0 / self.frame
+       if self.frame > (self.frameRate / 2.0) then
+          self.frameDrawPercentage = (self.frameRate / 2.0) / self.frame
        end
        self.frame = 0.0
     end

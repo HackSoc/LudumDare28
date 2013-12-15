@@ -23,8 +23,8 @@ function Mob:hit()
     return self.health <= 0
 end
 
-function Mob:tick()
-    Entity.tick(self)
+function Mob:tick(state)
+    Entity.tick(self, state)
     self.dy = self.dy + 4
     if self.dy > 10 then
         self.dy = 10

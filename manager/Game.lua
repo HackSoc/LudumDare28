@@ -117,6 +117,14 @@ function Game:update(dt)
             local splayer = SpawnPlayer(self.nextX, self.nextY, self.nextOrient)
             self.playerId = splayer.playerId
             self.eventLog:insert(splayer, self.time)
+
+            -- Not sure why this needs to be `time + 1`
+            -- But `time` doesn't work.
+            if self.keyLeft then
+                self.eventLog:insert(LeftEvent:new(self.playerId), self.time + 1)
+            elseif self.keyRight then
+                self.eventLog:insert(RightEvent:new(self.playerId), self.time + 1)
+            end
         end
 
         if self.time % 100 == 0 then

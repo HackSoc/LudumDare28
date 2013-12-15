@@ -11,6 +11,7 @@ function SpawnEnemy:initialize(x,y)
     self.enemyId = uniqueId()
     self.x = x
     self.y = y
+    self:createBehaviour()
 end
 
 function SpawnEnemy:createBehaviour()

@@ -25,8 +25,14 @@ end
 
 function Mob:tick()
     Entity.tick(self)
-    self.dy = self.dy + 1
-    if self.dy > 5 then
-        self.dy = 5
+    self.dy = self.dy + 4
+    if self.dy > 10 then
+        self.dy = 10
+    end
+end
+
+function Mob:jump()
+    if self.dy == 0 then
+        self.dy = -30
     end
 end

@@ -9,6 +9,7 @@ require 'events.EnemyBulletEvent'
 require 'events.SpawnPlayer'
 require 'events.DestroyEvent'
 require 'events.SpawnEnemy'
+require 'events.JumpEvent'
 
 require 'Display'
 require 'EventLog'
@@ -85,6 +86,7 @@ end
 function love.keypressed(key, unicode)
     if key == 'w' then
         keyUp = true
+        eventLog:insert(JumpEvent:new(playerId), time)
     elseif key == 's' then
         keyDown = true
     elseif key == 'a' and keyLeft == false then
@@ -95,7 +97,7 @@ function love.keypressed(key, unicode)
         keyRight = true
     elseif key == ' ' and fireCooldown <= 0 then
         eventLog:insert(PlayerBulletEvent:new(playerId, state[playerId].orientation), time)
-        fireCooldown = 20
+        fireCooldown = 5
     elseif key == '-' then
         eventLog:insert(EnemyBulletEvent:new(playerId, state[playerId].orientation), time)
     end

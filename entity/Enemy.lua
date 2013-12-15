@@ -16,7 +16,7 @@ function Enemy:initialize(id, x, y, behaviour, collider)
    self:startLeft()
 end
 
-function Enemy:tick()
+function Enemy:tick(state)
     
     self:move(self.x + self.dx, self.y + self.dy)
     

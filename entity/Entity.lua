@@ -76,7 +76,7 @@ function Entity:draw()
 end
 
 
-function Entity:tick()
+function Entity:tick(state)
     self:move(self.x + self.dx,
               self.y + self.dy)
 end

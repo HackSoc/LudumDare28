@@ -21,6 +21,10 @@ end
 
 
 function Enemy:tick(state, collider)
+    if self.visible == false then
+        return
+    end
+    
     self.internalTick = self.internalTick + 1
     
     

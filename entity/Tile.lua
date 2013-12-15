@@ -1,11 +1,12 @@
 local class = require 'middleclass.middleclass'
+
 require 'entity.Entity'
+require 'drawable.TileDrawable'
 
 Tile = class('entity.Tile', Entity)
-Tile.collider = nil
 
-function Tile:initialize(id, x, y, sprite, collider, nocollision)
-    Entity.initialize(self, id, x, y, sprite, collider)
+function Tile:initialize(id, x, y, tile, collider)
+    Entity.initialize(self, id, x, y, TileDrawable:new(tile), collider)
 end
 
 function Tile:tick(state, collider)

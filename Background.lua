@@ -9,10 +9,10 @@ require 'events.TileNoCollisionEvent'
 
 Background = class('Background')
 Background.tile = {}
-Background.mapWidth = 70
 
 function Background:initialize(mapfile)
     self.map = loader.load(mapfile)
+    self.maxPan = self.map.width*self.map.tileWidth - 836
 end
 
 function Background:getEvents()

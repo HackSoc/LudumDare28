@@ -6,6 +6,7 @@ Game = class('manager.Game', Manager)
 local constants = require 'constants'
 
 require 'manager.GameOver'
+require 'manager.Victory'
 
 require 'entity.Entity'
 require 'entity.Player'
@@ -77,8 +78,8 @@ function Game:update(dt)
     if self.realTime > 0.5 then
        self.realTime = 0.0
        
-       if self.frame > (constants.frameRate / 2.0) then
-          self.frameDrawPercentage = (constants.frameRate / 2.0) / self.frame
+       if self.frame > (constants.framerate / 2.0) then
+          self.frameDrawPercentage = (constants.framerate / 2.0) / self.frame
        end
        self.frame = 0.0
     end
@@ -122,6 +123,9 @@ function Game:update(dt)
             self.eventLog:insert(SpawnEnemy:new(self.state[self.playerId].x+500,0), self.maxTime + 1)
         end
         
+        if self.state[self.playerId] ~= nil and self.state[self.playerId].x > (self.display.background.map.width*self.display.background.map.tileWidth) - 140 then
+            self.setManager(Victory)
+        end
     end
 end
 
@@ -181,7 +185,7 @@ function Game:draw()
         function ()
             love.graphics.setColor(255, 255, 255)
 
-            local str = math.ceil((self.maxTime - self.time) * constants.frameDuration)
+            local str = math.ceil((self.maxTime - self.time) / constants.framerate)
             local strWidth = love.graphics.getFont():getWidth(str)
             love.graphics.print(str, 680 - strWidth/2, 23)
         end)

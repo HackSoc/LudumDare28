@@ -27,6 +27,8 @@ function Display:viewport(x, y)
 
     if self.viewportX < 0 then
         self.viewportX = 0
+    elseif self.viewportX > self.background.maxPan then
+        self.viewportX = self.background.maxPan
     end
 end
 

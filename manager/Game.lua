@@ -55,7 +55,7 @@ function Game:load()
         self.eventLog:append(v)
     end
 
-    local splayer = SpawnPlayer(100, 260)
+    local splayer = SpawnPlayer(100, 260, 1)
     self.playerId = splayer.playerId
     self.eventLog:append(splayer)
 
@@ -94,6 +94,7 @@ function Game:update(dt)
     if self.maxTime - self.time == constants.jumpTime then
         self.nextX = self.state[self.playerId].x
         self.nextY = self.state[self.playerId].y
+        self.nextOrient = self.state[self.playerId].orientation
     end
 
     if self.state[self.playerId] ~= nil and self.state[self.playerId].health <= 0 then
@@ -107,7 +108,7 @@ function Game:update(dt)
         self.maxTime = self.maxTime + constants.playTime - constants.jumpTime
         self.time = self.time - constants.jumpTime
 
-        local splayer = SpawnPlayer(self.nextX, self.nextY)
+        local splayer = SpawnPlayer(self.nextX, self.nextY, self.nextOrient)
         self.playerId = splayer.playerId
         self.eventLog:insert(splayer, self.time)
     end

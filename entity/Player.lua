@@ -12,10 +12,13 @@ Player.static.oldsprite = newSprite("assets/character-1.png")
 Player.static.sprite = newSprite("assets/character-2.png")
 Player.iteration = 0
 
-function Player:initialize(id, x, y, collider)
+function Player:initialize(id, x, y, collider, orientation)
     Mob.initialize(self, id, x, y, self.class.sprite, collider)
     highestiteration = highestiteration + 1
     self.iteration = highestiteration
+
+    self.orientation = orientation
+    self.sprite.orientation = orientation
 end
 
 function Player:isCurrentPlayer()

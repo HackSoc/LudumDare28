@@ -20,12 +20,14 @@ startState = {}
 
 interval = 0
 time = 0
-maxTime = 100
+maxTime = 140
 fireCooldown = 0
 keyLeft = false
 keyRight = false
 state = {}
-
+age = 0
+nextX = 0
+nextY = 0
 
 function love.load()
     love.graphics.setMode(800,600, false, true,0)
@@ -40,7 +42,7 @@ function love.load()
         eventLog:append(v)
     end
 
-    local splayer = SpawnPlayer()
+    local splayer = SpawnPlayer(100, 460)
     playerId = splayer.playerId
     eventLog:append(splayer)
     eventLog:append(SpawnEnemy:new(600,400))
@@ -58,6 +60,11 @@ function love.update(dt)
         if fireCooldown > 0 then
             fireCooldown = fireCooldown - 1
         end
+        age = age + 1
+        if age == 40 then
+            nextX = state[playerId].x
+            nextY = state[playerId].y
+        end
     end
 
     if time > maxTime then
@@ -65,14 +72,13 @@ function love.update(dt)
 
         maxTime = maxTime + 40
         time = time - 100
-        local splayer = SpawnPlayer()
+
+        age = 0
+
+        local splayer = SpawnPlayer(nextX, nextY)
         playerId = splayer.playerId
         eventLog:insert(splayer, time)
     end
-    
-    -- if timeChanged then
-    --     state = eventLog:play(time)
-    -- end
 end
 
 

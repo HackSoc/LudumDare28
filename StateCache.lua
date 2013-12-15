@@ -10,7 +10,7 @@ end
 
 function StateCache:invalidateAfter(t)
     for k, v in pairs(self.states) do
-        if k and k > t then
+        if k > t then
             self.states[k] = nil
         end
     end

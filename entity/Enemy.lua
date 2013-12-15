@@ -18,20 +18,22 @@ end
 
 function Enemy:tick()
     
-    self:move(self.x + self.dx, self.y + self.dy)
-    
     self.internalTick = self.internalTick + 1
-    if (self.internalTick % 4) ~= 0 then
-        return
-    end
+    
+    
+    if (self.internalTick % 4) == 0 then
     
     selectBehaviour = (self.internalTick / 4) % 100
     
     if (self.behaviour[selectBehaviour] == 1 or self.behaviour[selectBehaviour] == 2 or self.behaviour[selectBehaviour] == 3) then
        self:startLeft()
     elseif (self.behaviour[selectBehaviour] == 4) then
-        self:startRight() 
+        self:startRight()
+    elseif (self.behaviour[selectBehaviour] == 5 or self.behaviour[selectBehaviour] == 6 or self.behaviour[selectBehaviour] == 7) then
+        self:jump()
+    end
     end
     
+    Mob.tick(self)
 end
 

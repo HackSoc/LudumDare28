@@ -9,6 +9,7 @@ function Display:draw(entities)
 
     for key,entity in pairs(entities) do
         if entity.visible then
+            love.graphics.setColor({255,255,255,255})
             entity:draw()
         end
     end

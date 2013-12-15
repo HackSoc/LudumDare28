@@ -8,7 +8,7 @@ require 'utils'
 local highestiteration = 0
 
 Player = class('entity.Player', Mob)
-Player.static.oldsprite = newSprite("assets/character.png")
+Player.static.oldsprite = newSprite("assets/character-past.png")
 Player.static.sprite = newSprite("assets/character.png")
 Player.iteration = 0
 

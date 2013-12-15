@@ -3,6 +3,7 @@ local class = require 'middleclass.middleclass'
 require 'events.TileEvent'
 require 'entity.Tile'
 require 'entity.LeftTriangleTile'
+require 'entity.RightTriangleTile'
 require 'utils'
 
 TileNoCollisionEvent = class('events.TileNoCollisionEvent', TileEvent)

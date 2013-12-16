@@ -20,11 +20,16 @@ Enemy.internalTick = 0
 Enemy.behaviour = nil
 Enemy.bullets = nil
 Enemy.exploded = false
+Enemy.fireSound = nil
+Enemy.deathSound = nil
 
 function Enemy:initialize(id, x, y, behaviour, collider)
    Mob.initialize(self, id, x, y, self.class.sprite[behaviour[1]%5], collider)
    self.behaviour = behaviour
    self.bullets = {}
+
+   self.fireSound = love.audio.newSource("sound/enemy-shoot.wav")
+   self.deathSound = love.audio.newSource("sound/enemy-death.wav")
 
    -- All enemies start walking towards the left
    self:startLeft()
@@ -41,6 +46,9 @@ function Enemy:tick(state, collider)
         local id = uniqueId()
         local explosion = Explosion:new(id, self.x, self.y, collider)
         state[id] = explosion
+        love.audio.stop(self.deathSound)
+        love.audio.rewind(self.deathSound)
+        table.insert(state["sfx"], self.deathSound)
         self.exploded = true
     end
 
@@ -65,6 +73,9 @@ function Enemy:tick(state, collider)
         local id = uniqueId()
         local bullet = EnemyBullet:new(id, self.x, self.y, collider, self.orientation)
         state[id] = bullet
+        love.audio.stop(self.fireSound)
+        love.audio.rewind(self.fireSound)
+        table.insert(state["sfx"], self.fireSound)
     end
 
     -- Tick mob

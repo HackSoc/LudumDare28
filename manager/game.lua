@@ -97,10 +97,10 @@ function Game:load()
     self.eventLog:append(splayer)
 
     -- Spawn some enemies
-    self.eventLog:append(SpawnEnemy:new(1500,0))
-    self.eventLog:append(SpawnEnemy:new(1400,0))
-    self.eventLog:append(SpawnEnemy:new(1200,0))
-    self.eventLog:append(SpawnEnemy:new(1000,0))
+    self.eventLog:insert(SpawnEnemy:new(1500,0), 1)
+    self.eventLog:insert(SpawnEnemy:new(1400,0), 2)
+    self.eventLog:insert(SpawnEnemy:new(1200,0), 3)
+    self.eventLog:insert(SpawnEnemy:new(1000,0), 4)
 end
 
 function Game:update(dt)
@@ -197,6 +197,14 @@ function Game:update(dt)
     if self.state[self.playerId] and self.state[self.playerId].x > self.map.width * self.map.tileWidth - self.level.endpoint then
         -- Player has passed the victory point
         self.setManager(LevelComplete:new(self.levelNum, self.setManager, self.restart))
+    end
+
+
+    -- play sounds
+    if self.state["sfx"] then
+        for _, v in pairs(self.state["sfx"]) do
+            love.audio.play(v)
+        end
     end
 end
 

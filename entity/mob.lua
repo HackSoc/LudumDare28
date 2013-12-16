@@ -39,7 +39,7 @@ end
 
 function Mob:tick(state, collider)
     Entity.tick(self, state)
-    self.dy = self.dy + 3
+    self.dy = self.dy + 3 * constants.speed
     if self.dy > 10 then
         self.dy = 10
     end

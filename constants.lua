@@ -7,6 +7,7 @@ constants.playTime = 160
 constants.jumpTime = 100
 constants.framerate = 30
 constants.frameDuration = 1 / constants.framerate
+constants.speed = 0.5
 
 constants.windowWidth = 800
 constants.windowHeight = 600

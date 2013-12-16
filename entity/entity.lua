@@ -81,8 +81,8 @@ end
 
 
 function Entity:tick(state, collider)
-    self:move(self.x + self.dx,
-              self.y + self.dy)
+    self:move(self.x + self.dx * constants.speed,
+              self.y + self.dy * constants.speed)
 end
 
 function Entity:move(x, y)

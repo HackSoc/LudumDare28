@@ -187,6 +187,7 @@ function Game:update(dt)
         end
     end
 
+    -- maybe should vary with constants.speed
     if self.time % 100 == 0 then
         -- Spawn a new enemy
         self.eventLog:insert(SpawnEnemy:new(self.state[self.playerId].x + 500,0),
@@ -217,7 +218,7 @@ function Game:keypressed(key, unicode)
             self.movingRight = true
         elseif constants.controls.shoot[key] and self.fireCooldown <= 0 then
             self.eventLog:insert(PlayerBulletEvent:new(self.playerId, self.state[self.playerId].orientation), self.time)
-            self.fireCooldown = 5
+            self.fireCooldown = 5 / constants.speed
         end
     end
 end

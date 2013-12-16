@@ -60,7 +60,7 @@ function Enemy:tick(state, collider)
         end
     end
 
-    if self.internalTick % 8 == 0 then
+    if self.internalTick % math.floor(8 / constants.speed) == 0 then
         -- Shoot every 8 ticks
         local id = uniqueId()
         local bullet = EnemyBullet:new(id, self.x, self.y, collider, self.orientation)

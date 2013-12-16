@@ -236,9 +236,11 @@ function Game:draw()
     -- Replay the event log
     self.state = self.eventLog:play(self.time)
 
+    local player = self.state[self.playerId]
+
     -- Move the viewport
-    if self.state[self.playerId] then
-        self.viewport:move(self.state[self.playerId].x, 300)
+    if player then
+        self.viewport:move(player.x, 300)
     end
 
     -- Draw the world
@@ -246,19 +248,19 @@ function Game:draw()
     love.graphics.draw(self.bgimage)
     self.viewport:draw(self.state)
 
+    -- Draw the health bar
+    if player then
+        drawFilledBar(20, 20, 200, 20,
+                      player.health / player.maxHealth,
+                      {204,20,28}, nil, {255,255,255},
+                      player.health .. "/" .. player.maxHealth)
+    end
+
     -- Draw the time bar
     drawFilledBar(580, 20, 200, 20,
                   (self.maxTime - self.time) / constants.playTime,
-                  {107,141,255}, nil, {255,255,255})
-
-    resetDraw(
-        function ()
-            love.graphics.setColor(255, 255, 255)
-
-            local str = math.ceil((self.maxTime - self.time) / constants.framerate)
-            local strWidth = love.graphics.getFont():getWidth(str)
-            love.graphics.print(str, 680 - strWidth/2, 23)
-        end)
+                  {107,141,255}, nil, {255,255,255},
+                  math.ceil((self.maxTime - self.time) / constants.framerate))
 end
 
 return Game

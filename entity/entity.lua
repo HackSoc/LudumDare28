@@ -59,7 +59,7 @@ function Entity:rotate(angle)
 end
 
 function Entity:draw(vx, vy)
-    self.sprite:draw(self.x - vx, self.y - vy, self.orientation)
+    self.sprite:draw(math.floor(self.x - vx), math.floor(self.y - vy), self.orientation)
 
     if constants.debug then
         x1, y1, x2, y2 = self.hitbox:bbox()

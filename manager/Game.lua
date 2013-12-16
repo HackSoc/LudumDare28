@@ -131,7 +131,7 @@ function Game:update(dt)
         end
         
         if self.state[self.playerId] ~= nil and self.state[self.playerId].x > (self.display.background.map.width*self.display.background.map.tileWidth) - 140 then
-            self.setManager(Victory)
+            self.setManager(Victory:new(self.setManager, self.restart))
         end
     end
 end

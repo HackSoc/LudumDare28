@@ -9,7 +9,8 @@ end
 
 function Victory:keypressed(key, unicode)
     if key == "return" then
-       -- start next level
+       self.setManager(Game:new(Level:new("map2", "level1.png"),
+                                     setManager, love.load))
     end
 end
 

@@ -16,7 +16,6 @@ function Player:initialize(id, x, y, collider, orientation)
     Mob.initialize(self, id, x, y, self.class.sprite, collider)
     highestiteration = highestiteration + 1
     self.iteration = highestiteration
-
     self.orientation = orientation
 end
 

@@ -18,12 +18,12 @@ end
 function Background:getEvents()
     local events = {}
 
-    for x, y, tile in self.map("Map"):iterate() do
-        table.insert(events, TileEvent:new(x * 70, y * 70, tile))
-    end
-
     for x, y, tile in self.map("Objects"):iterate() do
         table.insert(events, TileNoCollisionEvent:new(x * 70, y * 70, tile))
+    end
+
+    for x, y, tile in self.map("Map"):iterate() do
+        table.insert(events, TileEvent:new(x * 70, y * 70, tile))
     end
     
     return events

@@ -73,10 +73,11 @@ function uniqueId()
     return lastUnique
 end
 
-function drawFilledBar(x, y, width, height, proportion, fgcolor, bgcolor, linecolor)
+function drawFilledBar(x, y, width, height, proportion, fgcolor, bgcolor, linecolor, caption, textcolor)
     bgcolor = bgcolor or {0,0,0,255}
     fgcolor = fgcolor or {255,255,255,255}
     linecolor = linecolor or bgcolor
+    textcolor = textcolor or {255,255,255,255}
 
     resetDraw(
         function ()
@@ -88,6 +89,11 @@ function drawFilledBar(x, y, width, height, proportion, fgcolor, bgcolor, lineco
 
             love.graphics.setColor(linecolor)
             love.graphics.rectangle("line", x-1, y-1, width+1, height+1)
+
+            if caption then
+                local strWidth = love.graphics.getFont():getWidth(caption)
+                love.graphics.print(caption, x + width/2 - strWidth/2, y + height/2 - 7)
+            end
         end)
 end
 

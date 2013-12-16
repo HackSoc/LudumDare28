@@ -1,6 +1,7 @@
 local class = require 'middleclass.middleclass'
 
 require 'utils'
+require 'constants'
 
 Entity = class('entity.Entity')
 Entity.id = nil
@@ -9,6 +10,7 @@ Entity.y = 0
 Entity.width = 0
 Entity.height = 0
 Entity.sprite = nil
+Entity.zlevel = constants.z.level.entities
 Entity.visible = true
 Entity.hitbox = nil
 Entity.dx = 0

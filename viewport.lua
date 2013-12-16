@@ -1,5 +1,7 @@
 local class = require 'middleclass.middleclass'
 
+require 'constants'
+
 Viewport = class('Viewport')
 Viewport.centerX = 0
 Viewport.centerY = 0
@@ -12,10 +14,12 @@ function Viewport:initialize(width, height, maxPan)
 end
 
 function Viewport:draw(entities)
-    for key, entity in pairs(entities) do
-        if type(key) == "number" and entity.visible then
-            love.graphics.setColor({255,255,255,255})
-            entity:draw(self.centerX, self.centerY)
+    for z = constants.z.min, constants.z.max do
+        for key, entity in pairs(entities) do
+            if type(key) == "number" and entity.visible and entity.zlevel == z then
+                love.graphics.setColor({255,255,255,255})
+                entity:draw(self.centerX, self.centerY)
+            end
         end
     end
 end

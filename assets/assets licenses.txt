@@ -1,0 +1,27 @@
+
+All used image assets are licensed under an open source license
+
+Here are the individual licenses:
+
+###############################################################################
+
+	Platformer graphics (Deluxe) by Kenney Vleugels (www.kenney.nl)
+
+			------------------------------
+
+			        License (CC0)
+	       http://creativecommons.org/publicdomain/zero/1.0/
+
+	You may use these graphics in personal and commercial projects.
+	Credit (Kenney or www.kenney.nl) would be nice but is not mandatory.
+
+###############################################################################
+
+http://opengameart.org/content/glitch-inhabitants-and-cubimals-svg
+
+Public Domain, CC0
+
+Attribution Instructions: 
+There is no obligation to link or credit the works, but if you do, please link to glitchthegame.com, our permanent "retirement" site for the game and these assets. Of course, links/shoutouts to Tiny Speck (tinyspeck.com) and/or Slack (slack.com) are appreciated.
+
+

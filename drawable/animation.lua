@@ -20,7 +20,7 @@ function Animation:initialize(image, framewidth, frameheight)
 end
 
 function Animation:draw(x, y, orientation)
-    self.image:draw(x, y, orientation)
+    self.image:draw(x, y - self:getHeight()/2, orientation)
 end
 
 function Animation:tick(state, collider)

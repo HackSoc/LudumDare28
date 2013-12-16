@@ -18,8 +18,6 @@ Entity.dy = 0
 Entity.ghosted = false
 Entity.orientation = 1
 
-Entity.static.debugHitboxes = false
-
 function Entity:initialize(id, x, y, sprite, collider)
     self.id = id
     self.x = x
@@ -63,7 +61,7 @@ end
 function Entity:draw(vx, vy)
     self.sprite:draw(self.x - vx, self.y - vy, self.orientation)
 
-    if self.class.debugHitboxes then
+    if constants.debug then
         x1, y1, x2, y2 = self.hitbox:bbox()
 
         x1 = x1 - vx

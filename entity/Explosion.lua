@@ -5,8 +5,6 @@ require 'misclibs.AnAL.AnAL'
 require 'utils'
 require 'drawable.Animation'
 
-Display = require 'Display'
-
 Explosion = class('entity.Explosion', Entity)
 Explosion.static.frameWidth = 96
 Explosion.static.frameHeight = 96

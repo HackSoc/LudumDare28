@@ -4,7 +4,7 @@ require 'ColliderWrapper'
 
 require 'utils'
 
-require 'events.Event'
+require 'events.TickEvent'
 
 require 'StateCache'
 

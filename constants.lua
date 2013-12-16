@@ -5,6 +5,9 @@ constants.jumpTime = 100
 constants.framerate = 30
 constants.frameDuration = 1 / constants.framerate
 
+constants.windowWidth = 800
+constants.windowHeight = 600
+
 -- constants.controls.<control>.<key> = true
 constants.controls = {jump={}, left={}, right={}, shoot={}}
 constants.controls.jump.w = true

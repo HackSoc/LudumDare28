@@ -18,7 +18,7 @@ end
 
 function SpawnEnemy:createBehaviour()
     self.behaviour = {}
-    for i = 1, 100 do
+    for i = 0, 99 do
         self.behaviour[i] = math.random(0,10)
     end
 end

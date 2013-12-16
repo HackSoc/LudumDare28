@@ -5,9 +5,9 @@ io.stdout:setvbuf("no")
 manager = nil
 
 function love.load()
-	music = love.audio.newSource("sound/golden-streets.mp3")
-	music:setLooping(true)
-	love.audio.play(music)
+    music = love.audio.newSource("sound/golden-streets.mp3")
+    music:setLooping(true)
+    love.audio.play(music)
 
     restart()
 end

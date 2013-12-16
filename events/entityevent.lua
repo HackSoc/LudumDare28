@@ -8,7 +8,7 @@ end
 
 function EntityEvent:apply(state, collider)
     if state[self.entityId] then
-    	self:safeApply(state, collider)
+        self:safeApply(state, collider)
     end
 end
 

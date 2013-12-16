@@ -242,6 +242,7 @@ function Game:draw()
     end
 
     -- Draw the world
+    love.graphics.setColor({255,255,255,255})
     love.graphics.draw(self.bgimage)
     self.viewport:draw(self.state)
 

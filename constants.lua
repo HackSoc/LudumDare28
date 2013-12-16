@@ -1,7 +1,7 @@
 constants = {}
 
 -- Debug mode: show hitboxes, and have lots of health
-constants.debug = true
+constants.debug = false
 
 constants.playTime = 160
 constants.jumpTime = 100

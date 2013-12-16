@@ -2,3 +2,5 @@
 *~
 *.sublime-*
 .DS_Store
+.ackrc
+

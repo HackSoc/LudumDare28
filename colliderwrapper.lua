@@ -1,7 +1,15 @@
 local class = require 'middleclass.middleclass'
 local HC = require 'HardonCollider'
 
+require 'events.eraseevent'
+
 ColliderWrapper = class('ColliderWrapper')
+
+-- number of ticks of slack/buffer to allow when erasing an event
+-- theoretically, this should not be necessary, but using it guarantees
+-- that we will not encounter hard-to-reproduce bugs due to off-by-one
+-- errors on the order of milliseconds
+ColliderWrapper.static.erasureSlack = 10
 
 function ColliderWrapper:initialize(eventLog)
     self.collider = HC(100, function(...) self:onCollide(...) end)
@@ -25,10 +33,12 @@ function ColliderWrapper:onCollide(dt, hitbox1, hitbox2, dx, dy)
 
     if entity1:hit(entity2, dx, dy) then
         self.eventLog:insert(DestroyEvent(id1), self.time)
+        self.eventLog:insert(EraseEvent(id1), self.time + constants.jumpTime + self.class.erasureSlack)
     end
 
     if entity2:hit(entity1, -dx, -dy) then
         self.eventLog:insert(DestroyEvent(id2), self.time)
+        self.eventLog:insert(EraseEvent(id2), self.time + constants.jumpTime + self.class.erasureSlack)
     end
 end
 

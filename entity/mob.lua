@@ -34,7 +34,13 @@ function Mob:hit(other, dx, dy)
         self.canJump = true
     end
     
-    return self.health <= 0
+    -- we can only die on encountering bullets
+    -- this should not be necessary, but seems to be :(
+    if other:isInstanceOf(Bullet) then
+        return self.health <= 0
+    else
+        return false
+    end
 end
 
 function Mob:tick(state, collider)

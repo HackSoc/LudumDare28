@@ -15,7 +15,7 @@ end
 function Menu:keypressed(key, unicode)
     if self.main then
         if key == "return" then
-            self.setManager(Game:new(Level:new("testmap", "level1.png", 140), 1,
+            self.setManager(Game:new(Level:new("testmap", "level1.png", 210), 1,
                                      self.setManager, self.restart))
         elseif key == "f1" then
             self.main = false

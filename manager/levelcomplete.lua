@@ -6,8 +6,8 @@ require 'level'
 
 LevelComplete = class('manager.LevelComplete', Manager)
 LevelComplete.static.levels = {}
-LevelComplete.static.levels[2] = Level:new("map2", "background.png", 140)
-LevelComplete.static.levels[3] = Level:new("map3", "level1.png", 140)
+LevelComplete.static.levels[2] = Level:new("map2", "background.png", 210)
+LevelComplete.static.levels[3] = Level:new("map3", "level1.png", 210)
 
 function LevelComplete:initialize(level, ...)
     Manager.initialize(self, ...)

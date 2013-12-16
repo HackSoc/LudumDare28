@@ -53,8 +53,9 @@ Game.playerId = nil
 
 -- Framerate
 Game.frame = 0
-Game.frameDrawPercentage = 0.5
+Game.frameDrawPercentage = 0.0
 Game.frameMiniCount = 0
+Game.starting = false
 
 function Game:initialize(level, levelNum, ...)
     Manager.initialize(self, ...)
@@ -84,7 +85,9 @@ function Game:load()
     end
 
     self.viewport.maxPan = self.map.width * self.map.tileWidth - (constants.windowWidth + self.map.tileWidth) / 2
-
+    
+    self.starting = true
+    
     -- Create a new player
     local splayer = SpawnPlayer(100, 260, 1)
     self.playerId = splayer.playerId
@@ -102,6 +105,7 @@ function Game:update(dt)
     
     --Frame Rate Limit
     self.realTime = self.realTime + dt
+    
     if self.realTime > 0.5 then
        self.realTime = 0
        
@@ -110,6 +114,18 @@ function Game:update(dt)
        end
 
        self.frame = 0
+       self.starting = false
+    end
+    
+    if self.starting and self.frame > 10 then --Perform Initial Guess At Framerate
+       
+       if self.frame > constants.framerate / 2 then
+           self.frameDrawPercentage = constants.framerate / self.realTime
+       end
+       
+       self.frame = 0
+       self.realTime = 0
+       self.starting = false
     end
     
     self.frame = self.frame + 1

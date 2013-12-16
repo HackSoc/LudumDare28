@@ -9,7 +9,7 @@ end
 
 function Victory:keypressed(key, unicode)
     if key == "return" then
-       self.setManager(Game:new(Level:new("map2", "level1.png"),
+       self.setManager(Game:new(Level:new("map2", "background.png"),
                                      setManager, love.load))
     end
 end

@@ -32,7 +32,7 @@ Game.map = nil
 Game.viewport = nil
 
 -- Time
-Game.time = 0
+Game.time = 1
 Game.realTime = 0
 Game.maxTime = constants.playTime
 

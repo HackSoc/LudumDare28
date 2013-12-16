@@ -5,9 +5,11 @@ Display = class('Display')
 Display.background = nil
 Display.viewportX = 0
 Display.viewportY = 0
+Display.maxPan = 0
 
 function Display:initialize(level)
     self.background = Background:new(level)
+    self.maxPan = self.background.map.width*self.background.map.tileWidth - 836
 end
 
 function Display:draw(entities)
@@ -27,8 +29,8 @@ function Display:viewport(x, y)
 
     if self.viewportX < 0 then
         self.viewportX = 0
-    elseif self.viewportX > self.background.maxPan then
-        self.viewportX = self.background.maxPan
+    elseif self.viewportX > self.maxPan then
+        self.viewportX = self.maxPan
     end
 end
 

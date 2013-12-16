@@ -8,15 +8,15 @@ require 'events.TileEvent'
 require 'events.TileNoCollisionEvent'
 
 Background = class('Background')
-Background.tile = {}
+Background.bgimage = nil
 
-function Background:initialize(mapfile)
-    self.map = loader.load(mapfile)
-    self.maxPan = self.map.width*self.map.tileWidth - 836
+function Background:initialize(level)
+    self.bgimage = level.background
+    self.map = loader.load(level.mapfile)
 end
 
 function Background:getEvents()
-    events = {}
+    local events = {}
 
     for x, y, tile in self.map("Map"):iterate() do
         table.insert(events, TileEvent:new(x * 70, y * 70, tile))
@@ -30,4 +30,5 @@ function Background:getEvents()
 end
 
 function Background:draw()
+    love.graphics.draw(self.bgimage, 0, 0)
 end

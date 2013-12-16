@@ -29,7 +29,7 @@ function Mob:damage(amount)
 end
 
 function Mob:hit(other, dx, dy)
-    if (other.class == Tile and self.y < other.y and self.x > other.x - other.width / 2 and self.x < other.x + other.width / 2) then
+    if (other:isInstanceOf(Tile) and self.y < other.y and self.x > other.x - other.width / 2 and self.x < other.x + other.width / 2) then
         self.canJump = true
     end
     

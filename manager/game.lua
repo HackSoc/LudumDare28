@@ -1,32 +1,30 @@
-class = require 'middleclass.middleclass'
-require 'manager.Manager'
-
-Game = class('manager.Game', Manager)
-
 local constants = require 'constants'
 local atl = require 'Advanced-Tiled-Loader'
+local class = require 'middleclass.middleclass'
+
+require 'manager.manager'
+require 'manager.gameover'
+require 'manager.levelcomplete'
+
+require 'events.rightevent'
+require 'events.leftevent'
+require 'events.stopevent'
+require 'events.playerbulletevent'
+require 'events.spawnplayer'
+require 'events.destroyevent'
+require 'events.spawnenemy'
+require 'events.jumpevent'
+require 'events.tileevent'
+require 'events.tilenocollisionevent'
+
+require 'viewport'
+require 'eventlog'
+require 'utils'
 
 local loader = atl.Loader
 loader.path = "maps/"
 
-require 'manager.GameOver'
-require 'manager.LevelComplete'
-
-require 'events.RightEvent'
-require 'events.LeftEvent'
-require 'events.StopEvent'
-require 'events.PlayerBulletEvent'
-require 'events.SpawnPlayer'
-require 'events.DestroyEvent'
-require 'events.SpawnEnemy'
-require 'events.JumpEvent'
-require 'events.TileEvent'
-require 'events.TileNoCollisionEvent'
-
-require 'Viewport'
-require 'EventLog'
-
-require 'utils'
+Game = class('manager.Game', Manager)
 
 -- Display
 Game.bgimage = nil

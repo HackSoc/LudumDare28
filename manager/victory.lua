@@ -1,5 +1,5 @@
-class = require 'middleclass.middleclass'
-require 'manager.Manager'
+local class = require 'middleclass.middleclass'
+require 'manager.manager'
 
 Victory = class('manager.Victory', Manager)
 

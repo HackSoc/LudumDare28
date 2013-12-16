@@ -1,8 +1,8 @@
-class = require 'middleclass.middleclass'
+local class = require 'middleclass.middleclass'
 
-require 'manager.Manager'
-require 'manager.Game'
-require 'Level'
+require 'manager.manager'
+require 'manager.game'
+require 'level'
 
 Menu = class('manager.Menu', Manager)
 

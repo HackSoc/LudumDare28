@@ -1,6 +1,7 @@
 local class = require 'middleclass.middleclass'
 
-require 'entity.Player'
+require 'entity.player'
+require 'events.entityevent'
 require 'utils'
 
 JumpEvent = class('events.JumpEvent', EntityEvent)

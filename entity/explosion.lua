@@ -1,9 +1,9 @@
 local class = require 'middleclass.middleclass'
 
-require 'entity.Entity'
 require 'misclibs.AnAL.AnAL'
+require 'entity.entity'
+require 'drawable.animation'
 require 'utils'
-require 'drawable.Animation'
 
 Explosion = class('entity.Explosion', Entity)
 Explosion.static.frameWidth = 96

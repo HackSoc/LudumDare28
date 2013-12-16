@@ -1,8 +1,9 @@
 local class = require 'middleclass.middleclass'
-require 'entity.Bullet'
-require 'entity.Player'
-require 'entity.Tile'
-require 'drawable.Drawable'
+
+require 'entity.bullet'
+require 'entity.player'
+require 'entity.tile'
+require 'drawable.drawable'
 
 EnemyBullet = class('entity.EnemyBullet', Bullet)
 EnemyBullet.static.sprite = newSprite("assets/orange-bullet.png")
@@ -16,6 +17,7 @@ function EnemyBullet:hit(other, dx, dy)
         other:damage(self.class.damage)
         return true
     end
+
     if other.class == Tile then
         return true
     end

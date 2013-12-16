@@ -1,8 +1,7 @@
 local class = require 'middleclass.middleclass'
-require 'entity.Mob'
 
-require 'drawable.Drawable'
-
+require 'entity.mob'
+require 'drawable.drawable'
 require 'utils'
 
 local highestiteration = 0
@@ -17,7 +16,6 @@ function Player:initialize(id, x, y, collider, orientation)
     Mob.initialize(self, id, x, y, self.class.sprite, collider)
     highestiteration = highestiteration + 1
     self.iteration = highestiteration
-
     self.orientation = orientation
     self.jump = true
 end

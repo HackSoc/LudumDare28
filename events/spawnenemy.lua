@@ -1,7 +1,7 @@
 local class = require 'middleclass.middleclass'
 
-require 'events.Event'
-require 'entity.Enemy'
+require 'events.event'
+require 'entity.enemy'
 require 'utils'
 
 SpawnEnemy = class('events.SpawnEnemy', Event)

@@ -1,4 +1,4 @@
-require 'manager.Menu'
+require 'manager.menu'
 
 love.graphics.drawq = love.graphics.drawq or love.graphics.draw
 io.stdout:setvbuf("no")

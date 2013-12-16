@@ -1,5 +1,6 @@
 local class = require 'middleclass.middleclass'
 
+require 'events.event'
 require 'utils'
 
 TickEvent = class('events.TickEvent', Event)

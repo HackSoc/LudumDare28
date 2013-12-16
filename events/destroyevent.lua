@@ -1,6 +1,6 @@
 local class = require 'middleclass.middleclass'
 
-require 'events.EntityEvent'
+require 'events.entityevent'
 
 DestroyEvent = class('events.DestroyEvent', EntityEvent)
 

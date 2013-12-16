@@ -1,5 +1,6 @@
 local class = require 'middleclass.middleclass'
-require 'entity.Entity'
+
+require 'entity.entity'
 
 Bullet = class('entity.Bullet', Entity)
 Bullet.static.speed = 20

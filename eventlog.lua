@@ -1,12 +1,9 @@
 local class = require 'middleclass.middleclass'
 
-require 'ColliderWrapper'
-
+require 'colliderwrapper'
 require 'utils'
-
-require 'events.TickEvent'
-
-require 'StateCache'
+require 'events.tickevent'
+require 'statecache'
 
 EventLog = class('EventLog')
 

@@ -111,6 +111,8 @@ function Game:update(dt)
        
        if self.frame > constants.framerate / 2 then
            self.frameDrawPercentage = constants.framerate / (2 * self.frame)
+       else
+           self.frameDrawPercentage = 1.0 --Draw Every Frame Lagging
        end
 
        self.frame = 0

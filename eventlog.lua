@@ -56,14 +56,14 @@ function EventLog:eventsInRange(first, last)
     local events = {}
     local time = 0
     for _, e in ipairs(self.events) do
-        if time >= first and time < last then
-            table.insert(events, e)
-        end
         if e:isInstanceOf(TickEvent) then
             time = time + 1
         end
         if time > last then
             break
+        end
+        if time >= first and time < last then
+            table.insert(events, e)
         end
     end
     if time < last then 

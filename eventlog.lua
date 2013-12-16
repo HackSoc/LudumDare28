@@ -31,7 +31,7 @@ function EventLog:insert(event, t)
     -- wind time forwards, inserting the event when get to the right point
     for _, e in ipairs(self.events) do
         table.insert(newEvents, e)
-        if e.class == TickEvent then 
+        if e:isInstanceOf(TickEvent) then 
             seenTicks = seenTicks + 1
             if seenTicks == t then
                 table.insert(newEvents, event)
@@ -59,7 +59,7 @@ function EventLog:eventsInRange(first, last)
         if time >= first and time < last then
             table.insert(events, e)
         end
-        if e.class == TickEvent then
+        if e:isInstanceOf(TickEvent) then
             time = time + 1
         end
         if time > last then
@@ -97,7 +97,7 @@ function EventLog:applyEvents(state, events, startTime)
     local time = startTime
     for _, e in ipairs(events) do
         e:apply(newState, self.collider)
-        if e.class == TickEvent then
+        if e:isInstanceOf(TickEvent) then
             time = time + 1
             self.collider:tick(time, newState)
         end

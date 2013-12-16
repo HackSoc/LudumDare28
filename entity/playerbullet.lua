@@ -13,12 +13,12 @@ function PlayerBullet:initialize(id, x, y, collider, dir)
 end
 
 function PlayerBullet:hit(other, dx, dy)
-    if other.class == Enemy then
+    if other:isInstanceOf(Enemy) then
         other:damage(self.class.damage)
         return true
     end
 
-    if other.class == Tile then
+    if other:isInstanceOf(Tile) then
         return true
     end
 end

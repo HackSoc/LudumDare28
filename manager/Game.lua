@@ -106,6 +106,11 @@ function Game:update(dt)
             self.setManager(GameOver:new(setManager, love.load))
             return
         end
+        
+        if self.state[self.playerId] ~= nil and self.state[self.playerId].y > 800 then --Falling Death
+            self.setManager(GameOver:new(setManager, love.load))
+            return
+        end
 
         if self.time > self.maxTime then
             self.eventLog:insert(DestroyEvent:new(self.playerId), self.time)

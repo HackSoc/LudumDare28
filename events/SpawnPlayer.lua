@@ -7,10 +7,11 @@ SpawnPlayer = class('events.SpawnPlayer', Event)
 SpawnPlayer.x = 0
 SpawnPlayer.y = 0
 
-function SpawnPlayer:initialize(x, y, orientation)
+function SpawnPlayer:initialize(x, y, orientation, dy)
     self.playerId = uniqueId()
     self.x = x
     self.y = y
+    self.dy = dy
     self.orientation = orientation
 end
 

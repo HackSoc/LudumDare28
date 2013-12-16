@@ -47,6 +47,7 @@ Game.movingRight = false
 Game.state = nil
 Game.nextX = 0
 Game.nextY = 0
+Game.nextdY = 0
 Game.nextOrient = 1
 
 -- Player
@@ -147,6 +148,7 @@ function Game:update(dt)
         -- Record position of next player to be spawned
         self.nextX = self.state[self.playerId].x
         self.nextY = self.state[self.playerId].y
+        self.nextdY = self.state[self.playerId].dY
         self.nextOrient = self.state[self.playerId].orientation
     end
 
@@ -157,7 +159,7 @@ function Game:update(dt)
         self.maxTime = self.maxTime + constants.playTime - constants.jumpTime
         self.time = self.time - constants.jumpTime
 
-        local splayer = SpawnPlayer(self.nextX, self.nextY, self.nextOrient)
+        local splayer = SpawnPlayer(self.nextX, self.nextY, self.nextOrient, self.nextdY)
         self.playerId = splayer.playerId
         self.eventLog:insert(splayer, self.time)
 

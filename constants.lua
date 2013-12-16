@@ -1,6 +1,6 @@
 constants = {}
 
-constants.playTime = 140
+constants.playTime = 160
 constants.jumpTime = 100
 constants.framerate = 30
 constants.frameDuration = 1 / constants.framerate

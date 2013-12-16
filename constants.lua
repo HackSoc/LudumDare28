@@ -8,6 +8,13 @@ constants.frameDuration = 1 / constants.framerate
 constants.windowWidth = 800
 constants.windowHeight = 600
 
+-- Z levels
+constants.z = {level={}}
+constants.z.min = 0
+constants.z.max = 1
+constants.z.level.scenery = 0
+constants.z.level.entities = 1
+
 -- constants.controls.<control>.<key> = true
 constants.controls = {jump={}, left={}, right={}, shoot={}}
 constants.controls.jump.w = true

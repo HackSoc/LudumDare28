@@ -188,10 +188,10 @@ function Game:update(dt)
     end
 
     -- maybe should vary with constants.speed
-    if self.time % 100 == 0 then
+    if (self.time + self.maxTime) % 100 == 0 then
         -- Spawn a new enemy
         self.eventLog:insert(SpawnEnemy:new(self.state[self.playerId].x + 500,0),
-                             self.maxTime + 1)
+                             self.time + constants.playTime + 1)
     end
 
     if self.state[self.playerId] and self.state[self.playerId].x > self.map.width * self.map.tileWidth - self.level.endpoint then

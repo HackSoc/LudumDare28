@@ -7,30 +7,33 @@ require 'drawable.drawable'
 require 'utils'
 
 Enemy = class('entity.Enemy', Mob)
-Enemy.static.speed = 5
-Enemy.maxHealth = 5
-Enemy.internalTick = 0
-Enemy.behaviour = {}
-Enemy.exploded = false
 Enemy.static.sprite = {}
 Enemy.static.sprite[0] = newSprite("assets/monster-0.png")
 Enemy.static.sprite[1] = newSprite("assets/monster-1.png")
 Enemy.static.sprite[2] = newSprite("assets/monster-2.png")
 Enemy.static.sprite[3] = newSprite("assets/monster-3.png")
 Enemy.static.sprite[4] = newSprite("assets/monster-4.png")
+Enemy.static.speed = 5
+
+Enemy.maxHealth = 5
+Enemy.internalTick = 0
+Enemy.behaviour = nil
+Enemy.bullets = nil
+Enemy.exploded = false
 
 function Enemy:initialize(id, x, y, behaviour, collider)
    Mob.initialize(self, id, x, y, self.class.sprite[behaviour[1]%5], collider)
-   self.internalTick = 0
    self.behaviour = behaviour
    self.bullets = {}
-   
+
+   -- All enemies start walking towards the left
    self:startLeft()
 end
 
 
 function Enemy:tick(state, collider)
     if self.visible == false then
+        -- Explode on death
         if self.exploded then
             return
         end
@@ -40,29 +43,31 @@ function Enemy:tick(state, collider)
         state[id] = explosion
         self.exploded = true
     end
-    
+
+    -- Maintain an internal clock
     self.internalTick = self.internalTick + 1
-    
-    
-    if (self.internalTick % 4) == 0 then 
+
+    -- Apparently random deterministic behaviour
+    if self.internalTick % 4 == 0 then 
         selectBehaviour = (self.internalTick / 4) % 100
-        
-        if (self.behaviour[selectBehaviour] == 1 or self.behaviour[selectBehaviour] == 2 or self.behaviour[selectBehaviour] == 3) then
+
+        if self.behaviour[selectBehaviour] < 4 then
             self:startLeft()
-            elseif (self.behaviour[selectBehaviour] == 4) then
-                self:startRight()
-            elseif (self.behaviour[selectBehaviour] == 5 or self.behaviour[selectBehaviour] == 6 or self.behaviour[selectBehaviour] == 7) then
-                self:jump()
-            end
+        elseif self.behaviour[selectBehaviour] == 4 then
+            self:startRight()
+        elseif self.behaviour[selectBehaviour] < 8 then
+            self:jump()
+        end
     end
-    
-    if (self.internalTick % 8) == 0 then --Shoot
+
+    if self.internalTick % 8 == 0 then
+        -- Shoot every 8 ticks
         local id = uniqueId()
-        local bullet = EnemyBullet:new(id,self.x,self.y,collider,self.orientation)
+        local bullet = EnemyBullet:new(id, self.x, self.y, collider, self.orientation)
         state[id] = bullet
     end
-    
+
+    -- Tick mob
     Mob.tick(self)
-    
 end
 

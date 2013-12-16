@@ -40,7 +40,7 @@ Game.nextY = 0
 Game.playerId = nil
 Game.realTime = 0
 Game.frame = 0
-Game.frameDrawPercentage = 1.0
+Game.frameDrawPercentage = 0.5
 Game.frameMiniCount = 0
 
 function Game:initialize(level, ...)
@@ -63,10 +63,10 @@ function Game:load()
     self.playerId = splayer.playerId
     self.eventLog:append(splayer)
 
-    self.eventLog:append(SpawnEnemy:new(1500,200))
-    self.eventLog:append(SpawnEnemy:new(1400,200))
-    self.eventLog:append(SpawnEnemy:new(1200,200))
-    self.eventLog:append(SpawnEnemy:new(1000,400))
+    self.eventLog:append(SpawnEnemy:new(1500,0))
+    self.eventLog:append(SpawnEnemy:new(1400,0))
+    self.eventLog:append(SpawnEnemy:new(1200,0))
+    self.eventLog:append(SpawnEnemy:new(1000,0))
 end
 
 function Game:update(dt)

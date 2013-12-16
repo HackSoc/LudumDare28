@@ -7,6 +7,7 @@ require 'drawable.drawable'
 
 PlayerBullet = class('entity.PlayerBullet', Bullet)
 PlayerBullet.static.sprite = newSprite("assets/blue-bullet.png")
+PlayerBullet.static.speed = Bullet.static.speed * 3
 
 function PlayerBullet:initialize(id, x, y, collider, dir)
     Bullet.initialize(self, id, x, y, self.class.sprite, collider, dir)

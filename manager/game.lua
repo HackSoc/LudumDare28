@@ -226,7 +226,7 @@ function Game:keypressed(key, unicode)
             self.movingRight = true
         elseif constants.controls.shoot[key] and self.fireCooldown <= 0 then
             self.eventLog:insert(PlayerBulletEvent:new(self.playerId, self.state[self.playerId].orientation), self.time)
-            self.fireCooldown = 5 / constants.speed
+            self.fireCooldown = 2 / constants.speed -- 2 is the magic number, trust in the 2
         end
     end
 end

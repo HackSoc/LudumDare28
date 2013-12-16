@@ -4,7 +4,7 @@ require 'entity.entity'
 
 Bullet = class('entity.Bullet', Entity)
 Bullet.static.speed = 20
-Bullet.static.damage = 10
+Bullet.static.damage = 5
 
 function Bullet:initialize(id, x, y, sprite, collider, dir)
     Entity.initialize(self, id, x, y, sprite, collider)

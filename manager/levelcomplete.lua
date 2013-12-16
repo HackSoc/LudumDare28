@@ -17,14 +17,14 @@ end
 function LevelComplete:load()
     self.backgroundImage = love.graphics.newImage("assets/levelcomplete.png")
     if self.nextLevel == 4 then
-    	self.setManager(Victory:new(setManager, love.load))
+    	self.setManager(Victory:new(setManager, restart))
     end
 end
 
 function LevelComplete:keypressed(key, unicode)
     if key == "return" then
        self.setManager(Game:new(self.class.levels[self.nextLevel], self.nextLevel,
-                                setManager, love.load))
+                                setManager, restart))
     end
 end
 

@@ -145,13 +145,13 @@ function Game:update(dt)
         
     if self.state[self.playerId] and self.state[self.playerId].health <= 0 then
         -- Player is dead.
-        self.setManager(GameOver:new(setManager, love.load))
+        self.setManager(GameOver:new(setManager, restart))
         return
     end
 
     if self.state[self.playerId] ~= nil and self.state[self.playerId].y > 800 then
         --Falling Death
-        self.setManager(GameOver:new(setManager, love.load))
+        self.setManager(GameOver:new(setManager, restart))
         return
     end
 

@@ -8,7 +8,12 @@ function love.load()
 	music = love.audio.newSource("sound/golden-streets.mp3")
 	music:setLooping(true)
 	love.audio.play(music)
-    setManager(Menu:new(setManager, love.load))
+
+    restart()
+end
+
+function restart()
+    setManager(Menu:new(setManager, restart))
 end
 
 function love.update(dt)

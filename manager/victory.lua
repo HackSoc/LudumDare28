@@ -9,7 +9,7 @@ end
 
 function Victory:keypressed(key, unicode)
     if key == "return" then
-       self.setManager(Menu:new(setManager, love.load))
+       self.setManager(Menu:new(setManager, restart))
     end
 end
 

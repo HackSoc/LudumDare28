@@ -10,8 +10,8 @@ local highestiteration = 0
 Player = class('entity.Player', Mob)
 Player.static.oldsprite = newSprite("assets/character-past.png")
 Player.static.sprite = newSprite("assets/character.png")
-Player.static.currentHealth = 100
 Player.iteration = 0
+Player.deferredDamage = 0
 
 function Player:initialize(id, x, y, collider, orientation)
     Mob.initialize(self, id, x, y, self.class.sprite, collider)
@@ -19,7 +19,6 @@ function Player:initialize(id, x, y, collider, orientation)
     self.iteration = highestiteration
 
     self.orientation = orientation
-    self.health = Player.static.currentHealth
 end
 
 function Player:isCurrentPlayer()
@@ -27,10 +26,8 @@ function Player:isCurrentPlayer()
 end
 
 function Player:damage(amount)
-    Mob.damage(self,amount)
-    if self:isCurrentPlayer() then
-       Player.static.currentHealth = self.health 
-    end
+    -- schedule the damage to be applied by "tick"
+    self.deferredDamage = self.deferredDamage + amount
 end
 
 function Player:draw(vx, vy)
@@ -46,4 +43,16 @@ function Player:draw(vx, vy)
             love.graphics.setColor(255,255,255, 255 * opacity)
             Mob.draw(self, vx, vy)
         end)
+end
+
+function Player:tick(state, collider)
+    Mob.tick(self, state, collider)
+    
+    -- apply damage received in Player:damage
+    state["health"] = state["health"] or self.maxHealth
+    state["health"] = state["health"] - self.deferredDamage
+    self.deferredDamage = 0
+
+    -- update instance health so we can draw a health bar
+    self.health = state["health"]
 end

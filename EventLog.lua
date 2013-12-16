@@ -113,11 +113,13 @@ function EventLog:reset()
 end
 
 function EventLog:sanitizeCollider(entities)
-    for _, e in pairs(entities) do
-        if e.ghosted then
-            self.collider:setGhost(e.hitbox)
-        else
-            self.collider:setSolid(e.hitbox)
+    for k, e in pairs(entities) do
+        if type(k) == "number" then
+            if e.ghosted then
+                self.collider:setGhost(e.hitbox)
+            else
+                self.collider:setSolid(e.hitbox)
+            end
         end
     end
 end

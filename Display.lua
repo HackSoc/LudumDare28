@@ -16,7 +16,7 @@ function Display:draw(entities)
     self.background:draw()
 
     for key,entity in pairs(entities) do
-        if entity.visible then
+        if type(key) == "number" and entity.visible then
             love.graphics.setColor({255,255,255,255})
             entity:draw(self.viewportX, self.viewportY)
         end

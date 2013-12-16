@@ -59,7 +59,6 @@ function Game:load()
     end
 
     local splayer = SpawnPlayer(100, 260, 1)
-    Player.static.currentHealth = 100.0
     self.playerId = splayer.playerId
     self.eventLog:append(splayer)
 

@@ -10,7 +10,7 @@ local loader = atl.Loader
 loader.path = "maps/"
 
 require 'manager.GameOver'
-require 'manager.Victory'
+require 'manager.LevelComplete'
 
 require 'events.RightEvent'
 require 'events.LeftEvent'
@@ -57,9 +57,10 @@ Game.frame = 0
 Game.frameDrawPercentage = 0.5
 Game.frameMiniCount = 0
 
-function Game:initialize(level, ...)
+function Game:initialize(level, levelNum, ...)
     Manager.initialize(self, ...)
     self.level = level
+    self.levelNum = levelNum
 end
 
 function Game:load()
@@ -176,7 +177,7 @@ function Game:update(dt)
 
     if self.state[self.playerId] and self.state[self.playerId].x > self.map.width * self.map.tileWidth - self.level.endpoint then
         -- Player has passed the victory point
-        self.setManager(Victory:new(self.setManager, self.restart))
+        self.setManager(LevelComplete:new(self.levelNum, self.setManager, self.restart))
     end
 end
 

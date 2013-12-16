@@ -4,13 +4,12 @@ require 'manager.Manager'
 Victory = class('manager.Victory', Manager)
 
 function Victory:load()
-    self.backgroundImage = love.graphics.newImage("assets/levelcomplete.png")
+    self.backgroundImage = love.graphics.newImage("assets/youwin.png")
 end
 
 function Victory:keypressed(key, unicode)
     if key == "return" then
-       self.setManager(Game:new(Level:new("map2", "background.png", 140),
-                                setManager, love.load))
+       self.setManager(Menu:new(setManager, love.load))
     end
 end
 

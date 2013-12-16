@@ -3,6 +3,7 @@ local class = require 'middleclass.middleclass'
 require 'entity.mob'
 require 'drawable.drawable'
 require 'utils'
+require 'constants'
 
 local highestiteration = 0
 
@@ -18,6 +19,11 @@ function Player:initialize(id, x, y, collider, orientation)
     self.iteration = highestiteration
     self.orientation = orientation
     self.canJump = true
+
+    if constants.debug then
+        self.maxHealth = 999999999999999999999999999
+        self.health = self.maxHealth
+    end
 end
 
 function Player:isCurrentPlayer()

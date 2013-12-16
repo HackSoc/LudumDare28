@@ -56,6 +56,8 @@ Game.frame = 0
 Game.frameDrawPercentage = 0.0
 Game.frameMiniCount = 0
 Game.starting = false
+Game.totalTime = 0
+Game.totalFrames = 0
 
 function Game:initialize(level, levelNum, ...)
     Manager.initialize(self, ...)
@@ -87,6 +89,7 @@ function Game:load()
     self.viewport.maxPan = self.map.width * self.map.tileWidth - (constants.windowWidth + self.map.tileWidth) / 2
     
     self.starting = true
+    self.totalTime = 0.0
     
     -- Create a new player
     local splayer = SpawnPlayer(100, 260, 1)
@@ -105,6 +108,7 @@ function Game:update(dt)
     
     --Frame Rate Limit
     self.realTime = self.realTime + dt
+    self.totalTime = self.totalTime + dt
     
     if self.realTime > 0.5 then
        self.realTime = 0
@@ -119,17 +123,6 @@ function Game:update(dt)
        self.starting = false
     end
     
-    if self.starting and self.frame > 10 then --Perform Initial Guess At Framerate
-       
-       if self.frame > constants.framerate / 2 then
-           self.frameDrawPercentage = constants.framerate / self.realTime
-       end
-       
-       self.frame = 0
-       self.realTime = 0
-       self.starting = false
-    end
-    
     self.frame = self.frame + 1
     self.frameMiniCount = self.frameMiniCount + 1
     
@@ -137,6 +130,13 @@ function Game:update(dt)
         -- Too many frames: skip this one
         return
     end
+    
+    --Frame Rate Limiter Before Frame Rate Measured
+    if self.starting and (self.totalFrames / constants.framerate) > self.totalTime then
+       return 
+    end
+    
+    self.totalFrames = self.totalFrames + 1
 
     self.frameMiniCount = 0
 

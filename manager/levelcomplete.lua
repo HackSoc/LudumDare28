@@ -1,7 +1,8 @@
-class = require 'middleclass.middleclass'
-require 'manager.Manager'
-require 'manager.Victory'
-require 'Level'
+local class = require 'middleclass.middleclass'
+
+require 'manager.manager'
+require 'manager.victory'
+require 'level'
 
 LevelComplete = class('manager.LevelComplete', Manager)
 LevelComplete.static.levels = {}

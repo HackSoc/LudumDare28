@@ -1,6 +1,6 @@
 local class = require 'middleclass.middleclass'
 
-require 'entity.Tile'
+require 'entity.tile'
 
 RightTriangleTile = class('entity.RightTriangleTile', Tile)
 

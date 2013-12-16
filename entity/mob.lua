@@ -1,6 +1,7 @@
 local class = require 'middleclass.middleclass'
-require 'entity.Entity'
-require 'entity.Tile'
+
+require 'entity.entity'
+require 'entity.tile'
 require 'utils'
 
 Mob = class('entity.Mob', Entity)

@@ -1,6 +1,6 @@
 local class = require 'middleclass.middleclass'
 
-require 'drawable.Drawable'
+require 'drawable.drawable'
 
 TileDrawable = class('entity.TileDrawable', Drawable)
 TileDrawable.tile = nil

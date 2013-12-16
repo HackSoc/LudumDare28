@@ -1,9 +1,10 @@
 local class = require 'middleclass.middleclass'
-require 'entity.Mob'
-require 'entity.EnemyBullet'
-require 'entity.Explosion'
+
+require 'entity.mob'
+require 'entity.enemybullet'
+require 'entity.explosion'
+require 'drawable.drawable'
 require 'utils'
-require 'drawable.Drawable'
 
 Enemy = class('entity.Enemy', Mob)
 Enemy.static.speed = 5

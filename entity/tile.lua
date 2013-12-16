@@ -1,7 +1,7 @@
 local class = require 'middleclass.middleclass'
 
-require 'entity.Entity'
-require 'drawable.TileDrawable'
+require 'entity.entity'
+require 'drawable.tiledrawable'
 
 Tile = class('entity.Tile', Entity)
 

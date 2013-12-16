@@ -1,6 +1,6 @@
 local class = require 'middleclass.middleclass'
 
-require 'events.EntityEvent'
+require 'events.entityevent'
 
 LeftEvent = class('events.LeftEvent', EntityEvent)
 

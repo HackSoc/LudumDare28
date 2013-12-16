@@ -1,8 +1,7 @@
 local class = require 'middleclass.middleclass'
-require 'entity.Mob'
 
-require 'drawable.Drawable'
-
+require 'entity.mob'
+require 'drawable.drawable'
 require 'utils'
 
 local highestiteration = 0

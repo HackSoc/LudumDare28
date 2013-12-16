@@ -1,6 +1,6 @@
 local class = require 'middleclass.middleclass'
 
-require 'drawable.Drawable'
+require 'drawable.drawable'
 require 'constants'
 
 Animation = class('entity.Animation', Drawable)

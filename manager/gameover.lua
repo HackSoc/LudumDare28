@@ -1,5 +1,6 @@
-class = require 'middleclass.middleclass'
-require 'manager.Manager'
+local class = require 'middleclass.middleclass'
+
+require 'manager.manager'
 
 GameOver = class('manager.GameOver', Manager)
 

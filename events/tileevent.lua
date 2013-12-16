@@ -1,11 +1,11 @@
 local class = require 'middleclass.middleclass'
 
-require 'events.Event'
-require 'entity.Tile'
-require 'entity.LeftTriangleTile'
-require 'entity.RightTriangleTile'
+require 'events.event'
+require 'entity.tile'
+require 'entity.lefttriangletile'
+require 'entity.righttriangletile'
 require 'utils'
-require 'drawable.Drawable'
+require 'drawable.drawable'
 
 TileEvent = class('events.TileEvent', Event)
 
